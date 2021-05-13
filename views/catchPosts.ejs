@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>CatchPosts</h1>
+
+    <div>
+        <h3>Which catchegory would you like to omit?</h3>
+        <form action="/catchPosts/omitCatchegory?_method=PUT" method="POST">
+            <input type="text" name="omitCatchegory">
+            <input type="submit">
+        </form>
+
+    </div>
+
+    <ul>
+    <% catchPosts.forEach( el => { %>
+            <li class="catchPostItem" data-id="<%=el._id%>">
+                <span><%= el.catchTitle %></span>
+                <span class="catchPost"><%= el.catchPost %></span>
+                <% if (el.catchegories.length < 1) { %>
+                    <p>No catchegories selected</p>
+                <%} else { %>
+                    <p>Catchegories: <%= el.catchegories %></p>
+                <% } %>
+                <span>Likes: <%= el.likes %></span>
+                <span>Comments: <%= el.comments %></span>
+                <span class="del"> Delete </span>
+            </li>
+    <% }) %>    
+    </ul>
+
+    <h2><%= user.userName %> has posts.</h2>
+
+    <form action="/catchPosts/createCatchPost" method="POST">
+        <input type="text" placeholder="Enter Catch Title" name="catchTitle">
+        <input type="text" placeholder="Enter Catch Content" name="catchPost">
+        <input type="text" placeholder="Enter Catchegories" name="catchegories">
+        <input type="submit">
+    </form>
+
+    <a href="/logout">Logout</a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -5,6 +5,7 @@ const User = require('../models/User')
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect('/catchPosts')
+    // return res.redirect('/')
   }
   res.render('login', {
     title: 'Login'
@@ -32,6 +33,7 @@ exports.postLogin = (req, res, next) => {
       if (err) { return next(err) }
       req.flash('success', { msg: 'Success! You are logged in.' })
       res.redirect(req.session.returnTo || '/catchPosts')
+      // res.redirect(req.session.returnTo || '/')
     })
   })(req, res, next)
 }
@@ -48,6 +50,7 @@ exports.logout = (req, res) => {
 exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect('/catchPosts')
+    // return res.redirect('/')
   }
   res.render('signup', {
     title: 'Create Account'

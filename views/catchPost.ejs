@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch Post</title>
+</head>
+<body>
+    
+    <p><a href="/">Back to Home</a></p>
+    <% if (!user) {%>
+        <a href="/login"> Login</a>
+        <a href="/signup"> Signup</a>
+    <% } else {%>
+        <a href="/logout">Logout</a>
+        <a href="/catchPosts">Go to your Profile</a>
+    <% } %>
+
+
+    <h1>Here's the Catch Post</h1> 
+    <% if (user) {%>
+        <h2><%= user.userName %> logged in</h2>
+    <% } %>
+    <h2></h2>
+    <h3><%= catchPost[0].catchTitle %></h3>
+    <p><%= catchPost[0].catchContent %></p>
+    <p>Catchegories: <%= catchPost[0].catchegories %></p>
+</body>
+</html>

@@ -1,7 +1,14 @@
+console.log('public main.js loaded...')
+
 const deleteBtn = document.querySelectorAll('.del')
+const likeBtn = document.querySelectorAll('.like')
 
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteCatchPost)
+})
+
+Array.from(likeBtn).forEach((el)=>{
+    el.addEventListener('click', likeCatchPost)
 })
 
 // Array.from(catchPostItem).forEach((el)=>{
@@ -30,14 +37,17 @@ async function deleteCatchPost(){
     }
 }
 
-// async function markComplete(){
+
+// Replacing with method-override
+// async function likeCatchPost(){
+//     console.log('mainjs says this is: '+this.parentNode.dataset.id)
 //     const catchPostId = this.parentNode.dataset.id
 //     try{
-//         const response = await fetch('catchPosts/markComplete', {
+//         const response = await fetch('catchPosts/likeCatchPost', {
 //             method: 'put',
 //             headers: {'Content-type': 'application/json'},
 //             body: JSON.stringify({
-//                 'catchPostIdFromJSFile': catchPostId
+//                 'catchPostId': catchPostId
 //             })
 //         })
 //         const data = await response.json()
@@ -48,10 +58,11 @@ async function deleteCatchPost(){
 //     }
 // }
 
-// async function markIncomplete(){
+
+// async function markComplete(){
 //     const catchPostId = this.parentNode.dataset.id
 //     try{
-//         const response = await fetch('catchPosts/markIncomplete', {
+//         const response = await fetch('catchPosts/markComplete', {
 //             method: 'put',
 //             headers: {'Content-type': 'application/json'},
 //             body: JSON.stringify({

@@ -5,7 +5,7 @@ module.exports = {
     //     res.render('index.ejs')
     // }
     getIndex: async (req,res)=>{
-        console.log(req.user)
+        console.log('user: '+req.user)
         try{
             const catchPosts = await CatchPost.find()
             res.render('index.ejs', {
@@ -15,5 +15,17 @@ module.exports = {
         }catch(err){
             console.log(err)
         }
-    }
+    },
+    getCatchPost: async (req,res)=>{
+        console.log(req.params.id)
+        try{
+            const catchPost = await CatchPost.find({ _id: req.params.id })
+            res.render('catchPost.ejs', {
+                catchPost: catchPost,
+                user: req.user
+            })
+        }catch(err){
+            console.log(err)
+        }
+    },
 }

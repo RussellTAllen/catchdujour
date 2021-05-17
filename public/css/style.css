@@ -1,10 +1,17 @@
-h1{
-    color: red;
+/* Box Model Hack */
+*{
+    box-sizing: border-box;
 }
-.completed{
-    text-decoration: line-through;
-    color: gray;
-}
-.not{
-    text-decoration: underline;
-}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+
+
+
+
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('./User')
+// const {ObjectId} = mongoose.Schema.Types
 
 const CommentSchema = new mongoose.Schema({
   text: {
@@ -15,7 +16,7 @@ const CatchPostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  catchPost: {
+  catchContent: {
     type: String,
     required: true,
   },
@@ -33,21 +34,12 @@ const CatchPostSchema = new mongoose.Schema({
     unique: false,
     sparse: true
   },
-  likes: {
-    type: Number,
-    default: 0,
-    required: true
-  },
-  likedBy: {
-    type: { users: [User.UserSchema] },
-    default: [],
-    unique: false,
-    sparse: true
-  },
-  comments: {
-    type: [CommentSchema],
-    required: true
-  },
+  // likes: [{type: ObjectId, ref:"User"}],
+  // likedBy: [{type: ObjectId, ref:"User"}],
+  // comments: {
+  //   type: [CommentSchema],
+  //   required: true
+  // },
   catchegories: {
     type: Array,
     default: []

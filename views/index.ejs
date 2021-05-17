@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/dabf81eaea.js" crossorigin="anonymous"></script>
     <title>Catch du Jour!</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
             <a href="/signup"> Signup</a>
         <% } else {%>
             <a href="/logout">Logout</a>
-            <a href="/catchPosts">Create Your Own Post</a>
+            <a href="/catchPosts">Go to your Profile</a>
         <% } %>
         <p>
             <% if (user) {%>
@@ -34,22 +35,25 @@
             <% } %>
             <!-- Print posts-->
             <% catchPosts.forEach( el => { %>
-                <li class="catchPostItem" data-id="<%=el._id%>">
+                <li class="catch-post-item" data-id="<%=el._id%>">
                     <p>Posted by: <%= el.postedBy.userName %></p>
-                    <span><%= el.catchTitle %></span>
-                    <span class="catchPost"><%= el.catchPost %></span>
+                    <h4><a href="/<%= el._id %>"><%= el.catchTitle %></a></h4>
+                    <p class="catch-content"><%= el.catchContent %></p>
                     <% if (!el.catchegories[0]) { %>
                         <p>No catchegories selected</p>
                     <%} else { %>
                         <p>Catchegories: <%= el.catchegories %></p>
                     <% } %>
-                    <span>Likes: <%= el.likes %></span>
+                    <form action="/catchPosts/likeCatchPost/<%= el._id %>?_method=PUT" method="POST">
+                        <button class="fas fa-arrow-circle-up" type="submit"></button>Likes: <%= el.likes %>
+                    </form>
+
                     <span>Comments: <%= el.comments %></span>
                     <span class="del"> Delete </span>
                 </li>
             <% }) %>    
         </ul>
     </main>
-
+    <script src="js/main.js"></script>
 </body>
 </html>

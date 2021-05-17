@@ -3,19 +3,31 @@ const CatchPost = require('../models/CatchPost')
 const Catchegory = require('../models/Catchegory')
 
 module.exports = {
-    // getCatchPosts: async (req,res)=>{
-    //     console.log(req.user)
-    //     try{
-    //         const catchPosts = await CatchPost.find()
-    //         res.render('index.ejs', {
-    //             catchPosts: catchPosts, 
-    //             user: req.user.userName,
-    //         })
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // },
-    getCatchPostsById: async (req,res)=>{
+    getCatchPosts: async (req,res)=>{
+        console.log(req.user)
+        try{
+            const catchPosts = await CatchPost.find()
+            res.render('catchPosts.ejs', {
+                catchPosts: catchPosts, 
+                user: req.user.userName,
+            })
+        }catch(err){
+            console.log(err)
+        }
+    },
+    getCatchPost: async (req,res)=>{
+        console.log(req.params.id)
+        try{
+            const catchPost = await CatchPost.find({ _id: req.params.id })
+            res.render('catchPost.ejs', {
+                catchPost: catchPost, 
+                user: req.user.userName,
+            })
+        }catch(err){
+            console.log(err)
+        }
+    },
+    getCatchPostsByUser: async (req,res)=>{
         console.log(req.user)
         try{
             const catchPosts = await CatchPost.find({ userId: req.user.id })
@@ -31,7 +43,7 @@ module.exports = {
         try{
             await CatchPost.create({
                 catchTitle: req.body.catchTitle,
-                catchPost: req.body.catchPost, 
+                catchContent: req.body.catchContent, 
                 catchegories: req.body.catchegories,
                 userId: req.user.id,
                 postedBy: req.user,
@@ -89,6 +101,31 @@ module.exports = {
             console.log(err)
         }
     },
+    likeCatchPost: async (req, res)=>{
+        console.log('like me id '+ req.params.id)
+        
+        try{
+            const post = await CatchPost.findOneAndUpdate(
+                { _id: req.params.id },
+                {
+                    $inc: { likes: 1 }
+                })
+            // console.log('trying ' +post)
+            // const likedBy = post.likedBy.map(user => user._id)
+            // if (likedBy.includes(req.user._id)){
+            //     post.likes--
+            //     post.likedBy = post.likedBy.filter(user => !user._id.equals(req.user._id))
+            // }else{
+            //     post.likes++
+            //     post.likeBy.push(req.user)
+            // }
+            // await post.save()
+            console.log('Catch Post Liked')
+            res.redirect('/')
+        }catch(err){
+            console.log(err)
+        }
+    },
     // markIncomplete: async (req, res)=>{
     //     try{
     //         await CatchPost.findOneAndUpdate({_id:req.body.catchPostIdFromJSFile},{
@@ -103,7 +140,7 @@ module.exports = {
     deleteCatchPost: async (req, res)=>{
         console.log(req.body.catchPostIdFromJSFile)
         try{
-            await CatchPost.findOneAndDelete({ _id:req.body.catchPostIdFromJSFile })
+            await CatchPost.findOneAndDelete({ _id: req.body.catchPostIdFromJSFile })
             console.log('Deleted CatchPost')
             res.json('Deleted It')
         }catch(err){

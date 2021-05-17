@@ -7,8 +7,49 @@
     <title>Catch du Jour!</title>
 </head>
 <body>
-    <h1>Catch your very own blog space!</h1>
-    <a href="/login"> Login</a>
-    <a href="/signup"> Signup</a>
+    <header>
+        <h1>Catch your very own blog space!</h1>
+        <% if (!user) {%>
+            <a href="/login"> Login</a>
+            <a href="/signup"> Signup</a>
+        <% } else {%>
+            <a href="/logout">Logout</a>
+            <a href="/catchPosts">Create Your Own Post</a>
+        <% } %>
+        <p>
+            <% if (user) {%>
+                <%= user.userName %> is logged in
+                <p>Posts with <%= user.omittedCatchegories.join(', ') %> catchegories will not be displayed.</p>
+            <%} else{ %>
+                Not logged in
+            <% } %> 
+        </p>
+    </header>
+
+    <main>
+        <ul>
+            <!-- Filter out user's omitted catchegories -->
+            <% if (user) {%>
+                <% catchPosts = catchPosts.filter(post => post.catchegories.every(cat => !user.omittedCatchegories.includes(cat))) %>
+            <% } %>
+            <!-- Print posts-->
+            <% catchPosts.forEach( el => { %>
+                <li class="catchPostItem" data-id="<%=el._id%>">
+                    <p>Posted by: <%= el.postedBy.userName %></p>
+                    <span><%= el.catchTitle %></span>
+                    <span class="catchPost"><%= el.catchPost %></span>
+                    <% if (!el.catchegories[0]) { %>
+                        <p>No catchegories selected</p>
+                    <%} else { %>
+                        <p>Catchegories: <%= el.catchegories %></p>
+                    <% } %>
+                    <span>Likes: <%= el.likes %></span>
+                    <span>Comments: <%= el.comments %></span>
+                    <span class="del"> Delete </span>
+                </li>
+            <% }) %>    
+        </ul>
+    </main>
+
 </body>
 </html>

@@ -8,21 +8,33 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>CatchPosts</h1>
+    <h1><%= user %>'s CatchPosts</h1>
 
+    <p><a href="/">Back to Home</a></p>
+
+    <div>
+        <form action="/catchPosts/initCatchegory" method="POST">
+            <h3>Initialize Catchegories (remove before publishing)</h3>
+            <input type="submit">
+        </form>
+        <h3>Which catchegory would you like to create?</h3>
+        <form action="/catchPosts/createCatchegory?_method=PUT" method="POST">
+            <input type="text" name="createCatchegory">
+            <input type="submit">
+        </form>
+    </div>
     <div>
         <h3>Which catchegory would you like to omit?</h3>
         <form action="/catchPosts/omitCatchegory?_method=PUT" method="POST">
             <input type="text" name="omitCatchegory">
             <input type="submit">
         </form>
-
     </div>
 
     <ul>
     <% catchPosts.forEach( el => { %>
             <li class="catchPostItem" data-id="<%=el._id%>">
-                <span><%= el.catchTitle %></span>
+                <p>Posted by: <%= el.postedBy.userName %></p>                <span><%= el.catchTitle %></span>
                 <span class="catchPost"><%= el.catchPost %></span>
                 <% if (el.catchegories.length < 1) { %>
                     <p>No catchegories selected</p>

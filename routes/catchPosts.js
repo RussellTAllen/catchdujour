@@ -1,11 +1,17 @@
 const express = require('express')
 const router = express.Router()
+const homeController = require('../controllers/home') 
 const catchPostsController = require('../controllers/catchPosts') 
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
-router.get('/', ensureAuth, catchPostsController.getCatchPosts)
+// router.get('/', ensureAuth, catchPostsController.getCatchPosts)
+router.get('/', ensureAuth, homeController.getIndex)
 
 router.post('/createCatchPost', catchPostsController.createCatchPost)
+
+router.post('/initCatchegory', catchPostsController.initCatchegory)
+
+router.put('/createCatchegory', catchPostsController.createCatchegory)
 
 router.put('/omitCatchegory', catchPostsController.omitCatchegory)
 

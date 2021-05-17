@@ -28,7 +28,7 @@ const CatchPostSchema = new mongoose.Schema({
     required: true
   },
   postedBy: {
-    type: User.UserSchema,
+    type: { user: User.UserSchema },
     required: true,
     unique: false,
     sparse: true
@@ -39,7 +39,7 @@ const CatchPostSchema = new mongoose.Schema({
     required: true
   },
   likedBy: {
-    type: [User.UserSchema],
+    type: { users: [User.UserSchema] },
     default: [],
     unique: false,
     sparse: true

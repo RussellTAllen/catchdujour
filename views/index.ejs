@@ -36,7 +36,7 @@
             <% catchPosts.forEach( el => { %>
                 <li class="catchPostItem" data-id="<%=el._id%>">
                     <p>Posted by: <%= el.postedBy.userName %></p>
-                    <span><%= el.catchTitle %></span>
+                    <h4><a href="/catchPost"></a><%= el.catchTitle %></h4>
                     <span class="catchPost"><%= el.catchPost %></span>
                     <% if (!el.catchegories[0]) { %>
                         <p>No catchegories selected</p>

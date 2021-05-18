@@ -22,12 +22,13 @@
     <% if (user) {%>
         <h2>Logged in User: <%= user.userName %></h2>
     <% } %>
-    <h2>Title: <%= catchPost.catchTitle %></h2>
-    <h3>Posted by: <%= catchPost.postedBy.userName %></h3>
+    <hr>
+    <h3>Title: <%= catchPost.catchTitle %></h3>
+    <h5>Posted by: <%= catchPost.postedBy.userName %> on <%= catchPost.date %></h6>
     <p>Catch Content: <%= catchPost.catchContent %></p>
 
     <hr>
-    <h3>Comments:</h3>
+    <h2>Comments:</h2>
     <% if (catchPost.comments.length > 0) { %>
         <% catchPost.comments.forEach(comment => {%>
             <hr>

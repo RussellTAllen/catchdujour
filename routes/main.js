@@ -6,13 +6,18 @@ const catchPostsController = require('../controllers/catchPosts')
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
 router.get('/', homeController.getIndex)
+router.get('/mostLiked', homeController.getIndexByMostLiked)
+router.get('/mostCommented', homeController.getIndexByMostCommented)
 router.get('/login', authController.getLogin)
-router.post('/login', authController.postLogin)
 router.get('/logout', authController.logout)
 router.get('/signup', authController.getSignup)
 router.get('/catchPost/:id', catchPostsController.getCatchPostById)
-// router.get('/:id', homeController.getCatchPostById)
 router.get('/catchPosts', catchPostsController.getCatchPostsByUserId)
+
+
+// router.get('/:id', homeController.getCatchPostById)
+
+router.post('/login', authController.postLogin)
 router.post('/signup', authController.postSignup)
 
 module.exports = router

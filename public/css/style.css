@@ -13,6 +13,13 @@
 /* LAYOUT
 /*******************************************/
 
+
+/* DARK MODE */
+/* body{
+  color: white;
+  background: rgb(83, 83, 83);
+} */
+
 div.catch-post{
     background: rgb(236, 236, 236);
     border: 1px solid black;

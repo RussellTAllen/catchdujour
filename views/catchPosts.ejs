@@ -34,18 +34,21 @@
 
     <ul>
     <% catchPosts.forEach( el => { %>
-            <li class="catchPostItem" data-id="<%=el._id%>">
-                <p>Posted by: <%= el.postedBy.userName %></p>                <span><%= el.catchTitle %></span>
-                <span class="catchPost"><%= el.catchContent %></span>
-                <% if (el.catchegories.length < 1) { %>
-                    <p>No catchegories selected</p>
-                <%} else { %>
-                    <p>Catchegories: <%= el.catchegories %></p>
-                <% } %>
-                <span>Likes: <%= el.likes %></span>
-                <span>Comments: <%= el.comments %></span>
+        <li class="catchPostItem" data-id="<%=el._id%>">
+            <h3><%= el.catchTitle %></h3>
+            <h5>Posted by: <%= el.postedBy.userName %> on <%= el.date %></h5>                
+            <span class="catchPost"><%= el.catchContent %></span>
+            <% if (el.catchegories.length < 1) { %>
+                <p>No catchegories selected</p>
+            <%} else { %>
+                <p>Catchegories: <%= el.catchegories %></p>
+            <% } %>
+            <span>Likes: <%= el.likes %></span>
+            <span>Comments: <%= el.commentsLength %></span>
+            <% if (user === el.postedBy.userName) {%>
                 <span class="del"> Delete </span>
-            </li>
+            <% } %>
+        </li>
     <% }) %>    
     </ul>
 

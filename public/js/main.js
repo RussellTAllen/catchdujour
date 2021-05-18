@@ -17,6 +17,9 @@ Array.from(likeBtn).forEach((el)=>{
 // })
 
 async function deleteCatchPost(){
+    const c = confirm('You are about to delete this post, would you like to continue?')
+    if (c === false) return
+    
     const catchPostId = this.parentNode.dataset.id
     try{
         const response = await fetch('catchPosts/deleteCatchPost', {

@@ -30,7 +30,7 @@ module.exports = {
     getCatchPostsByUserId: async (req,res)=>{
         console.log(req.user)
         try{
-            const catchPosts = await CatchPost.find({ userId: req.user.id })
+            const catchPosts = await CatchPost.find({ userId: req.user.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: req.user.userName,
@@ -44,7 +44,7 @@ module.exports = {
             await CatchPost.create({
                 catchTitle: req.body.catchTitle,
                 catchContent: req.body.catchContent, 
-                catchegories: req.body.catchegories,
+                catchegories: req.body.catchegories.toLowerCase().trim(),
                 userId: req.user.id,
                 postedBy: req.user,
                 likes: 0,
@@ -63,8 +63,6 @@ module.exports = {
         }
     },
     likeCatchPost: async (req, res) => {
-        console.log('liking stuff and things ...')
-        console.log(req.params.id)
         try{
             // Works method-override/mongoose, but refreshes to top of page
             // const post = await CatchPost.findOneAndUpdate(
@@ -100,7 +98,8 @@ module.exports = {
                         text: req.body.text,
                         user: req.user
                     }
-                }
+                },
+                $inc: { commentsLength: 1 }
             } )
             res.redirect(`/catchPost/${req.params.id}`)
         }
@@ -113,7 +112,7 @@ module.exports = {
         console.log('Initializing catchegory...')
         try{
             await Catchegory.create({
-                catchegories: ['Art', 'Food', 'Politics', 'Religion', 'Rant', 'Science', 'Technology']
+                catchegories: ['art', 'food', 'politics', 'religion', 'rant', 'science', 'technology']
             })
             console.log('Catchegory has been initialized!')
             res.redirect('/catchPosts')
@@ -126,7 +125,7 @@ module.exports = {
         console.log(req.body.createCatchegory)
         try{
             await Catchegory.updateOne({
-                $push: { catchegories: req.body.createCatchegory }
+                $push: { catchegories: req.body.createCatchegory.toLowerCase().trim() }
             })
             console.log('Catchegory has been created!')
             res.redirect('/catchPosts')

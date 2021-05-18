@@ -16,13 +16,20 @@
 
         <!-- Filter out user's omitted catchegories -->
         <% if (user !== 'guest') {%>
+            <% console.log('catchegory object '+catchPosts.forEach(p => p.catchegories)) %>
             <% catchPosts = catchPosts.filter(post => post.catchegories.every(cat => !user.omittedCatchegories.includes(cat))) %>
         <% } %>
+
+        <!-- Sort by New, Tastiest, Most Talked About -->
+        <a href="/">New</a>  |  
+        <a href="/mostLiked">Tastiest</a>  |  
+        <a href="/mostCommented">Most Talked About</a>
+
         <!-- Print posts-->
         <% catchPosts.forEach( el => { %>
             <div class="catch-post" data-id="<%=el._id%>">
-                <p>Posted by: <%= el.postedBy.userName %></p>
-                <h4><a href="catchPost/<%= el._id%>"><%= el.catchTitle %></a></h4>
+                <h3><a href="catchPost/<%= el._id%>"><%= el.catchTitle %></a></h3>
+                <h5>Posted by: <em><%= el.postedBy.userName %></em> on <%= el.date %></h5>
                 <span class="catchPost"><%= el.catchContent %></span>
                 <% if (!el.catchegories[0]) { %>
                     <p>No catchegories selected</p>

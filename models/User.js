@@ -8,6 +8,10 @@ const UserSchema = new mongoose.Schema({
   omittedCatchegories: {
     type: Array,
     default: []
+  },
+  preferredSort: {
+    type: String,
+    default: 'new'
   }
 })
 

@@ -49,7 +49,7 @@
                 <% }else{%>
                     <span>Likes: <%= el.likes %></span>
                 <% } %>
-                <span>Comments: <%= el.comments %></span>
+                <span>Comments: <%= el.comments.length %></span>
                 <% if (user.userName === el.postedBy.userName) {%>
                     <span class="del"> Delete </span>
                 <% } %>

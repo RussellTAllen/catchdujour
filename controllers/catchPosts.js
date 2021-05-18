@@ -92,6 +92,22 @@ module.exports = {
           console.log(err)
         }
     },
+    addComment: async (req, res) => {
+        try{
+            await CatchPost.findOneAndUpdate( req.params.id, {
+                $push: {
+                    comments: {
+                        text: req.body.text,
+                        user: req.user
+                    }
+                }
+            } )
+            res.redirect(`/catchPost/${req.params.id}`)
+        }
+        catch(err){
+            console.log(err)
+        }
+    },
     // Initialize Catchegory Collection
     initCatchegory: async (req, res)=>{
         console.log('Initializing catchegory...')

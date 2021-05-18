@@ -41,16 +41,10 @@ const CatchPostSchema = new mongoose.Schema({
     type: [User.UserSchema],
     default: [],
   },
-  // likedBy: {
-  //   type: { users: [User.UserSchema] },
-  //   default: [],
-  //   unique: false,
-  //   sparse: true
-  // },
-  // comments: {
-  //   type: [CommentSchema],
-  //   required: true
-  // },
+  comments: {
+    type: [CommentSchema],
+    required: true
+  },
   catchegories: {
     type: Array,
     default: []

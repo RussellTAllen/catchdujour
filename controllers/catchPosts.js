@@ -66,20 +66,22 @@ module.exports = {
         console.log('liking stuff and things ...')
         console.log(req.params.id)
         try{
-            // This is working, but I want to test something below
+            // This works with method-override/mongoose, but will not update without refreshing whole page
             // const post = await CatchPost.findOneAndUpdate(
             //     { _id: req.params.id },
             //     { 
             //     $inc: { likes: 1 },
             //     }
             // );
-            
-            const post = await CatchPost.findOne({ _id: req.params.id })
+            // res.redirect('/')
+
+            // Using client-side main.js to update each like as it's added
+            const post = await CatchPost.findOne({ _id: req.body.postId })
             console.log(post)
             post.likes++
 
             await post.save()
-            // res.json('Added a like!')
+            res.json('Added a like!')
 
         //   const likedBy = post.likedBy.map((user) => user._id);
         //   if (likedBy.includes(req.user._id)) {
@@ -94,7 +96,7 @@ module.exports = {
 
 
 
-            // res.redirect('/')
+          
         }catch(err){
           console.log(err)
         }

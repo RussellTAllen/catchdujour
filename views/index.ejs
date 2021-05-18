@@ -44,9 +44,11 @@
                 <%} else { %>
                     <p>Catchegories: <%= el.catchegories %></p>
                 <% } %>
-                <form action="catchPosts/likeCatchPost/<%= el._id %>?_method=PUT" method="POST">
-                    <button type="submit" data-id="<%= el._id %>">Likes: </button><%= el.likes %>
-                </form>
+                <% if (user !== 'guest') {%>
+                    <button type="button" class="likes">Likes: </button><%= el.likes %>
+                <% }else{%>
+                    <span>Likes: <%= el.likes %></span>
+                <% } %>
                 <span>Comments: <%= el.comments %></span>
                 <% if (user.userName === el.postedBy.userName) {%>
                     <span class="del"> Delete </span>
@@ -56,6 +58,6 @@
 
         <% }) %>    
     </main>
-
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -15,7 +15,19 @@ module.exports = {
     //         console.log(err)
     //     }
     // },
-    getCatchPostsById: async (req,res)=>{
+    getCatchPostById: async (req,res)=>{
+        console.log(req.params.id)
+        try{
+            const catchPost = await CatchPost.findById({ _id: req.params.id })
+            res.render('catchPost.ejs', {
+                catchPost: catchPost, 
+                user: req.user
+            })
+        }catch(err){
+            console.log(err)
+        }
+    },
+    getCatchPostsByUserId: async (req,res)=>{
         console.log(req.user)
         try{
             const catchPosts = await CatchPost.find({ userId: req.user.id })
@@ -31,7 +43,7 @@ module.exports = {
         try{
             await CatchPost.create({
                 catchTitle: req.body.catchTitle,
-                catchPost: req.body.catchPost, 
+                catchContent: req.body.catchContent, 
                 catchegories: req.body.catchegories,
                 userId: req.user.id,
                 postedBy: req.user,

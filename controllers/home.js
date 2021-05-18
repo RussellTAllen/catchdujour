@@ -6,6 +6,8 @@ module.exports = {
     // }
     getIndex: async (req,res)=>{
         console.log(req.user)
+        if (!req.user) req.user = 'guest'
+
         try{
             const catchPosts = await CatchPost.find()
             res.render('index.ejs', {
@@ -15,5 +17,5 @@ module.exports = {
         }catch(err){
             console.log(err)
         }
-    }
+    },
 }

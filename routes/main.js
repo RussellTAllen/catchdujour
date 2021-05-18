@@ -10,7 +10,9 @@ router.get('/login', authController.getLogin)
 router.post('/login', authController.postLogin)
 router.get('/logout', authController.logout)
 router.get('/signup', authController.getSignup)
-router.get('/catchPosts', catchPostsController.getCatchPostsById)
+router.get('/catchPost/:id', catchPostsController.getCatchPostById)
+// router.get('/:id', homeController.getCatchPostById)
+router.get('/catchPosts', catchPostsController.getCatchPostsByUserId)
 router.post('/signup', authController.postSignup)
 
 module.exports = router

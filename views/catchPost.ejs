@@ -8,5 +8,16 @@
 </head>
 <body>
     <h1> One Catch Post, Plz!</h1>
+    <% if (user) {%>
+        <h2>Logged in User: <%= user.userName %></h2>
+    <% } %>
+    <h2>Title: <%= catchPost.catchTitle %></h2>
+    <h3>Posted by: <%= catchPost.postedBy.userName %></h3>
+    <p>Catch: <%= catchPost.catchContent %></p>
+
+    <% if (user) {%>
+        <p>Hey bby, you can comment and like, and your name is <%= user.userName %></p>
+    <% } %>
+
 </body>
 </html>

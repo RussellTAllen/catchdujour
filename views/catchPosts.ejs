@@ -35,7 +35,7 @@
     <% catchPosts.forEach( el => { %>
             <li class="catchPostItem" data-id="<%=el._id%>">
                 <p>Posted by: <%= el.postedBy.userName %></p>                <span><%= el.catchTitle %></span>
-                <span class="catchPost"><%= el.catchPost %></span>
+                <span class="catchPost"><%= el.catchContent %></span>
                 <% if (el.catchegories.length < 1) { %>
                     <p>No catchegories selected</p>
                 <%} else { %>
@@ -48,11 +48,11 @@
     <% }) %>    
     </ul>
 
-    <h2><%= user.userName %> has posts.</h2>
+    <h2><%= user %> has posts.</h2>
 
     <form action="/catchPosts/createCatchPost" method="POST">
         <input type="text" placeholder="Enter Catch Title" name="catchTitle">
-        <input type="text" placeholder="Enter Catch Content" name="catchPost">
+        <input type="text" placeholder="Enter Catch Content" name="catchContent">
         <input type="text" placeholder="Enter Catchegories" name="catchegories">
         <input type="submit">
     </form>

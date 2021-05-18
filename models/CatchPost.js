@@ -15,7 +15,7 @@ const CatchPostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  catchPost: {
+  catchContent: {
     type: String,
     required: true,
   },

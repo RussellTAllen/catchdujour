@@ -7,18 +7,11 @@ const { ensureAuth, ensureGuest } = require('../middleware/auth')
 // router.get('/', ensureAuth, catchPostsController.getCatchPosts)
 router.get('/', ensureAuth, homeController.getIndex)
 // Should this be here?
-router.get('/catchPosts', catchPostsController.getCatchPostsById)
-
+// router.get('/catchPosts', catchPostsController.getCatchPostsById)
 router.post('/createCatchPost', catchPostsController.createCatchPost)
-
 router.post('/initCatchegory', catchPostsController.initCatchegory)
-
 router.put('/createCatchegory', catchPostsController.createCatchegory)
-
 router.put('/omitCatchegory', catchPostsController.omitCatchegory)
-
-// router.put('/markIncomplete', catchPostsController.markIncomplete)
-
 router.delete('/deleteCatchPost', catchPostsController.deleteCatchPost)
 
 module.exports = router

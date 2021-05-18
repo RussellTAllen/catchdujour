@@ -13,6 +13,7 @@ router.get('/logout', authController.logout)
 router.get('/signup', authController.getSignup)
 router.get('/catchPost/:id', catchPostsController.getCatchPostById)
 router.get('/catchPosts', catchPostsController.getCatchPostsByUserId)
+router.get('/catchPosts/:id', catchPostsController.getCatchPostsByPostId)
 
 
 // router.get('/:id', homeController.getCatchPostById)

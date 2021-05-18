@@ -39,6 +39,18 @@ module.exports = {
             console.log(err)
         }
     },
+    getCatchPostsByPostId: async (req,res)=>{
+        console.log('get by post id: '+req.params.id)
+        try{
+            const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
+            res.render('catchPosts.ejs', {
+                catchPosts: catchPosts, 
+                user: req.user.userName,
+            })
+        }catch(err){
+            console.log(err)
+        }
+    },
     createCatchPost: async (req, res)=>{
         try{
             await CatchPost.create({

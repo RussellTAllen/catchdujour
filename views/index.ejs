@@ -29,7 +29,7 @@
         <% catchPosts.forEach( el => { %>
             <div class="catch-post" data-id="<%=el._id%>">
                 <h3><a href="catchPost/<%= el._id%>"><%= el.catchTitle %></a></h3>
-                <h5>Posted by: <em><%= el.postedBy.userName %></em> on <%= el.date %></h5>
+                <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy._id %>"><%= el.postedBy.userName %></a></em> on <%= el.date %></h5>
                 <span class="catchPost"><%= el.catchContent %></span>
                 <% if (!el.catchegories[0]) { %>
                     <p>No catchegories selected</p>

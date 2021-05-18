@@ -17,12 +17,5 @@
             <a href="/logout">Logout</a>
             <a href="/catchPosts">Create Your Own Post</a>
         <% } %>
-        <p>
-            <% if (user !== 'guest' || !user) {%>
-                <%= user.userName %> is logged in
-                <p>Posts with <%= user.omittedCatchegories.join(', ') %> catchegories will not be displayed.</p>
-            <%} else{ %>
-                Not logged in
-            <% } %> 
-        </p>
+
     </header>

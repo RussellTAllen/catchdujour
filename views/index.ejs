@@ -1,34 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catch du Jour!</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <header>
-        <h1>Catch your very own blog space!</h1>
-        <% if (user === 'guest') {%>
-            <a href="/login"> Login</a>
-            <a href="/signup"> Signup</a>
-        <% } else {%>
-            <a href="/logout">Logout</a>
-            <a href="/catchPosts">Create Your Own Post</a>
-        <% } %>
+<%- include('partials/header') -%>
+
+    <% console.log('index.ejs loading...') %>
+    <% console.log('user: '+user) %>
+    <main>
         <p>
-            <% if (user !== 'guest') {%>
+            <% if (user !== 'guest' || !user) {%>
                 <%= user.userName %> is logged in
-                <p>Posts with <%= user.omittedCatchegories.join(', ') %> catchegories will not be displayed.</p>
+                <% if (user.omittedCatchegories) {%>
+                    <p>Posts with <%= user.omittedCatchegories.join(', ') %> catchegories will not be displayed.</p>
+                <% } %>
             <%} else{ %>
                 Not logged in
             <% } %> 
         </p>
-    </header>
-    <% console.log('index.ejs loading...') %>
-    <% console.log('user: '+user) %>
-    <main>
+
         <!-- Filter out user's omitted catchegories -->
         <% if (user !== 'guest') {%>
             <% catchPosts = catchPosts.filter(post => post.catchegories.every(cat => !user.omittedCatchegories.includes(cat))) %>

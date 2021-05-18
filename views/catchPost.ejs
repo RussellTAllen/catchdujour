@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<header>
+    <% if (user === 'guest' || !user) {%>
+        <a href="/login"> Login</a>
+        <a href="/signup"> Signup</a>
+    <% } else {%>
+        <a href="/logout">Logout</a>
+        <a href="/">Back to Main</a>
+        <a href="/catchPosts">Create Your Own Post</a>
+    <% } %>
+</header>
+
 <body>
     <h1> One Catch Post, Plz!</h1>
     <% if (user) {%>
@@ -27,7 +38,7 @@
 
     <% if (user) {%>
         <p>Hey <%= user.userName %>, you can comment and like</p>
-        <form action="/catchPosts/comment/<%= catchPost._id %>?_method=PUT" method="POST">
+        <form action="/catchPosts/<%= catchPost._id %>/comment/?_method=PUT" method="POST">
             <label for="text">Enter Comment here: </label>
                 <textarea name="text"></textarea>
             <input type="submit">

@@ -94,7 +94,7 @@ module.exports = {
     },
     addComment: async (req, res) => {
         try{
-            await CatchPost.findOneAndUpdate( req.params.id, {
+            await CatchPost.findOneAndUpdate({ _id: req.params.id }, {
                 $push: {
                     comments: {
                         text: req.body.text,

@@ -23,7 +23,7 @@ async function deleteCatchPost(){
             method: 'delete',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'catchPostIdFromJSFile': catchPostId
+                'catchPostId': catchPostId
             })
         })
         const data = await response.json()

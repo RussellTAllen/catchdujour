@@ -66,7 +66,7 @@ module.exports = {
         console.log('liking stuff and things ...')
         console.log(req.params.id)
         try{
-            // This works with method-override/mongoose, but will not update without refreshing whole page
+            // Works method-override/mongoose, but refreshes to top of page
             // const post = await CatchPost.findOneAndUpdate(
             //     { _id: req.params.id },
             //     { 
@@ -77,26 +77,17 @@ module.exports = {
 
             // Using client-side main.js to update each like as it's added
             const post = await CatchPost.findOne({ _id: req.body.postId })
-            console.log(post)
-            post.likes++
+            const likedBy = post.likedBy.map((user) => user._id);
 
+            if (likedBy.includes(req.user._id)) {
+                post.likes--
+                post.likedBy = post.likedBy.filter((user) => !user._id.equals(req.user._id))
+            } else {
+                post.likes++;
+                post.likedBy.push(req.user)
+            }
             await post.save()
             res.json('Added a like!')
-
-        //   const likedBy = post.likedBy.map((user) => user._id);
-        //   if (likedBy.includes(req.user._id)) {
-        //     post.likes--;
-        //     post.likedBy = post.likedBy.filter((user) => !user._id.equals(req.user._id))
-        //   } else {
-        //     post.likes++;
-        //     post.likedBy.push(req.user)
-        //   }
-        // await post.save();
-
-
-
-
-          
         }catch(err){
           console.log(err)
         }
@@ -152,9 +143,9 @@ module.exports = {
     //     }
     // },
     deleteCatchPost: async (req, res)=>{
-        console.log(req.body.catchPostIdFromJSFile)
+        console.log(req.body.catchPostId)
         try{
-            await CatchPost.findOneAndDelete({ _id:req.body.catchPostIdFromJSFile })
+            await CatchPost.findOneAndDelete({ _id:req.body.catchPostId })
             console.log('Deleted CatchPost')
             res.json('Deleted It')
         }catch(err){

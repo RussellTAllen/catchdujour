@@ -44,7 +44,9 @@
                 <%} else { %>
                     <p>Catchegories: <%= el.catchegories %></p>
                 <% } %>
-                <span>Likes: <%= el.likes %></span>
+                <form action="catchPosts/likeCatchPost/<%= el._id %>?_method=PUT" method="POST">
+                    <button type="submit" data-id="<%= el._id %>">Likes: </button><%= el.likes %>
+                </form>
                 <span>Comments: <%= el.comments %></span>
                 <% if (user.userName === el.postedBy.userName) {%>
                     <span class="del"> Delete </span>

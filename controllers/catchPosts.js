@@ -62,6 +62,43 @@ module.exports = {
             console.log(err)
         }
     },
+    likeCatchPost: async (req, res) => {
+        console.log('liking stuff and things ...')
+        console.log(req.params.id)
+        try{
+            // This is working, but I want to test something below
+            // const post = await CatchPost.findOneAndUpdate(
+            //     { _id: req.params.id },
+            //     { 
+            //     $inc: { likes: 1 },
+            //     }
+            // );
+            
+            const post = await CatchPost.findOne({ _id: req.params.id })
+            console.log(post)
+            post.likes++
+
+            await post.save()
+            // res.json('Added a like!')
+
+        //   const likedBy = post.likedBy.map((user) => user._id);
+        //   if (likedBy.includes(req.user._id)) {
+        //     post.likes--;
+        //     post.likedBy = post.likedBy.filter((user) => !user._id.equals(req.user._id))
+        //   } else {
+        //     post.likes++;
+        //     post.likedBy.push(req.user)
+        //   }
+        // await post.save();
+
+
+
+
+            // res.redirect('/')
+        }catch(err){
+          console.log(err)
+        }
+    },
     // Initialize Catchegory Collection
     initCatchegory: async (req, res)=>{
         console.log('Initializing catchegory...')

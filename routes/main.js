@@ -12,11 +12,9 @@ router.get('/login', ensureGuest, authController.getLogin)
 router.get('/logout', authController.logout)
 router.get('/signup', authController.getSignup)
 router.get('/catchPosts/:id/catchPost', catchPostsController.getCatchPostById)
-router.get('/catchPosts', catchPostsController.getCatchPostsByUserId)
+router.get('/catchPosts', catchPostsController.getProfile)
 router.get('/createCatchPage', ensureAuth, catchPostsController.getCreateCatchPage)
-// Works, but no CSS, trying to fix below
-router.get('/catchPosts/:id', catchPostsController.getCatchPostsByPostId)
-// router.get('/catchPosts/', catchPostsController.getCatchPostsByPostId)
+router.get('/catchPosts/:id', catchPostsController.getCatchPostsByUserId)
 
 
 // router.get('/:id', homeController.getCatchPostById)

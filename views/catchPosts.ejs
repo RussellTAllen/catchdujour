@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-    <% console.log('user from ejs' +user) %>
-    <% console.log('catchpost.postedby.username ' +catchPosts[0]?.postedBy.userName) %>
+    <!--% console.log('user from ejs' +user) -->
+    <!--% console.log('catchpost.postedby.username ' +catchPosts[0]?.postedBy.userName) %-->
 
     <% if (user === 'guest' || !user) {%>
         <a href="/login"> Login</a>
@@ -29,7 +29,7 @@
         <p><a href="/">Back to Home</a></p>
         
         <!-- If the user is one their own page, allow personalization of things -->
-        <% console.log(`from EJS - user: ${user}, catchPosts: ${catchPosts}`) %>
+        <!-- console.log(`from EJS - user: ${user}, catchPosts: ${catchPosts}`) -->
         <% if (user.userName === catchPosts[0]?.postedBy.userName) {%>
         <div>
             <form action="/catchPosts/initCatchegory" method="POST">

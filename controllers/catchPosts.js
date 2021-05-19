@@ -32,7 +32,7 @@ module.exports = {
             console.log(err)
         }
     },
-    getCatchPostsByUserId: async (req,res)=>{
+    getProfile: async (req,res)=>{
         console.log('getByUserId: '+req.user)
         try{
             const catchPosts = await CatchPost.find({ userId: req.user.id }).sort({ _id: -1 })
@@ -44,8 +44,8 @@ module.exports = {
             console.log(err)
         }
     },
-    getCatchPostsByPostId: async (req,res)=>{
-        console.log('get by post id: '+req.params.id)
+    getCatchPostsByUserId: async (req,res)=>{
+        console.log('get postS by post id: '+req.params.id)
         try{
             const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {

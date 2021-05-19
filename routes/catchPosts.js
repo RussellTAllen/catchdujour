@@ -23,5 +23,6 @@ router.put('/createCatchegory', ensureAuth, catchPostsController.createCatchegor
 router.put('/omitCatchegory', ensureAuth, catchPostsController.omitCatchegory)
 
 router.delete('/deleteCatchPost', ensureAuth, catchPostsController.deleteCatchPost)
+router.delete('/deleteComment', ensureAuth, catchPostsController.deleteComment)
 
 module.exports = router

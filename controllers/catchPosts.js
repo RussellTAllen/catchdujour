@@ -19,11 +19,14 @@ module.exports = {
     // },
     getCatchPostById: async (req,res)=>{
         console.log('getting post by id: '+req.params.id)
+        let user = req.user
+        if (!user) user = { userName: 'guest' }
+
         try{
             const catchPost = await CatchPost.findById({ _id: req.params.id })
             res.render('catchPost.ejs', {
                 catchPost: catchPost, 
-                user: req.user
+                user: user
             })
         }catch(err){
             console.log(err)
@@ -185,6 +188,20 @@ module.exports = {
             await CatchPost.findOneAndDelete({ _id:req.body.catchPostId })
             console.log('Deleted CatchPost')
             res.json('Deleted It')
+        }catch(err){
+            console.log(err)
+        }
+    },
+    deleteComment: async (req, res)=>{
+        console.log('the postId with the comments: '+req.body.catchPostId)
+        console.log('the comment id: '+req.body.commentId)
+        try{
+            await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },
+                {
+                    $pull: {"comments": { _id: req.body.commentId }}
+                })
+            console.log('Deleted Comment')
+            res.json('Delete Comment')
         }catch(err){
             console.log(err)
         }

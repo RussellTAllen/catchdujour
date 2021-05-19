@@ -25,17 +25,26 @@
     <% } %>
     <hr>
     <h3>Title: <%= catchPost.catchTitle %></h3>
-    <h5>Posted by: <%= catchPost.postedBy.userName %> on <%= catchPost.date %></h6>
+    <h5>Posted by: <%= catchPost.postedBy.userName %> on <%= catchPost.date %></h5>
     <p>Catch Content: <%= catchPost.catchContent %></p>
 
     <hr>
     <h2>Comments:</h2>
     <% if (catchPost.comments.length > 0) { %>
+        <div data-id="<%= catchPost._id %>">
         <% catchPost.comments.forEach(comment => {%>
-            <hr>
-            <h4>User <%= comment.user.userName %> said: </h4>
-            <p><%= comment.text %></p>
+            <div class="comment" data-id="<%= comment._id %>">
+                <hr>
+                <h4>User <%= comment.user.userName %> said: </h4>
+                <p><%= comment.text %></p>
+                <% if (user.userName === comment.user.userName) {%>
+                    <p>You should be able to delete your own comment, amiright?</p>
+                    <p><%= comment._id %></p>
+                    <button class='del-comment'>Delete Comment</button>
+                <% } %>
+            </div>
         <% }) %>
+        </div>
     <% } %>
 
     <% if (user) {%>
@@ -48,6 +57,7 @@
     <% }else{ %>
         <p><a href="/signup">Sign up</a> or <a href="/login">Login</a> to comment</p>
     <% } %>
-
+    
+    <script src="../../js/main.js"></script>
 </body>
 </html>

@@ -5,33 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-    <h1><%= catchPosts[0].postedBy.userName %>'s CatchPosts</h1>
+    <% console.log('user from ejs' +user) %>
+    <% console.log('catchpost.postedby.username ' +catchPosts[0]?.postedBy.userName) %>
 
-    <p><a href="/logout">Logout</a></p>
-    <p><a href="/">Back to Home</a></p>
+    <% if (user === 'guest' || !user) {%>
+        <a href="/login"> Login</a>
+        <a href="/signup"> Signup</a>
+    <% } else {%>
+        <a href="/logout">Logout</a>
+        <a href="/catchPosts">Go To Your Profile</a>
+        <a href="/createCatchPage">(new) Create Your Own Post</a>
+    <% } %>
 
-    <div>
-        <form action="/catchPosts/initCatchegory" method="POST">
-            <h3>Initialize Catchegories (remove before publishing)</h3>
-            <input type="submit">
-        </form>
-        <h3>Which catchegory would you like to create?</h3>
-        <form action="/catchPosts/createCatchegory?_method=PUT" method="POST">
-            <input type="text" name="createCatchegory">
-            <input type="submit">
-        </form>
-    </div>
-    <div>
-        <h3>Which catchegory would you like to omit?</h3>
-        <form action="/catchPosts/omitCatchegory?_method=PUT" method="POST">
-            <input type="text" name="omitCatchegory">
-            <input type="submit">
-        </form>
-    </div>
+    <h1><%= catchPosts[0]?.postedBy.userName %>'s CatchPosts</h1>
+    
+    <% if (user) {%>
+        <h1><%= user.userName %> is logged in</h1>
+    
+        <p><a href="/logout">Logout</a></p>
+        <p><a href="/">Back to Home</a></p>
+        
+        <!-- If the user is one their own page, allow personalization of things -->
+        <% console.log(`from EJS - user: ${user}, catchPosts: ${catchPosts}`) %>
+        <% if (user.userName === catchPosts[0]?.postedBy.userName) {%>
+        <div>
+            <form action="/catchPosts/initCatchegory" method="POST">
+                <h3>Initialize Catchegories (remove before publishing)</h3>
+                <input type="submit">
+            </form>
+            <h3>Which catchegory would you like to create?</h3>
+            <form action="/catchPosts/createCatchegory?_method=PUT" method="POST">
+                <input type="text" name="createCatchegory">
+                <input type="submit">
+            </form>
+        </div>
+        <div>
+            <h3>Which catchegory would you like to omit?</h3>
+            <form action="/catchPosts/omitCatchegory?_method=PUT" method="POST">
+                <input type="text" name="omitCatchegory">
+                <input type="submit">
+            </form>
+        </div>
+        <% } %>
+    <% } %>
+    <!-- ------------------------------------------------------------ -->
 
+    <!-- Print All Posts from User -->
     <ul>
     <% catchPosts.forEach( el => { %>
         <li class="catchPostItem" data-id="<%=el._id%>">
@@ -51,15 +73,9 @@
         </li>
     <% }) %>    
     </ul>
+    <!-- -------------------------- -->
 
-    <h2><%= user %> has posts.</h2>
-
-    <form action="/catchPosts/createCatchPost" method="POST">
-        <input type="text" placeholder="Enter Catch Title" name="catchTitle">
-        <input type="text" placeholder="Enter Catch Content" name="catchContent">
-        <input type="text" placeholder="Enter Catchegories" name="catchegories">
-        <input type="submit">
-    </form>
+    <h2><%= user?.userName %> is logged in.</h2>
 
     <a href="/logout">Logout</a>
 

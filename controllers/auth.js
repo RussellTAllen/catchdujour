@@ -1,3 +1,5 @@
+const express = require('express')
+
 const passport = require('passport')
 const validator = require('validator')
 const User = require('../models/User')
@@ -32,7 +34,7 @@ exports.postLogin = (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) { return next(err) }
       req.flash('success', { msg: 'Success! You are logged in.' })
-      // res.redirect(req.session.returnTo || '/catchPosts')
+      console.log('line 36 is running')
       res.redirect(req.session.returnTo || '/')
     })
   })(req, res, next)
@@ -91,7 +93,7 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err)
         }
-        // res.redirect('/catchPosts')
+        console.log('line 94 running...')
         res.redirect('/')
       })
     })

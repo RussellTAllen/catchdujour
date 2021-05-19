@@ -1,4 +1,25 @@
-<%- include('partials/header') -%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch du Jour!</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Catch your very own blog space!</h1>
+        <% if (user === 'guest' || !user) {%>
+            <a href="/login"> Login</a>
+            <a href="/signup"> Signup</a>
+        <% } else {%>
+            <a href="/logout">Logout</a>
+            <a href="/catchPosts">Go To Your Profile</a>
+            <a href="/createCatchPage">(new) Create Your Own Post</a>
+        <% } %>
+
+    </header>
 
     <% console.log('index.ejs loading...') %>
     <% console.log('user: '+user) %>
@@ -21,14 +42,14 @@
         <% } %>
 
         <!-- Sort by New, Tastiest, Most Talked About -->
-        <a href="/">New</a>  |  
+        <a href="/">Freshest</a>  |  
         <a href="/mostLiked">Tastiest</a>  |  
-        <a href="/mostCommented">Most Talked About</a>
+        <a href="/mostCommented">Most Chewed On</a>
 
         <!-- Print posts-->
         <% catchPosts.forEach( el => { %>
             <div class="catch-post" data-id="<%=el._id%>">
-                <h3><a href="catchPost/<%= el._id%>"><%= el.catchTitle %></a></h3>
+                <h3><a href="catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>
                 <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy._id %>"><%= el.postedBy.userName %></a></em> on <%= el.date %></h5>
                 <span class="catchPost"><%= el.catchContent %></span>
                 <% if (!el.catchegories[0]) { %>

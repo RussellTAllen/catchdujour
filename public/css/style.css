@@ -15,11 +15,17 @@
 
 
 /* DARK MODE */
-/* body{
+body,
+body div.catch-post{
   color: white;
-  background: rgb(83, 83, 83);
-} */
-
+  background: rgb(54, 54, 54);
+}
+a{
+  color: rgb(255, 175, 46);
+}
+input{
+  background:rgb(255, 175, 46);
+}
 div.catch-post{
     background: rgb(236, 236, 236);
     border: 1px solid black;

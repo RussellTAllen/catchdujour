@@ -2,6 +2,8 @@ const User = require('../models/User')
 const CatchPost = require('../models/CatchPost')
 const Catchegory = require('../models/Catchegory')
 
+
+
 module.exports = {
     // getCatchPosts: async (req,res)=>{
     //     console.log(req.user)
@@ -16,7 +18,7 @@ module.exports = {
     //     }
     // },
     getCatchPostById: async (req,res)=>{
-        console.log(req.params.id)
+        console.log('getting post by id: '+req.params.id)
         try{
             const catchPost = await CatchPost.findById({ _id: req.params.id })
             res.render('catchPost.ejs', {
@@ -28,12 +30,12 @@ module.exports = {
         }
     },
     getCatchPostsByUserId: async (req,res)=>{
-        console.log(req.user)
+        console.log('getByUserId: '+req.user)
         try{
             const catchPosts = await CatchPost.find({ userId: req.user.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
-                user: req.user.userName,
+                user: req.user,
             })
         }catch(err){
             console.log(err)
@@ -45,8 +47,16 @@ module.exports = {
             const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
-                user: req.user.userName,
+                user: req.user,
             })
+        }catch(err){
+            console.log(err)
+        }
+    },
+    getCreateCatchPage: async (req, res)=>{
+        try{
+            res.render('createCatchPage.ejs',
+                { user: req.user })
         }catch(err){
             console.log(err)
         }
@@ -113,7 +123,7 @@ module.exports = {
                 },
                 $inc: { commentsLength: 1 }
             } )
-            res.redirect(`/catchPost/${req.params.id}`)
+            res.redirect(`/catchPosts/${req.params.id}/catchPost`)
         }
         catch(err){
             console.log(err)

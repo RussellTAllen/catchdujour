@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/logout">Logout</a>
+    <a href="/">Back to Main</a>
+    <a href="/catchPosts">Go To Your Profile</a>
+    
+    <h1>Create A Catch!!!</h1>
+    <h2>Logged in user: <%= user.userName %></h2>
+
+    <form action="/catchPosts/createCatchPost" method="POST">
+        <input type="text" placeholder="Enter Catch Title" name="catchTitle">
+        <input type="text" placeholder="Enter Catch Content" name="catchContent">
+        <input type="text" placeholder="Enter Catchegories" name="catchegories">
+        <input type="submit">
+    </form>
+</body>
+</html>

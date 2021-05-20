@@ -8,12 +8,13 @@
     <title>Document</title>
 </head>
 <header>
+    <a href="/">Back to Main</a>
     <% if (user === 'guest' || !user) {%>
         <a href="/login"> Login</a>
         <a href="/signup"> Signup</a>
     <% } else {%>
         <a href="/logout">Logout</a>
-        <a href="/">Back to Main</a>
+        <a href="/catchProfile">Go To Your Profile</a>
         <a href="/catchPosts">Create Your Own Post</a>
     <% } %>
 </header>

@@ -8,46 +8,47 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Filter out user's omitted catchegories -->
+    <% if (user !== 'guest') {%>
+        <% console.log('catchegory object '+catchPosts.forEach(p => p.catchegories)) %>
+        <% catchPosts = catchPosts.filter(post => post.catchegories.every(cat => !user.omittedCatchegories.includes(cat))) %>
+    <% } %>
+    
     <header>
-        <h1>Catch your very own blog space!</h1>
+        <div class='intro'>
+            <h1>Welcome to Catch du Jour!</h1>
+            <h3>Read/interact/create the tastiest catch of the day!</h3>
+        </div>
+
+        <nav>
         <% if (user === 'guest' || !user) {%>
             <a href="/login"> Login</a>
             <a href="/signup"> Signup</a>
         <% } else {%>
+            <h5><%= user.userName %> is logged in</h5>
             <a href="/logout">Logout</a>
-            <a href="/catchPosts">Go To Your Profile</a>
-            <a href="/createCatchPage">(new) Create Your Own Post</a>
+            <a href="/catchProfile">Go To Your Profile</a>
         <% } %>
-
+        </nav>
     </header>
 
     <% console.log('index.ejs loading...') %>
-    <% console.log('user: '+user) %>
-    <main>
-        <p>
-            <% if (user !== 'guest' || !user) {%>
-                <%= user.userName %> is logged in
-                <% if (user.omittedCatchegories) {%>
-                    <p>Posts with <%= user.omittedCatchegories.join(', ') %> catchegories will not be displayed.</p>
-                <% } %>
-            <%} else{ %>
-                Not logged in
-            <% } %> 
-        </p>
+    <div class="container">
+        <main>
+            <% if (user !== 'guest' && user) {%>
+                <div class='create-page'>
+                    <a href="/createCatchPage">Create Your Own Catch</a>
+                </div>
+            <% } %>
 
-        <!-- Filter out user's omitted catchegories -->
-        <% if (user !== 'guest') {%>
-            <% console.log('catchegory object '+catchPosts.forEach(p => p.catchegories)) %>
-            <% catchPosts = catchPosts.filter(post => post.catchegories.every(cat => !user.omittedCatchegories.includes(cat))) %>
-        <% } %>
 
-        <!-- Sort by New, Tastiest, Most Talked About -->
-        <a href="/">Freshest</a>  |  
-        <a href="/mostLiked">Tastiest</a>  |  
-        <a href="/mostCommented">Most Chewed On</a>
+            <!-- Sort by New, Tastiest, Most Talked About -->
+            <a href="/">Freshest</a>  |  
+            <a href="/mostLiked">Tastiest</a>  |  
+            <a href="/mostCommented">Most Chewed On</a>
 
-        <!-- Print posts-->
-        <% catchPosts.forEach( el => { %>
+            <!-- Print posts-->
+            <% catchPosts.forEach( el => { %>
             <div class="catch-post" data-id="<%=el._id%>">
                 <h3><a href="catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>
                 <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy._id %>"><%= el.postedBy.userName %></a></em> on <%= el.date %></h5>
@@ -68,9 +69,28 @@
                 <% } %>
             </div>
             <% console.log('postedBy: '+el.postedBy.userName) %>
+            <% }) %>    
+        </main>
 
-        <% }) %>    
-    </main>
+        <aside>
+            <h3>Catchegories</h3>
+            <ul>
+                <% catchegories[0].catchegories.forEach(cat => {%>
+                    <li> <%= cat %></li>
+                <% }) %>
+            </ul>
+
+            <% if (user !== 'guest' || !user) {%>
+            <h3>Unseen Catchegories</h3>
+            <ul>
+                <% if (user.omittedCatchegories) {%>
+                    <li><%= user.omittedCatchegories.join(', ') %></p>
+                <% } %>
+            </ul>
+            <% } %>
+        </aside>
+    </div>
+
     <script src="js/main.js"></script>
 </body>
 </html>

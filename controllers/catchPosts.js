@@ -33,7 +33,6 @@ module.exports = {
         }
     },
     getProfile: async (req,res)=>{
-        console.log('getByUserId: '+req.user)
         try{
             const catchPosts = await CatchPost.find({ userId: req.user.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
@@ -45,12 +44,21 @@ module.exports = {
         }
     },
     getCatchPostsByUserId: async (req,res)=>{
-        console.log('get postS by post id: '+req.params.id)
         try{
             const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: req.user,
+            })
+        }catch(err){
+            console.log(err)
+        }
+    },
+    getCatchPostToEdit: async (req, res)=>{
+        try{
+            const catchPost = await CatchPost.find({ _id: req.body.catchPostId })
+            res.json('Editing post...', {
+                catchPost: catchPost
             })
         }catch(err){
             console.log(err)
@@ -99,7 +107,7 @@ module.exports = {
             // res.redirect('/')
 
             // Using client-side main.js to update each like as it's added
-            const post = await CatchPost.findOne({ _id: req.body.postId })
+            const post = await CatchPost.findOne({ _id: req.body.catchPostId })
             const likedBy = post.likedBy.map((user) => user._id);
 
             if (likedBy.includes(req.user._id)) {
@@ -153,7 +161,7 @@ module.exports = {
                 $push: { catchegories: req.body.createCatchegory.toLowerCase().trim() }
             })
             console.log('Catchegory has been created!')
-            res.redirect('/catchPosts')
+            res.redirect('/catchProfile')
         }catch(err){
             console.log(err)
         }

@@ -21,7 +21,7 @@
 
 <body>
     <h1> One Catch Post, Plz!</h1>
-    <% if (user) {%>
+    <% if (user.userName !== 'guest') {%>
         <h2>Logged in User: <%= user.userName %></h2>
     <% } %>
     <hr>

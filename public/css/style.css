@@ -27,7 +27,7 @@ input{
 } */
 /***************/
 
-body{
+body, *{
   font-family: "Cereal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 header{
@@ -67,11 +67,25 @@ aside h3{
   margin: 10px 10px;
 }
 
-div.catch-post{
+.catch-post{
     background: rgb(236, 236, 236);
     border: 1px solid black;
     padding: 10px;
 }
+.catch-post 
+.catch-post-content{
+  /* background:rgb(199, 199, 199); */
+  width: 100%;
+}
+.catch-post 
+.edit-catch-post{
+  width: 100%;
+  height: 100%;
+}
+.edit.selected{
+  background: rgb(197, 197, 255);
+}
+
 
 /******************************************
 /* ADDITIONAL STYLES

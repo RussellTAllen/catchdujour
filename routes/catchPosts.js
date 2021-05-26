@@ -14,6 +14,8 @@ const { ensureAuth, ensureGuest } = require('../middleware/auth')
 // router.get('/catchPosts', catchPostsController.getCatchPostsByUserId)
 // router.get('/catchPosts/:id', catchPostsController.getCatchPostsByPostId)
 
+router.get('/getCatchPostToEdit', catchPostsController.getCatchPostToEdit)
+
 router.post('/createCatchPost', ensureAuth, catchPostsController.createCatchPost)
 router.post('/initCatchegory', catchPostsController.initCatchegory)
 

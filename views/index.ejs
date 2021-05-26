@@ -41,7 +41,6 @@
                 </div>
             <% } %>
 
-
             <!-- Sort by New, Tastiest, Most Talked About -->
             <a href="/">Freshest</a>  |  
             <a href="/mostLiked">Tastiest</a>  |  
@@ -52,7 +51,7 @@
             <div class="catch-post" data-id="<%=el._id%>">
                 <h3><a href="catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>
                 <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy._id %>"><%= el.postedBy.userName %></a></em> on <%= el.date %></h5>
-                <span class="catchPost"><%= el.catchContent %></span>
+                <span class="catch-post-content"><%= el.catchContent %></span>
                 <% if (!el.catchegories[0]) { %>
                     <p>No catchegories selected</p>
                 <%} else { %>
@@ -65,7 +64,8 @@
                 <% } %>
                 <span>Comments: <%= el.comments.length %></span>
                 <% if (user.userName === el.postedBy.userName) {%>
-                    <span class="del"> Delete </span>
+                    <button class="edit">Edit Post</span>
+                    <button class="del"> Delete </span>
                 <% } %>
             </div>
             <% console.log('postedBy: '+el.postedBy.userName) %>

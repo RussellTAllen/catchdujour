@@ -18,12 +18,17 @@
     <% } else {%>
         <a href="/logout">Logout</a>
         <a href="/catchProfile">Go To Your Profile</a>
-        <a href="/createCatchPage">(new) Create Your Own Post</a>
+        <a href="/createCatchPage">Create Your Own Post</a>
     <% } %>
 
-    <h1><%= catchPosts[0]?.postedBy.userName %>'s CatchPosts</h1>
+    <% console.log(Object.keys(catchPosts).length == 0) %>
+    <% if (Object.keys(catchPosts).length !== 0){ %>
+        <h1><%= catchPosts[0]?.postedBy.userName %>'s Catches</h1>
+    <% }else{ %>
+        <h1><%= user.userName %> has no catches.</h1>
+    <% } %>
     
-    <% if (user) {%>
+    <% if (user.userName !== 'guest') {%>
         <h1><%= user.userName %> is logged in</h1>
     
         <p><a href="/logout">Logout</a></p>

@@ -49,9 +49,12 @@
             <!-- Print posts-->
             <% catchPosts.forEach( el => { %>
             <div class="catch-post" data-id="<%=el._id%>">
-                <h3><a href="catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>
+                <h3><a class="catch-title"
+                        href="catchPosts/<%= el._id%>/catchPost">
+                        <%= el.catchTitle %></a>
+                </h3>
                 <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy._id %>"><%= el.postedBy.userName %></a></em> on <%= el.date %></h5>
-                <span class="catch-post-content"><%= el.catchContent %></span>
+                <p class="catch-post-content"><%= el.catchContent %></p>
                 <% if (!el.catchegories[0]) { %>
                     <p>No catchegories selected</p>
                 <%} else { %>
@@ -64,8 +67,8 @@
                 <% } %>
                 <span>Comments: <%= el.comments.length %></span>
                 <% if (user.userName === el.postedBy.userName) {%>
-                    <button class="edit">Edit Post</span>
-                    <button class="del"> Delete </span>
+                    <button class="edit" type="submit">Edit Post</button>
+                    <button class="del"> Delete </button>
                 <% } %>
             </div>
             <% console.log('postedBy: '+el.postedBy.userName) %>

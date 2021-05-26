@@ -54,12 +54,17 @@ module.exports = {
             console.log(err)
         }
     },
-    getCatchPostToEdit: async (req, res)=>{
+    editCatchPost: async (req, res)=>{
+        console.log('Controller is editing...')
+        // console.log(Object.keys(req.body.catchTitleElement))
+        // const catchTitleElement = req.body.catchTitleElement
+        // catchTitleElement.setAttribute('contenteditable', 'false')
         try{
-            const catchPost = await CatchPost.find({ _id: req.body.catchPostId })
-            res.json('Editing post...', {
-                catchPost: catchPost
+            await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },{
+                catchContent: req.body.catchContent,
+                catchTitle: req.body.catchTitle
             })
+            console.log('here ' +Object.keys(req.body))
         }catch(err){
             console.log(err)
         }
@@ -90,7 +95,7 @@ module.exports = {
                 })
             })
             console.log('CatchPost has been added!')
-            res.redirect('/catchPosts')
+            res.redirect('/')
         }catch(err){
             console.log(err)
         }

@@ -81,10 +81,19 @@ aside h3{
 .edit-catch-post{
   width: 100%;
   height: 100%;
+  height: 200px;
+  resize: none;
+  overflow: hidden;
+  min-height: 50px;
+  max-height: 200px;
 }
 .edit.selected{
   background: rgb(197, 197, 255);
 }
+.editable{
+  border: 1px solid black;  
+}
+
 
 
 /******************************************

@@ -20,6 +20,7 @@ router.post('/initCatchegory', catchPostsController.initCatchegory)
 router.put('/editCatchPost', ensureAuth, catchPostsController.editCatchPost)
 router.put('/likeCatchPost', ensureAuth, catchPostsController.likeCatchPost)
 router.put('/:id/comment', ensureAuth, catchPostsController.addComment)
+router.put('/editComment', ensureAuth, catchPostsController.editComment)
 router.put('/createCatchegory', ensureAuth, catchPostsController.createCatchegory)
 router.put('/omitCatchegory', ensureAuth, catchPostsController.omitCatchegory)
 

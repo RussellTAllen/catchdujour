@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const CatchPost = require('../models/CatchPost')
+const Comment = require('../models/CatchPost')
 const Catchegory = require('../models/Catchegory')
 
 
@@ -69,7 +70,17 @@ module.exports = {
                 catchContent: req.body.catchContent,
                 catchTitle: req.body.catchTitle
             })
-            console.log('here ' +Object.keys(req.body))
+        }catch(err){
+            console.log(err)
+        }
+    },
+    editComment: async (req, res)=>{
+        try{
+            const post = await CatchPost.findById(req.body.catchPostId)
+            const comment = post.comments.filter(c => String(c._id) === req.body.commentId)
+            comment[0].text = req.body.catchComment
+
+            post.save()
         }catch(err){
             console.log(err)
         }

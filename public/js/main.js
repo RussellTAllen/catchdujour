@@ -1,26 +1,30 @@
 console.log('client-side main.js is connected')
 
+// DOM Variables
 const deleteBtn = document.querySelectorAll('.del')
 const editBtn = document.querySelectorAll('.edit')
+const editCommentBtn = document.querySelectorAll('.edit-comment')
 const deleteCommentBtn = document.querySelectorAll('.del-comment')
 const likeBtn = document.querySelectorAll('.likes')
 
+// EVENT LISTENERS
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteCatchPost)
 })
-
 Array.from(editBtn).forEach((el)=>{
     el.addEventListener('click', editCatchPost)
 })
-
+Array.from(editCommentBtn).forEach((el)=>{
+    el.addEventListener('click', editComment)
+})
 Array.from(deleteCommentBtn).forEach((el)=>{
     el.addEventListener('click', deleteComment)
 })
-
 Array.from(likeBtn).forEach((el)=>{
     el.addEventListener('click', likeCatchPost)
 })
 
+// FUNCTIONS
 async function deleteCatchPost(){
     const c = confirm('You are about to delete this post, would you like to continue?')
     if (c === false) return
@@ -112,11 +116,61 @@ function editCatchPost(){
 }
 
 function editComment(){
+    // DOM variables
+    const catchPostId = this.parentNode.parentNode.dataset.id
+    const commentId = this.parentNode.dataset.id
+    const commentText = this.parentNode.querySelector('.comment-text')
+    const edit = this.parentNode.querySelector('.edit-comment')
+
+    console.log('editComment function: ',catchPostId, commentId)
+    
+    edit.classList.add('selected')
+
+    // Turn comment into editable input field
+    const editCommentText = document.createElement('textarea')
+    editCommentText.classList.add('edit-catch-post')
+    editCommentText.innerText = commentText.textContent
+    commentText.replaceWith(editCommentText)
+
+
+    // Handle event listeners
+    window.addEventListener('keypress', confirmCommentEdit)
+    edit.removeEventListener('click', editComment)
+    edit.addEventListener('click', confirmCommentEdit)
+
+    async function confirmCommentEdit(e){
+        let eventKey = e.key
+        if (e.key == undefined) eventKey = 'Enter'
+        if (eventKey === 'Enter' && !e.shiftKey){
+            const catchComment = document.querySelector('.edit-catch-post')
+
+            commentText.innerText = catchComment.value
+
+            // Editing/refreshing DOM - a little hacky because it updates client-side before the DB
+            editCommentText.replaceWith(commentText)
+            edit.classList.remove('selected')
+            edit.addEventListener('click', editComment)
+
+            // Send PUT request to controller
+            try{
+                const response = await fetch ('../../catchPosts/editComment', {
+                    method: 'put',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        'catchPostId': catchPostId,
+                        'commentId': commentId,
+                        'catchComment': catchComment.value
+                    })
+                })
+            }catch(err){
+                console.log(err)
+            }
+        }
+    }
 
 }
 
-
-
+// Function to auto-grow textarea element based on text within...
 // function autoGrow(element) {
 //     element.style.height = "5px";
 //     element.style.height = (element.scrollHeight)+"px";
@@ -165,40 +219,3 @@ async function likeCatchPost(){
       console.log(err)
     }
 }
-
-// async function markComplete(){
-//     const catchPostId = this.parentNode.dataset.id
-//     try{
-//         const response = await fetch('catchPosts/markComplete', {
-//             method: 'put',
-//             headers: {'Content-type': 'application/json'},
-//             body: JSON.stringify({
-//                 'catchPostIdFromJSFile': catchPostId
-//             })
-//         })
-//         const data = await response.json()
-//         console.log(data)
-//         location.reload()
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
-
-// async function markIncomplete(){
-//     const catchPostId = this.parentNode.dataset.id
-//     try{
-//         const response = await fetch('catchPosts/markIncomplete', {
-//             method: 'put',
-//             headers: {'Content-type': 'application/json'},
-//             body: JSON.stringify({
-//                 'catchPostIdFromJSFile': catchPostId
-//             })
-//         })
-//         const data = await response.json()
-//         console.log(data)
-//         location.reload()
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
-

@@ -43,7 +43,7 @@
             <div class="comment" data-id="<%= comment._id %>">
                 <hr>
                 <h4>User <%= comment.user.userName %> said: </h4>
-                <p><%= comment.text %></p>
+                <p class='comment-text'><%= comment.text %></p>
                 <% if (user.userName === comment.user.userName) {%>
                     <p>You should be able to delete your own comment, amiright?</p>
                     <p><%= comment._id %></p>

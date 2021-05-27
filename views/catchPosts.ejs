@@ -12,7 +12,7 @@
     <!--% console.log('catchpost.postedby.username ' +catchPosts[0]?.postedBy.userName) %-->
 
     <a href="/">Back to Main</a>
-    <% if (user === 'guest' || !user) {%>
+    <% if (user.userName === 'guest' || !user) {%>
         <a href="/login"> Login</a>
         <a href="/signup"> Signup</a>
     <% } else {%>
@@ -62,7 +62,7 @@
     <!-- Print All Posts from User -->
     <ul>
     <% catchPosts.forEach( el => { %>
-        <li class="catch-post" data-id="<%=el._id%>">
+        <div class="catch-post" data-id="<%=el._id%>">
             <h3><a class="catch-title"
                     href="../catchPosts/<%= el._id%>/catchPost">
                     <%= el.catchTitle %></a>
@@ -80,12 +80,12 @@
                 <button class="edit">Edit Post</button>
                 <button class="del"> Delete </button>
             <% } %>
-        </li>
+            </div>
     <% }) %>    
     </ul>
     <!-- -------------------------- -->
 
-    <h2><%= user?.userName %> is logged in.</h2>
+    <h2><%= user.userName %> is logged in.</h2>
 
     <a href="/logout">Logout</a>
 

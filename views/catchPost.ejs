@@ -32,7 +32,7 @@
         <span>Likes: <%= catchPost.likes %></span>
         <% if (user.userName === catchPost.postedBy.userName) {%>
             <button class="edit" type="submit">Edit Post</button>
-            <button class="del"> Delete </button>
+            <span>If you wish to delete this post, do so from your <a href="/catchProfile">profile page</a>.</span>
         <% } %>
     </section>
     <hr>
@@ -47,6 +47,7 @@
                 <% if (user.userName === comment.user.userName) {%>
                     <p>You should be able to delete your own comment, amiright?</p>
                     <p><%= comment._id %></p>
+                    <button class='edit-comment'>Edit Comment</button>
                     <button class='del-comment'>Delete Comment</button>
                 <% } %>
             </div>

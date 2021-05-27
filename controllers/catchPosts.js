@@ -44,11 +44,14 @@ module.exports = {
         }
     },
     getCatchPostsByUserId: async (req,res)=>{
+        if (!req.user) user = { userName: 'guest' }
+        else user = req.user
+
         try{
             const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
-                user: req.user,
+                user: user,
             })
         }catch(err){
             console.log(err)
@@ -202,7 +205,7 @@ module.exports = {
         try{
             await CatchPost.findOneAndDelete({ _id:req.body.catchPostId })
             console.log('Deleted CatchPost')
-            res.json('Deleted It')
+            res.json('Deleted Catchpost')
         }catch(err){
             console.log(err)
         }

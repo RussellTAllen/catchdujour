@@ -27,7 +27,7 @@ async function deleteCatchPost(){
     
     const catchPostId = this.parentNode.dataset.id
     try{
-        const response = await fetch('catchPosts/deleteCatchPost', {
+        const response = await fetch('../catchPosts/deleteCatchPost', {
             method: 'delete',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
@@ -35,7 +35,7 @@ async function deleteCatchPost(){
             })
         })
         const data = await response.json()
-        console.log(data)
+        console.log('data: '+ data)
         location.reload()
     }catch(err){
         console.log(err)
@@ -43,7 +43,8 @@ async function deleteCatchPost(){
 }
 
 // May want to refactor using contenteditable
-function editCatchPost(req, res){
+// function editCatchPost(req, res){  // ummm, don't need the req,res arguments here...
+function editCatchPost(){
     // DOM variables
     const catchPostId = this.parentNode.dataset.id
     const postTitle = this.parentNode.querySelector('.catch-title')
@@ -109,6 +110,11 @@ function editCatchPost(req, res){
         }
     }
 }
+
+function editComment(){
+
+}
+
 
 
 // function autoGrow(element) {

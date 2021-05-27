@@ -93,6 +93,9 @@ aside h3{
 .editable{
   border: 1px solid black;  
 }
+.edit-catch-title{
+  background: rgb(197, 197, 255);
+}
 
 
 

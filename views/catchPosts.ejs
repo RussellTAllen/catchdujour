@@ -62,10 +62,13 @@
     <!-- Print All Posts from User -->
     <ul>
     <% catchPosts.forEach( el => { %>
-        <li class="catchPostItem" data-id="<%=el._id%>">
-            <h3><%= el.catchTitle %></h3>
+        <li class="catch-post" data-id="<%=el._id%>">
+            <h3><a class="catch-title"
+                    href="../catchPosts/<%= el._id%>/catchPost">
+                    <%= el.catchTitle %></a>
+            </h3>
             <h5>Posted by: <%= el.postedBy.userName %> on <%= el.date %></h5>                
-            <span class="catchPost"><%= el.catchContent %></span>
+            <p class="catch-post-content"><%= el.catchContent %></p>
             <% if (el.catchegories.length < 1) { %>
                 <p>No catchegories selected</p>
             <%} else { %>
@@ -73,8 +76,9 @@
             <% } %>
             <span>Likes: <%= el.likes %></span>
             <span>Comments: <%= el.commentsLength %></span>
-            <% if (user === el.postedBy.userName) {%>
-                <span class="del"> Delete </span>
+            <% if (user.userName === el.postedBy.userName) {%>
+                <button class="edit">Edit Post</button>
+                <button class="del"> Delete </button>
             <% } %>
         </li>
     <% }) %>    
@@ -85,6 +89,6 @@
 
     <a href="/logout">Logout</a>
 
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

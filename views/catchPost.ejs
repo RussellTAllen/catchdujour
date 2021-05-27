@@ -15,7 +15,7 @@
     <% } else {%>
         <a href="/logout">Logout</a>
         <a href="/catchProfile">Go To Your Profile</a>
-        <a href="/catchPosts">Create Your Own Post</a>
+        <a href="/catchPosts">Create Your Own Catch</a>
     <% } %>
 </header>
 
@@ -25,10 +25,16 @@
         <h2>Logged in User: <%= user.userName %></h2>
     <% } %>
     <hr>
-    <h3>Title: <%= catchPost.catchTitle %></h3>
-    <h5>Posted by: <%= catchPost.postedBy.userName %> on <%= catchPost.date %></h5>
-    <p>Catch Content: <%= catchPost.catchContent %></p>
-
+    <section data-id="<%= catchPost._id %>">
+        <h3><span class="catch-title"><%= catchPost.catchTitle %></span></h3>
+        <h5>Posted by: <em><%= catchPost.postedBy.userName %></em> on <%= catchPost.date %></h5>
+        <p class="catch-post-content"><%= catchPost.catchContent %></p>
+        <span>Likes: <%= catchPost.likes %></span>
+        <% if (user.userName === catchPost.postedBy.userName) {%>
+            <button class="edit" type="submit">Edit Post</button>
+            <button class="del"> Delete </button>
+        <% } %>
+    </section>
     <hr>
     <h2>Comments:</h2>
     <% if (catchPost.comments.length > 0) { %>

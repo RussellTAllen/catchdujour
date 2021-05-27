@@ -42,37 +42,31 @@ async function deleteCatchPost(){
     }
 }
 
-// Need to refactor using contenteditable
+// May want to refactor using contenteditable
 function editCatchPost(req, res){
+    // DOM variables
     const catchPostId = this.parentNode.dataset.id
     const postTitle = this.parentNode.querySelector('.catch-title')
     const postContent = this.parentNode.querySelector('.catch-post-content')
     const edit = this.parentNode.querySelector('.edit')
 
-    console.log('post title client-side: '+postTitle.textContent)
-
     edit.classList.add('selected')
 
-    // Edit post title using contenteditable
-    postTitle.classList.add('editable')
-    postTitle.classList.add('edit-catch-title')
-    postTitle.setAttribute('contenteditable', 'true')
+    // Turn title into editable input
+    const editTitle = document.createElement('input')
+    editTitle.classList.add('edit-catch-title')
+    editTitle.value = postTitle.innerText
+    postTitle.replaceWith(editTitle)
     
-    // Turning post content into editable input
+    // Turn post content into editable input
     const editInput = document.createElement('textarea')
     editInput.classList.add('edit-catch-post')
     editInput.innerText = postContent.textContent
-    // editInput.style.height = '100px'
     // editInput.style.height = (editInput.scrollHeight, 200)+'px'
-    // editInput.style.resize= 'none'
-    // editInput.setAttribute('overflow', 'hidden')
-    // editInput.setAttribute('min-height', '50px')
-    // editInput.setAttribute('max-height', '200px')
-    // editInput.setAttribute('name', 'catchContent')
     // editInput.setAttribute('onchange', 'autoGrow(this)')
-
     postContent.replaceWith(editInput)
 
+    // Handle event listeners
     window.addEventListener('keypress', confirmEdit)
     edit.removeEventListener('click', editCatchPost)
     edit.addEventListener('click', confirmEdit)
@@ -81,38 +75,34 @@ function editCatchPost(req, res){
         let eventKey = e.key
         if (e.key == undefined) eventKey = 'Enter'
         if (eventKey === 'Enter' && !e.shiftKey){
-            console.log('Confirming edit on client-side...')
-            const catchContent = document.querySelector('.edit-catch-post').value
+            const catchContent = document.querySelector('.edit-catch-post')
             const catchTitle = document.querySelector('.edit-catch-title')
-            console.log('client says catchContent is '+catchContent)
-            console.log('client says catchTitle is '+catchTitle)
 
-            const newPostContent = document.createElement('p')
-            newPostContent.classList.add('catch-post-content')
-            newPostContent.textContent = catchContent
+            postTitle.innerText = catchTitle.value
+            postContent.innerText = catchContent.value
 
             // Editing/refreshing DOM - a little hacky because it updates client-side before the DB
-            editInput.replaceWith(newPostContent)
+            editInput.replaceWith(postContent)
+            editTitle.replaceWith(postTitle)
             edit.classList.remove('selected')
             edit.addEventListener('click', editCatchPost)
-            // catchTitle.setAttribute('contenteditable', 'false')
-            // catchTitle.classList.remove('editable')
-            // catchTitle.classList.remove('edit-catch-title')
 
+            // Send PUT request to controller
             try{
-                const response = await fetch ('catchPosts/editCatchPost', {
+                const response = await fetch ('../../catchPosts/editCatchPost', {
                     method: 'put',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
                         'catchPostId': catchPostId,
                         'catchTitleElement': catchTitle,
-                        'catchTitle': catchTitle.textContent,
-                        'catchContent': catchContent
+                        'catchTitle': catchTitle.value,
+                        'catchContent': catchContent.value
                     })
                 })
             }catch(err){
                 console.log(err)
-                newPostContent.replaceWith(editInput)
+                postTitle.replaceWith(editTitle)
+                postContent.replaceWith(editInput)
                 edit.classList.add('selected')
                 edit.removeEventListener('click', editCatchPost)
             }

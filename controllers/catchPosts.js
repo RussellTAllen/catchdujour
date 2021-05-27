@@ -59,6 +59,8 @@ module.exports = {
         // console.log(Object.keys(req.body.catchTitleElement))
         // const catchTitleElement = req.body.catchTitleElement
         // catchTitleElement.setAttribute('contenteditable', 'false')
+        console.log(req.body.catchContent)
+        console.log('catchId of post being editted '+req.body.catchPostId)
         try{
             await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },{
                 catchContent: req.body.catchContent,

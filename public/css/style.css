@@ -96,10 +96,26 @@ aside h3{
 .edit-catch-title{
   background: rgb(197, 197, 255);
 }
-
+.followed-content{
+  position: absolute;
+  min-width: 160px;
+  max-height: 200px;
+  overflow: auto;
+  
+}
+.followed-content a{
+  display: block;
+  background:rgb(197, 197, 255);
+  padding: 5px 25px 5px 10px;
+}
+.followed-content a:hover{
+  background:rgb(223, 223, 255)
+}
 
 
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
-
+.hidden{
+  display: none;
+}

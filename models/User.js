@@ -1,10 +1,26 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
+
+
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
+  following: [new mongoose.Schema(
+    { 
+      userId: String,
+      userName: String
+     },
+    { _id: false }
+  )],
+  followedBy: [new mongoose.Schema(
+    { 
+      userId: String,
+      userName: String
+     },
+    { _id: false }
+  )],
   omittedCatchegories: {
     type: Array,
     default: []

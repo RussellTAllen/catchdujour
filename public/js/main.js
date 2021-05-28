@@ -6,6 +6,9 @@ const editBtn = document.querySelectorAll('.edit')
 const editCommentBtn = document.querySelectorAll('.edit-comment')
 const deleteCommentBtn = document.querySelectorAll('.del-comment')
 const likeBtn = document.querySelectorAll('.likes')
+const followBtn = document.querySelector('#follow')
+const followedDropdown = document.querySelector('#followed-dropdown')
+const followedDropdownBtn = document.querySelector('#followed-btn')
 
 // EVENT LISTENERS
 Array.from(deleteBtn).forEach((el)=>{
@@ -23,8 +26,15 @@ Array.from(deleteCommentBtn).forEach((el)=>{
 Array.from(likeBtn).forEach((el)=>{
     el.addEventListener('click', likeCatchPost)
 })
+followBtn.addEventListener('click', followUser)
+followedBtn.addEventListener('click', () => followedDropdown.classList.toggle('hidden'))
+
 
 // FUNCTIONS
+function followUser(){
+    
+}
+
 async function deleteCatchPost(){
     const c = confirm('You are about to delete this post, would you like to continue?')
     if (c === false) return
@@ -46,7 +56,7 @@ async function deleteCatchPost(){
     }
 }
 
-// May want to refactor using contenteditable
+// May want to refactor using contenteditable - or just wait to refactor with React
 // function editCatchPost(req, res){  // ummm, don't need the req,res arguments here...
 function editCatchPost(){
     // DOM variables

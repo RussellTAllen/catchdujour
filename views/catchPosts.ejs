@@ -21,15 +21,17 @@
         <a href="/createCatchPage">Create Your Own Post</a>
     <% } %>
 
-    <% console.log(Object.keys(catchPosts).length == 0) %>
     <% if (Object.keys(catchPosts).length !== 0){ %>
         <h1><%= catchPosts[0]?.postedBy.userName %>'s Catches</h1>
     <% }else{ %>
         <h1><%= user.userName %> has no catches.</h1>
     <% } %>
-    
+        
     <% if (user.userName !== 'guest') {%>
-        <h1><%= user.userName %> is logged in</h1>
+        <form action="/users/followUser?_method=PUT" method="POST">
+            <button id="follow" type="submit" name="<%= catchPosts[0].postedBy._id %>">Follow</button>
+        </form>
+        <h2><%= user.userName %> is logged in</h2>
     
         <p><a href="/logout">Logout</a></p>
         <p><a href="/">Back to Home</a></p>

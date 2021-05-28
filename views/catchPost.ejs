@@ -23,6 +23,7 @@
     <h1> One Catch Post, Plz!</h1>
     <% if (user.userName !== 'guest') {%>
         <h2>Logged in User: <%= user.userName %></h2>
+        <button id="followed-btn">Followed</button>
     <% } %>
     <hr>
     <section data-id="<%= catchPost._id %>">
@@ -67,5 +68,8 @@
     <% } %>
     
     <script src="../../js/main.js"></script>
+    <% if (user.userName !== 'guest'){ %>
+        <script src="../../js/user.js"></script>
+    <% } %>
 </body>
 </html>

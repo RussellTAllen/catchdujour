@@ -9,7 +9,7 @@
 </head>
 <body>
     <!-- Filter out user's omitted catchegories -->
-    <% if (user !== 'guest') {%>
+    <% if (user.userName !== 'guest') {%>
         <% catchPosts = catchPosts.filter(post => post.catchegories.every(cat => !user.omittedCatchegories.includes(cat))) %>
     <% } %>
     
@@ -18,31 +18,19 @@
             <h1>Welcome to Catch du Jour!</h1>
             <h3>Read/interact/create the tastiest catch of the day!</h3>
         </div>
+        <% if (user.userName !== 'guest') {%>
         <div class="followed-container">
             <button id="followed-btn">Followed</button>
             <div id="followed-dropdown" class="followed-content hidden">
-                <a href="#">Testestesteststestest</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
-                <a href="#">Test</a>
+                <% for (let i = 0, len = following.length; i < len; i++){ %>
+                    <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>
+                <% } %>
             </div>
         </div>
+        <% } %>
 
         <nav>
-        <% if (user === 'guest' || !user) {%>
+        <% if (user.userName === 'guest' || !user) {%>
             <a href="/login"> Login</a>
             <a href="/signup"> Signup</a>
         <% } else {%>
@@ -53,10 +41,9 @@
         </nav>
     </header>
 
-    <% console.log('index.ejs loading...') %>
     <div class="container">
         <main>
-            <% if (user !== 'guest' && user) {%>
+            <% if (user.userName !== 'guest' && user) {%>
                 <div class='create-page'>
                     <a href="/createCatchPage">Create Your Own Catch</a>
                 </div>
@@ -103,7 +90,7 @@
                 <% }) %>
             </ul>
 
-            <% if (user !== 'guest' || !user) {%>
+            <% if (user.userName !== 'guest' || !user) {%>
             <h3>Unseen Catchegories</h3>
             <ul>
                 <% if (user.omittedCatchegories) {%>
@@ -115,5 +102,8 @@
     </div>
 
     <script src="js/main.js"></script>
+    <% if (user.userName !== 'guest'){ %>
+        <script src="js/user.js"></script>
+    <% } %>
 </body>
 </html>

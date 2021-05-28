@@ -8,16 +8,18 @@ module.exports = {
     //     res.render('index.ejs')
     // }
     getIndex: async (req,res)=>{
-        if (!req.user) req.user = 'guest'
-        
+        if (!req.user) req.user = { userName: 'guest' }
         try{
+            let user = await User.findById(req.user._id)
+            if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find().sort({ _id: -1 })
             const catchegories = await Catchegories.find()
             await User.findOneAndUpdate({ _id: req.user._id },
                 { preferredSort: 'new' })
             res.render('index.ejs', {
                 catchPosts: catchPosts, 
-                user: req.user,
+                user: user,
+                following: user.following,
                 catchegories: catchegories
             })
         }catch(err){

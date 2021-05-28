@@ -21,6 +21,8 @@
         <a href="/createCatchPage">Create Your Own Post</a>
     <% } %>
 
+        <button id="followed-btn">Followed</button>
+
     <% if (Object.keys(catchPosts).length !== 0){ %>
         <h1><%= catchPosts[0]?.postedBy.userName %>'s Catches</h1>
     <% }else{ %>
@@ -92,5 +94,9 @@
     <a href="/logout">Logout</a>
 
     <script src="../js/main.js"></script>
+    <% if (user.userName !== 'guest'){ %>
+        <script src="../js/user.js"></script>
+        <script src="../js/catchPosts.js"></script>
+    <% } %>
 </body>
 </html>

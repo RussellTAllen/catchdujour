@@ -7,7 +7,7 @@ module.exports = {
             const currentUser = await User.findById(req.user._id)
             const followedUser = await User.findById(followedUserId) 
 
-            // Update logged in user's following property with followed user
+            // Update logged in user's following property with followed user's info
             await User.findByIdAndUpdate(req.user._id, {
                 $addToSet: { 
                     following:  { 
@@ -16,7 +16,8 @@ module.exports = {
                     }
                 }
             })
-            // Update followed user's followedBy property with logged in user
+            
+            // Update followed user's followedBy property with logged in user's info
             await User.findByIdAndUpdate(followedUserId, {
                 $addToSet: { 
                     followedBy: { 

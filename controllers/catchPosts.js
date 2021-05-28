@@ -59,12 +59,6 @@ module.exports = {
         }
     },
     editCatchPost: async (req, res)=>{
-        console.log('Controller is editing...')
-        // console.log(Object.keys(req.body.catchTitleElement))
-        // const catchTitleElement = req.body.catchTitleElement
-        // catchTitleElement.setAttribute('contenteditable', 'false')
-        console.log(req.body.catchContent)
-        console.log('catchId of post being editted '+req.body.catchPostId)
         try{
             await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },{
                 catchContent: req.body.catchContent,
@@ -200,17 +194,6 @@ module.exports = {
             console.log(err)
         }
     },
-    // markIncomplete: async (req, res)=>{
-    //     try{
-    //         await CatchPost.findOneAndUpdate({_id:req.body.catchPostIdFromJSFile},{
-    //             completed: false
-    //         })
-    //         console.log('Marked Incomplete')
-    //         res.json('Marked Incomplete')
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // },
     deleteCatchPost: async (req, res)=>{
         console.log(req.body.catchPostId)
         try{

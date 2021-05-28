@@ -17,18 +17,32 @@
         <a href="/catchProfile">Go To Your Profile</a>
         <a href="/catchPosts">Create Your Own Catch</a>
     <% } %>
+
+    <% if (user.userName !== 'guest') {%>
+        <div class="followed-container">
+            <button id="followed-btn">Followed</button>
+            <div id="followed-dropdown" class="followed-content hidden">
+                <% for (let i = 0, len = following.length; i < len; i++){ %>
+                    <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
 </header>
 
 <body>
     <h1> One Catch Post, Plz!</h1>
     <% if (user.userName !== 'guest') {%>
         <h2>Logged in User: <%= user.userName %></h2>
-        <button id="followed-btn">Followed</button>
     <% } %>
     <hr>
     <section data-id="<%= catchPost._id %>">
         <h3><span class="catch-title"><%= catchPost.catchTitle %></span></h3>
-        <h5>Posted by: <em><%= catchPost.postedBy.userName %></em> on <%= catchPost.date %></h5>
+        <h5>Posted by: 
+            <a href="/catchPosts/<%= catchPost.postedBy._id %>">
+                <em><%= catchPost.postedBy.userName %></em>
+            </a> on <%= catchPost.date %>
+        </h5>
         <p class="catch-post-content"><%= catchPost.catchContent %></p>
         <span>Likes: <%= catchPost.likes %></span>
         <% if (user.userName === catchPost.postedBy.userName) {%>
@@ -46,8 +60,6 @@
                 <h4>User <%= comment.user.userName %> said: </h4>
                 <p class='comment-text'><%= comment.text %></p>
                 <% if (user.userName === comment.user.userName) {%>
-                    <p>You should be able to delete your own comment, amiright?</p>
-                    <p><%= comment._id %></p>
                     <button class='edit-comment'>Edit Comment</button>
                     <button class='del-comment'>Delete Comment</button>
                 <% } %>

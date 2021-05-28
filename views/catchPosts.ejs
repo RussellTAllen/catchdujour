@@ -10,18 +10,28 @@
 <body>
     <!--% console.log('user from ejs' +user) -->
     <!--% console.log('catchpost.postedby.username ' +catchPosts[0]?.postedBy.userName) %-->
+    <header>
+        <a href="/">Back to Main</a>
+        <% if (user.userName === 'guest' || !user) {%>
+            <a href="/login"> Login</a>
+            <a href="/signup"> Signup</a>
+        <% } else {%>
+            <a href="/logout">Logout</a>
+            <a href="/catchProfile">Go To Your Profile</a>
+            <a href="/createCatchPage">Create Your Own Post</a>
+        <% } %>
 
-    <a href="/">Back to Main</a>
-    <% if (user.userName === 'guest' || !user) {%>
-        <a href="/login"> Login</a>
-        <a href="/signup"> Signup</a>
-    <% } else {%>
-        <a href="/logout">Logout</a>
-        <a href="/catchProfile">Go To Your Profile</a>
-        <a href="/createCatchPage">Create Your Own Post</a>
-    <% } %>
-
-        <button id="followed-btn">Followed</button>
+        <% if (user.userName !== 'guest') {%>
+            <div class="followed-container">
+                <button id="followed-btn">Followed</button>
+                <div id="followed-dropdown" class="followed-content hidden">
+                    <% for (let i = 0, len = following.length; i < len; i++){ %>
+                        <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </header>
 
     <% if (Object.keys(catchPosts).length !== 0){ %>
         <h1><%= catchPosts[0]?.postedBy.userName %>'s Catches</h1>
@@ -30,9 +40,16 @@
     <% } %>
         
     <% if (user.userName !== 'guest') {%>
+        <% if (user.userName !== catchPosts[0]?.postedBy.userName &&
+                user.following.every(u => u.userName !== catchPosts[0]?.postedBy.userName)) {%>
         <form action="/users/followUser?_method=PUT" method="POST">
             <button id="follow" type="submit" name="<%= catchPosts[0].postedBy._id %>">Follow</button>
         </form>
+        <% }else if (user.userName !== catchPosts[0]?.postedBy.userName) { %>
+        <form action="/users/unfollowUser?_method=PUT" method="POST">
+            <button id="follow" type="submit" name="<%= catchPosts[0].postedBy._id %>">Unfollow</button>
+        </form>
+        <% } %>
         <h2><%= user.userName %> is logged in</h2>
     
         <p><a href="/logout">Logout</a></p>

@@ -24,10 +24,13 @@ module.exports = {
         if (!user) user = { userName: 'guest' }
 
         try{
+            let user = await User.findById(req.user._id)
+            if (!user) user = { userName: 'guest' }
             const catchPost = await CatchPost.findById({ _id: req.params.id })
             res.render('catchPost.ejs', {
                 catchPost: catchPost, 
-                user: user
+                user: user,
+                following: user.following
             })
         }catch(err){
             console.log(err)
@@ -49,10 +52,13 @@ module.exports = {
         else user = req.user
 
         try{
+            let user = await User.findById(req.user._id)
+            if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: user,
+                following: user.following
             })
         }catch(err){
             console.log(err)
@@ -112,16 +118,6 @@ module.exports = {
     },
     likeCatchPost: async (req, res) => {
         try{
-            // Works method-override/mongoose, but refreshes to top of page
-            // const post = await CatchPost.findOneAndUpdate(
-            //     { _id: req.params.id },
-            //     { 
-            //     $inc: { likes: 1 },
-            //     }
-            // );
-            // res.redirect('/')
-
-            // Using client-side main.js to update each like as it's added
             const post = await CatchPost.findOne({ _id: req.body.catchPostId })
             const likedBy = post.likedBy.map((user) => user._id);
 

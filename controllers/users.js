@@ -31,6 +31,36 @@ module.exports = {
         }catch(err){
             console.log(err)
         }
+    },
+    unfollowUser: async (req, res) => {
+        try{
+            const followedUserId = String(Object.keys(req.body))
+            const currentUser = await User.findById(req.user._id)
+            const followedUser = await User.findById(followedUserId) 
 
-    }
+            // Remove followed's user's info from logged in user's following property
+            await User.findByIdAndUpdate(req.user._id, {
+                $pull: { 
+                    following:  { 
+                        userId: followedUserId,
+                        userName: followedUser.userName
+                    }
+                }
+            })
+            
+            // Remove user's info from followed user's followedBy property
+            await User.findByIdAndUpdate(followedUserId, {
+                $pull: { 
+                    followedBy: { 
+                        userId: currentUser._id,
+                        userName: currentUser.userName                    
+                    }
+                }
+            })
+
+            res.redirect(`/catchPosts/${followedUserId}`)
+        }catch(err){
+            console.log(err)
+        }
+    },
 }

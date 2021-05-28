@@ -28,10 +28,10 @@ module.exports = {
     },
     getIndexByMostLiked: async (req,res)=>{
         if (!req.user) req.user = 'guest'
-
-        console.log('getMostLiked User: '+req.user)
         
         try{
+            let user = await User.findById(req.user._id)
+            if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find().sort({ likes: -1 })
             const catchegories = await Catchegories.find()
             await User.findOneAndUpdate({ _id: req.user._id },
@@ -39,6 +39,7 @@ module.exports = {
             res.render('index.ejs', {
                 catchPosts: catchPosts, 
                 user: req.user,
+                following: user.following,
                 catchegories: catchegories
             })
         }catch(err){
@@ -49,6 +50,8 @@ module.exports = {
         if (!req.user) req.user = 'guest'
         
         try{
+            let user = await User.findById(req.user._id)
+            if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find().sort({ commentsLength: -1 })
             const catchegories = await Catchegories.find()
             await User.findOneAndUpdate({ _id: req.user._id },
@@ -56,6 +59,7 @@ module.exports = {
             res.render('index.ejs', {
                 catchPosts: catchPosts, 
                 user: req.user,
+                following: user.following,
                 catchegories: catchegories
             })
         }catch(err){

@@ -20,7 +20,7 @@
 
     <% if (user.userName !== 'guest') {%>
         <div class="followed-container">
-            <button id="followed-btn">Followed</button>
+            <button id="followed-btn">Followed (<%= following.length %>)</button>
             <div id="followed-dropdown" class="followed-content hidden">
                 <% for (let i = 0, len = following.length; i < len; i++){ %>
                     <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>

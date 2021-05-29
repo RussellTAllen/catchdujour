@@ -20,11 +20,14 @@
         </div>
         <% if (user.userName !== 'guest') {%>
         <div class="followed-container">
-            <button id="followed-btn">Followed</button>
+            <button id="followed-btn">Followed (<%= following.length %>)</button>
             <div id="followed-dropdown" class="followed-content hidden">
+                <% if (following.length === 0) {%>
+                    <span>You are not following anyone</span> 
+                <% } else { %>
                 <% for (let i = 0, len = following.length; i < len; i++){ %>
                     <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>
-                <% } %>
+                <% }} %>
             </div>
         </div>
         <% } %>
@@ -65,7 +68,7 @@
                 <p class="catch-post-content"><%= el.catchContent %></p>
                 <% if (!el.catchegories[0]) { %>
                     <p>No catchegories selected</p>
-                <%} else { %>
+                <% } else { %>
                     <p>Catchegories: <%= el.catchegories %></p>
                 <% } %>
                 <% if (user !== 'guest') {%>

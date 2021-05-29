@@ -23,7 +23,7 @@
 
         <% if (user.userName !== 'guest') {%>
             <div class="followed-container">
-                <button id="followed-btn">Followed</button>
+                <button id="followed-btn">Followed (<%= following.length %>)</button>
                 <div id="followed-dropdown" class="followed-content hidden">
                     <% for (let i = 0, len = following.length; i < len; i++){ %>
                         <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>
@@ -32,50 +32,58 @@
             </div>
         <% } %>
     </header>
-
-    <% if (Object.keys(catchPosts).length !== 0){ %>
-        <h1><%= catchPosts[0]?.postedBy.userName %>'s Catches</h1>
-    <% }else{ %>
-        <h1><%= user.userName %> has no catches.</h1>
-    <% } %>
+    
+    <h1><%= targetUser.userName %>'s Catch Page!</h1>
         
     <% if (user.userName !== 'guest') {%>
-        <% if (user.userName !== catchPosts[0]?.postedBy.userName &&
-                user.following.every(u => u.userName !== catchPosts[0]?.postedBy.userName)) {%>
-        <form action="/users/followUser?_method=PUT" method="POST">
-            <button id="follow" type="submit" name="<%= catchPosts[0].postedBy._id %>">Follow</button>
-        </form>
-        <% }else if (user.userName !== catchPosts[0]?.postedBy.userName) { %>
-        <form action="/users/unfollowUser?_method=PUT" method="POST">
-            <button id="follow" type="submit" name="<%= catchPosts[0].postedBy._id %>">Unfollow</button>
-        </form>
+        <% if (Object.keys(catchPosts).length !== 0){ %>
+            <% if (user.userName !== catchPosts[0].postedBy.userName &&
+                    user.following.every(u => u.userName !== catchPosts[0]?.postedBy.userName)) {%>
+            <form action="/users/followUser?_method=PUT" method="POST">
+                <button id="follow" type="submit" name="<%= catchPosts[0]?.postedBy._id %>">Follow</button>
+            </form>
+            <% }else if (user.userName !== catchPosts[0]?.postedBy.userName) { %>
+            <form action="/users/unfollowUser?_method=PUT" method="POST">
+                <button id="follow" type="submit" name="<%= catchPosts[0].postedBy._id %>">Unfollow</button>
+            </form>
+            <% } %>
         <% } %>
         <h2><%= user.userName %> is logged in</h2>
     
         <p><a href="/logout">Logout</a></p>
         <p><a href="/">Back to Home</a></p>
         
-        <!-- If the user is one their own page, allow personalization of things -->
+        <!-- If the user is on their own page, allow personalization of things -->
         <!-- console.log(`from EJS - user: ${user}, catchPosts: ${catchPosts}`) -->
-        <% if (user.userName === catchPosts[0]?.postedBy.userName) {%>
-        <div>
-            <form action="/catchPosts/initCatchegory" method="POST">
-                <h3>Initialize Catchegories (remove before publishing)</h3>
-                <input type="submit">
-            </form>
-            <h3>Which catchegory would you like to create?</h3>
-            <form action="/catchPosts/createCatchegory?_method=PUT" method="POST">
-                <input type="text" name="createCatchegory">
-                <input type="submit">
-            </form>
-        </div>
-        <div>
-            <h3>Which catchegory would you like to omit?</h3>
-            <form action="/catchPosts/omitCatchegory?_method=PUT" method="POST">
-                <input type="text" name="omitCatchegory">
-                <input type="submit">
-            </form>
-        </div>
+        <% if (Object.keys(catchPosts).length !== 0){ %>
+            <% if (user.userName === catchPosts[0].postedBy.userName) {%>
+            <div id="followed-by">
+                <button id="followed-by-btn">See who is following you (<%= followedBy.length %>)</button>
+                <div class="followed-by-content hidden">
+                    <% for (let i = 0, len = followedBy.length; i < len; i++) {%>
+                        <a href="/catchPosts/<%= followedBy[i].userId %>"><%= followedBy[i].userName %></a>
+                    <% } %>
+                </div>
+            </div>
+            <div>
+                <form action="/catchPosts/initCatchegory" method="POST">
+                    <h3>Initialize Catchegories (remove before publishing)</h3>
+                    <input type="submit">
+                </form>
+                <h3>Which catchegory would you like to create?</h3>
+                <form action="/catchPosts/createCatchegory?_method=PUT" method="POST">
+                    <input type="text" name="createCatchegory">
+                    <input type="submit">
+                </form>
+            </div>
+            <div>
+                <h3>Which catchegory would you like to omit?</h3>
+                <form action="/catchPosts/omitCatchegory?_method=PUT" method="POST">
+                    <input type="text" name="omitCatchegory">
+                    <input type="submit">
+                </form>
+            </div>
+            <% } %>
         <% } %>
     <% } %>
     <!-- ------------------------------------------------------------ -->
@@ -113,7 +121,14 @@
     <script src="../js/main.js"></script>
     <% if (user.userName !== 'guest'){ %>
         <script src="../js/user.js"></script>
-        <script src="../js/catchPosts.js"></script>
+        <% if (Object.keys(catchPosts).length !== 0){ %>
+            <% if (user.userName !== catchPosts[0].postedBy.userName) { %>
+                <script src="../js/catchPosts.js"></script>
+            <% } %>
+            <% if (user.userName === catchPosts[0].postedBy.userName){ %>
+                <script src="../js/profile.js"></script>
+            <% } %>
+        <% } %>
     <% } %>
 </body>
 </html>

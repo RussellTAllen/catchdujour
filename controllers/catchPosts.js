@@ -38,10 +38,14 @@ module.exports = {
     },
     getProfile: async (req,res)=>{
         try{
+            let user = await User.findById(req.user._id)
             const catchPosts = await CatchPost.find({ userId: req.user.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: req.user,
+                targetUser: req.user,
+                following: user.following,
+                followedBy: user.followedBy
             })
         }catch(err){
             console.log(err)
@@ -53,12 +57,15 @@ module.exports = {
 
         try{
             let user = await User.findById(req.user._id)
+            let targetUser = await User.findById(req.params.id)
             if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: user,
-                following: user.following
+                targetUser: targetUser,
+                following: user.following,
+                followedBy: user.followedBy
             })
         }catch(err){
             console.log(err)

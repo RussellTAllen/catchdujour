@@ -9,11 +9,13 @@ module.exports = {
     // }
     getIndex: async (req,res)=>{
         if (!req.user) req.user = { userName: 'guest' }
+        
         try{
             let user = await User.findById(req.user._id)
-            if (!user) user = { userName: 'guest' }
+            if (!user) user = { userName: 'guest', omittedCatchegories: [] }
             const catchPosts = await CatchPost.find().sort({ _id: -1 })
             let catchegories = await Catchegory.find()
+            if (!catchegories) catchegories = []
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
             catchegories.sort((a,b) => b.count - a.count)
             

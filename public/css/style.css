@@ -38,6 +38,9 @@ h1{
   margin: 0;
   padding: 0;
 }
+button{
+  cursor: pointer;
+}
 header div.intro h3{
   /* color: red; */
   /* border: 1px solid black; */
@@ -136,6 +139,10 @@ textarea.catch-content{
   width: 450px;
   height: 350px;
   resize: none;
+}
+aside span{
+  font-size: 10px;
+  margin: 0 10px;
 }
 
 

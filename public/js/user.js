@@ -252,7 +252,7 @@ async function unselectCatchegory(){
     console.log('omit this catchegory: '+omitCatchegory)
 
     try{
-        const response = await fetch('users/omitCatchegory', {
+        const response = await fetch('../users/omitCatchegory', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -275,7 +275,7 @@ async function selectCatchegory(){
     console.log('allow this catchegory: '+allowCatchegory)
 
     try{
-        const response = await fetch('users/allowCatchegory', {
+        const response = await fetch('../users/allowCatchegory', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

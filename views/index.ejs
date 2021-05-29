@@ -87,6 +87,10 @@
 
         <aside>
             <h3>Catchegories</h3>
+            <% if (user.userName === 'guest') {%>
+                <span>(Signup/Login to edit your viewed catchegories)</span>
+            <% } %>
+            <hr>
             <div class="catchegories">
                 <form action="/users/omitCatchegory?_method=PUT" method="POST">
                 <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
@@ -98,7 +102,7 @@
                 </form>
             </div>
       
-            <% if (user.userName !== 'guest' && user.omittedCatchegories) {%>
+            <% if (user.userName !== 'guest' && user.omittedCatchegories.length > 0) {%>
             <h3>Unseen Catchegories</h3>
             <div class='omitted-catchegories'>
                 <form action="/users/omitCatchegory?_method=PUT" method="POST">

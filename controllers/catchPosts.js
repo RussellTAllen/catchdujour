@@ -40,10 +40,15 @@ module.exports = {
         try{
             let user = await User.findById(req.user._id)
             const catchPosts = await CatchPost.find({ userId: req.user.id }).sort({ _id: -1 })
+            let catchegories = await Catchegory.find()
+            if (!catchegories) catchegories = []
+            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories.sort((a,b) => b.count - a.count)
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: req.user,
                 targetUser: req.user,
+                catchegories: catchegories,
                 following: user.following,
                 followedBy: user.followedBy
             })
@@ -57,12 +62,18 @@ module.exports = {
         try{
             let user = await User.findById(req.user._id)
             const targetUser = await User.findById(req.params.id)
-            if (!user) user = { userName: 'guest' }
+            if (!user) user = { userName: 'guest', omittedCatchegories: [] }
+            let catchegories = await Catchegory.find()
+            if (!catchegories) catchegories = []
+            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories.sort((a,b) => b.count - a.count)
             const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
+            catchegories = catchegories.filter(cat => catchPosts.some(post => post.catchegories.includes(cat.catchegory)))
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: user,
                 targetUser: targetUser,
+                catchegories: catchegories,
                 following: user.following,
                 followedBy: user.followedBy
             })
@@ -189,12 +200,16 @@ module.exports = {
     createCatchegory: async (req, res)=>{
         console.log(req.body.createCatchegory)
         try{
-            await Catchegory.create({
-                    catchegory: req.body.createCatchegory.toLowerCase().trim(), 
-                    count: 0
-            })
-            console.log('Catchegory has been created!')
-            res.redirect('/catchProfile')
+            const catchegories = await Catchegory.find()
+
+            if (catchegories.every(cat => !cat.catchegory.includes(req.body.createCatchegory.toLowerCase().trim()))){
+                await Catchegory.create({
+                        catchegory: req.body.createCatchegory.toLowerCase().trim(), 
+                        count: 0,
+                })
+                console.log('Catchegory has been created!')
+                res.redirect('/catchProfile')
+            }
         }catch(err){
             console.log(err)
         }

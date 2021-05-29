@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const CatchPost = require('../models/CatchPost')
 const Comment = require('../models/CatchPost')
-const Catchegory = require('../models/Catchegory')
+const Catchegories = require('../models/Catchegory')
 
 
 
@@ -57,7 +57,7 @@ module.exports = {
 
         try{
             let user = await User.findById(req.user._id)
-            let targetUser = await User.findById(req.params.id)
+            const targetUser = await User.findById(req.params.id)
             if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
             res.render('catchPosts.ejs', {
@@ -94,18 +94,30 @@ module.exports = {
     },
     getCreateCatchPage: async (req, res)=>{
         try{
+            const catchegories = await Catchegories.find()
+            catchegories.sort((a,b) => b.count - a.count)
+
             res.render('createCatchPage.ejs',
-                { user: req.user })
+                { 
+                user: req.user,
+                catchegories: catchegories        
+                }
+            )
         }catch(err){
             console.log(err)
         }
     },
     createCatchPost: async (req, res)=>{
         try{
+            await Catchegories.updateMany( { catchegory: req.body.catchegories },
+                {
+                $inc: { count: 1 }
+                }
+            )
             await CatchPost.create({
                 catchTitle: req.body.catchTitle,
                 catchContent: req.body.catchContent, 
-                catchegories: req.body.catchegories.toLowerCase().trim(),
+                catchegories: req.body.catchegories,
                 userId: req.user.id,
                 postedBy: req.user,
                 likes: 0,
@@ -162,9 +174,12 @@ module.exports = {
     initCatchegory: async (req, res)=>{
         console.log('Initializing catchegory...')
         try{
-            await Catchegory.create({
-                catchegories: ['art', 'food', 'politics', 'religion', 'rant', 'science', 'technology']
-            })
+            await Catchegory.create(
+                {
+                catchegory: 'art',
+                count: 0
+                }
+            )
             console.log('Catchegory has been initialized!')
             res.redirect('/catchPosts')
         }catch(err){
@@ -175,8 +190,9 @@ module.exports = {
     createCatchegory: async (req, res)=>{
         console.log(req.body.createCatchegory)
         try{
-            await Catchegory.updateOne({
-                $push: { catchegories: req.body.createCatchegory.toLowerCase().trim() }
+            await Catchegory.create({
+                    catchegory: req.body.createCatchegory.toLowerCase().trim(), 
+                    count: 0
             })
             console.log('Catchegory has been created!')
             res.redirect('/catchProfile')

@@ -37,7 +37,7 @@
         
     <% if (user.userName !== 'guest') {%>
         <% if (Object.keys(catchPosts).length !== 0){ %>
-            <% if (user.userName !== catchPosts[0].postedBy.userName &&
+            <% if (user.userName !== targetUser.userName &&
                     user.following.every(u => u.userName !== catchPosts[0]?.postedBy.userName)) {%>
             <form action="/users/followUser?_method=PUT" method="POST">
                 <button id="follow" type="submit" name="<%= catchPosts[0]?.postedBy._id %>">Follow</button>
@@ -55,8 +55,7 @@
         
         <!-- If the user is on their own page, allow personalization of things -->
         <!-- console.log(`from EJS - user: ${user}, catchPosts: ${catchPosts}`) -->
-        <% if (Object.keys(catchPosts).length !== 0){ %>
-            <% if (user.userName === catchPosts[0].postedBy.userName) {%>
+            <% if (user.userName === targetUser.userName) {%>
             <div id="followed-by">
                 <button id="followed-by-btn">See who is following you (<%= followedBy.length %>)</button>
                 <div class="followed-by-content hidden">
@@ -65,6 +64,8 @@
                     <% } %>
                 </div>
             </div>
+
+
             <div>
                 <form action="/catchPosts/initCatchegory" method="POST">
                     <h3>Initialize Catchegories (remove before publishing)</h3>
@@ -84,7 +85,6 @@
                 </form>
             </div>
             <% } %>
-        <% } %>
     <% } %>
     <!-- ------------------------------------------------------------ -->
 
@@ -122,10 +122,10 @@
     <% if (user.userName !== 'guest'){ %>
         <script src="../js/user.js"></script>
         <% if (Object.keys(catchPosts).length !== 0){ %>
-            <% if (user.userName !== catchPosts[0].postedBy.userName) { %>
+            <% if (user.userName !== targetUser.userName) { %>
                 <script src="../js/catchPosts.js"></script>
             <% } %>
-            <% if (user.userName === catchPosts[0].postedBy.userName){ %>
+            <% if (user.userName === targetUser.userName){ %>
                 <script src="../js/profile.js"></script>
             <% } %>
         <% } %>

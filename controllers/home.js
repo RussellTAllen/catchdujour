@@ -14,6 +14,9 @@ module.exports = {
             if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find().sort({ _id: -1 })
             const catchegories = await Catchegories.find()
+            
+            catchegories.sort((a,b) => b.count - a.count)
+            console.log(catchegories)
             await User.findOneAndUpdate({ _id: req.user._id },
                 { preferredSort: 'new' })
             res.render('index.ejs', {

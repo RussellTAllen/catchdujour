@@ -88,8 +88,8 @@
         <aside>
             <h3>Catchegories</h3>
             <ul>
-                <% catchegories[0].catchegories.forEach(cat => {%>
-                    <li> <%= cat %></li>
+                <% catchegories.forEach(cat => {%>
+                    <li> <%= cat.catchegory %> (<%= cat.count %>)</li>
                 <% }) %>
             </ul>
 

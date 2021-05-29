@@ -114,6 +114,17 @@ aside h3{
 .followed-content a:hover{
   background:rgb(223, 223, 255)
 }
+.catchegories{
+  display: flex;
+  flex-direction: column;
+} 
+.catchegories input{
+  /* display: inline-block; */
+}
+.catchegories label{
+  /* display: inline-block; */
+  justify-content: right;
+}
 
 
 /******************************************

@@ -18,7 +18,14 @@
     <form action="/catchPosts/createCatchPost" method="POST">
         <input type="text" placeholder="Enter Catch Title" name="catchTitle">
         <input type="text" placeholder="Enter Catch Content" name="catchContent">
-        <input type="text" placeholder="Enter Catchegories" name="catchegories">
+        <div class="catchegories">
+        <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
+            <div>
+                <input type="checkbox" id="catchegory-options" name="catchegories" value="<%= catchegories[i].catchegory %>">
+                <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
+            </div>
+        <% } %>
+        </div>
         <input type="submit">
     </form>
 </body>

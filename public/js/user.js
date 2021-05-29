@@ -8,22 +8,26 @@ const deleteCommentBtn = document.querySelectorAll('.del-comment')
 const likeBtn = document.querySelectorAll('.likes')
 const followedBtn = document.querySelector('#followed-btn')
 const followedContent = document.querySelector('.followed-content')
+const catchegorySelected = document.querySelectorAll('.catchegory-selected')
 
 // EVENT LISTENERS
-Array.from(deleteBtn).forEach((el)=>{
+Array.from(deleteBtn).forEach(el =>{
     el.addEventListener('click', deleteCatchPost)
 })
-Array.from(editBtn).forEach((el)=>{
+Array.from(editBtn).forEach(el =>{
     el.addEventListener('click', editCatchPost)
 })
-Array.from(editCommentBtn).forEach((el)=>{
+Array.from(editCommentBtn).forEach(el =>{
     el.addEventListener('click', editComment)
 })
-Array.from(deleteCommentBtn).forEach((el)=>{
+Array.from(deleteCommentBtn).forEach(el =>{
     el.addEventListener('click', deleteComment)
 })
-Array.from(likeBtn).forEach((el)=>{
+Array.from(likeBtn).forEach(el =>{
     el.addEventListener('click', likeCatchPost)
+})
+Array.from(catchegorySelected).forEach(el =>{
+    el.addEventListener('change', unselectCatchegory)
 })
 
 followedBtn.addEventListener('click', toggleDropdown)
@@ -221,17 +225,39 @@ async function likeCatchPost(){
     const catchPostId = this.parentNode.dataset.id
     console.log('catchpostID: '+catchPostId)
     try{
-      const response = await fetch('catchPosts/likeCatchPost', {
-        method: 'put',
-        headers: {'Content-type': 'application/json'},
-        body: JSON.stringify({
-          'catchPostId': catchPostId
+        const response = await fetch('catchPosts/likeCatchPost', {
+            method: 'put',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                'catchPostId': catchPostId
+            })
         })
-      })
-      const data = await response.json()
-      console.log(data)
-      location.reload()
+        const data = await response.json()
+        console.log(data)
+        location.reload()
     }catch(err){
       console.log(err)
+    }
+}
+
+async function unselectCatchegory(){
+    console.log('catchegories')
+    const user = this.parentNode.parentNode.dataset.id
+    const omitCatchegory = this.value
+    console.log('omit this catchegory: '+omitCatchegory)
+
+    try{
+        const response = await fetch('users/omitCatchegory', {
+            method: 'put',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                'user': user,
+                'omitCatchegory': omitCatchegory
+            })
+        })
+        const data = response.json()
+        console.log('data: '+data)
+    }catch(err){
+        console.log(err)
     }
 }

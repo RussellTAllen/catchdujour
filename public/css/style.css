@@ -114,16 +114,28 @@ aside h3{
 .followed-content a:hover{
   background:rgb(223, 223, 255)
 }
-.catchegories{
+.catchegories,
+.omitted-catchegories{
   display: flex;
   flex-direction: column;
 } 
 .catchegories input{
   /* display: inline-block; */
 }
-.catchegories label{
+.catchegories label,
+.omitted-catchegories label{
   /* display: inline-block; */
   justify-content: right;
+}
+input.catch-title{
+  width: 200px;
+  margin-bottom: 10px;
+}
+textarea.catch-content{
+  display: block;
+  width: 450px;
+  height: 350px;
+  resize: none;
 }
 
 

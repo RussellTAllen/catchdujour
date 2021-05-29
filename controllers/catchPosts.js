@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const CatchPost = require('../models/CatchPost')
 const Comment = require('../models/CatchPost')
-const Catchegories = require('../models/Catchegory')
+const Catchegory = require('../models/Catchegory')
 
 
 
@@ -52,8 +52,7 @@ module.exports = {
         }
     },
     getCatchPostsByUserId: async (req,res)=>{
-        if (!req.user) user = { userName: 'guest' }
-        else user = req.user
+        if (!req.user) req.user = { userName: 'guest' }
 
         try{
             let user = await User.findById(req.user._id)
@@ -94,7 +93,7 @@ module.exports = {
     },
     getCreateCatchPage: async (req, res)=>{
         try{
-            const catchegories = await Catchegories.find()
+            const catchegories = await Catchegory.find()
             catchegories.sort((a,b) => b.count - a.count)
 
             res.render('createCatchPage.ejs',
@@ -109,7 +108,7 @@ module.exports = {
     },
     createCatchPost: async (req, res)=>{
         try{
-            await Catchegories.updateMany( { catchegory: req.body.catchegories },
+            await Catchegory.updateMany( { catchegory: req.body.catchegories },
                 {
                 $inc: { count: 1 }
                 }
@@ -200,19 +199,19 @@ module.exports = {
             console.log(err)
         }
     },
-    omitCatchegory: async (req, res)=>{
-        console.log(req.user._id, req.body.omitCatchegory)
-        try{
-            await User.updateOne( { _id: req.user._id },
-                { $push: { omittedCatchegories: req.body.omitCatchegory
-                }})
-            console.log('Catchegory Omitted')
-            console.log( req.user.omittedCatchegories )
-            res.redirect('/catchPosts')
-        }catch(err){
-            console.log(err)
-        }
-    },
+    // omitCatchegory: async (req, res)=>{
+    //     console.log(req.user._id, req.body.omitCatchegory)
+    //     try{
+    //         await User.updateOne( { _id: req.user._id },
+    //             { $push: { omittedCatchegories: req.body.omitCatchegory
+    //             }})
+    //         console.log('Catchegory Omitted')
+    //         console.log( req.user.omittedCatchegories )
+    //         res.redirect('/catchPosts')
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // },
     deleteCatchPost: async (req, res)=>{
         console.log(req.body.catchPostId)
         try{

@@ -87,19 +87,28 @@
 
         <aside>
             <h3>Catchegories</h3>
-            <ul>
-                <% catchegories.forEach(cat => {%>
-                    <li> <%= cat.catchegory %> (<%= cat.count %>)</li>
-                <% }) %>
-            </ul>
-
-            <% if (user.userName !== 'guest' || !user) {%>
-            <h3>Unseen Catchegories</h3>
-            <ul>
-                <% if (user.omittedCatchegories) {%>
-                    <li><%= user.omittedCatchegories.join(', ') %></p>
+            <div class="catchegories">
+                <form action="/users/omitCatchegory?_method=PUT" method="POST" data-id="<%= user %>">
+                <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
+                    <div>
+                        <input type="checkbox" class="catchegory-selected" name="catchegory" value="<%= catchegories[i].catchegory %>" checked>
+                        <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %> (<%= catchegories[i].count %>)</label>
+                    </div>
                 <% } %>
-            </ul>
+                </form>
+            </div>
+      
+            <% if (user.userName !== 'guest' && user.omittedCatchegories) {%>
+            <h3>Unseen Catchegories</h3>
+            <div class='omitted-catchegories'>
+                <form action="/users/omitCatchegory?_method=PUT" method="POST" data-id="<%= user %>">
+                <% for (let i = 0, len = user.omittedCatchegories.length; i < len; i++) {%>
+                    <div>
+                        <input type="checkbox" class="catchegory-unselected" name="omitted-catchegory" value="<%= user.omittedCatchegories[i] %>">
+                        <label for="<%= user.omittedCatchegories[i] %>"><%= user.omittedCatchegories[i] %></label>
+                    </div>
+                <% } %>
+            </div>
             <% } %>
         </aside>
     </div>

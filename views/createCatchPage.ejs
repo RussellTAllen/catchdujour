@@ -10,18 +10,18 @@
 <body>
     <a href="/logout">Logout</a>
     <a href="/">Back to Main</a>
-    <a href="/catchPosts">Go To Your Profile</a>
+    <a href="/catchProfile">Go To Your Profile</a>
     
     <h1>Create A Catch!!!</h1>
     <h2>Logged in user: <%= user.userName %></h2>
 
     <form action="/catchPosts/createCatchPost" method="POST">
-        <input type="text" placeholder="Enter Catch Title" name="catchTitle">
-        <input type="text" placeholder="Enter Catch Content" name="catchContent">
+        <input class="catch-title" type="text" placeholder="Enter Catch Title" name="catchTitle">
+        <textarea class="catch-content" placeholder="Enter Catch Content" name="catchContent"></textarea>
         <div class="catchegories">
         <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
             <div>
-                <input type="checkbox" id="catchegory-options" name="catchegories" value="<%= catchegories[i].catchegory %>">
+                <input type="checkbox" class="catchegory-options" name="catchegories" value="<%= catchegories[i].catchegory %>">
                 <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
             </div>
         <% } %>

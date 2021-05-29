@@ -1,6 +1,6 @@
 const CatchPost = require('../models/CatchPost')
 const User = require('../models/User')
-const Catchegories = require('../models/Catchegory')
+const Catchegory = require('../models/Catchegory')
 
 
 module.exports = {
@@ -13,10 +13,13 @@ module.exports = {
             let user = await User.findById(req.user._id)
             if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find().sort({ _id: -1 })
-            const catchegories = await Catchegories.find()
-            
+            let catchegories = await Catchegory.find()
+
+            // catchPosts.filter(post => post.catchegories.every(cat => !user.omittedCatchegories.includes(cat)))
+            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            console.log('Catchegories after filter - '+catchegories)
             catchegories.sort((a,b) => b.count - a.count)
-            console.log(catchegories)
+            
             await User.findOneAndUpdate({ _id: req.user._id },
                 { preferredSort: 'new' })
             res.render('index.ejs', {
@@ -31,12 +34,13 @@ module.exports = {
     },
     getIndexByMostLiked: async (req,res)=>{
         if (!req.user) req.user = 'guest'
-        
+        // if (!req.user) req.user = { userName: 'guest' }
+
         try{
             let user = await User.findById(req.user._id)
             if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find().sort({ likes: -1 })
-            const catchegories = await Catchegories.find()
+            const catchegories = await Catchegory.find()
             await User.findOneAndUpdate({ _id: req.user._id },
                 { preferredSort: 'mostLiked'})
             res.render('index.ejs', {
@@ -51,12 +55,13 @@ module.exports = {
     },
     getIndexByMostCommented: async (req,res)=>{
         if (!req.user) req.user = 'guest'
+        // if (!req.user) req.user = { userName: 'guest' }
         
         try{
             let user = await User.findById(req.user._id)
             if (!user) user = { userName: 'guest' }
             const catchPosts = await CatchPost.find().sort({ commentsLength: -1 })
-            const catchegories = await Catchegories.find()
+            const catchegories = await Catchegory.find()
             await User.findOneAndUpdate({ _id: req.user._id },
                     { preferredSort: 'mostCommented' })
             res.render('index.ejs', {

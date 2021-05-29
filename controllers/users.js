@@ -63,4 +63,18 @@ module.exports = {
             console.log(err)
         }
     },
+    omitCatchegory: async (req, res)=>{
+        console.log('omitting from user controller')
+        console.log(req.user._id, req.body.omitCatchegory)
+        try{
+            await User.updateOne( { _id: req.user._id },
+                { $addToSet: { omittedCatchegories: req.body.omitCatchegory
+                }})
+            console.log('Catchegory Omitted')
+            console.log( req.user.omittedCatchegories )
+            res.redirect('/catchPosts')
+        }catch(err){
+            console.log(err)
+        }
+    },
 }

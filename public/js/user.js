@@ -8,7 +8,8 @@ const deleteCommentBtn = document.querySelectorAll('.del-comment')
 const likeBtn = document.querySelectorAll('.likes')
 const followedBtn = document.querySelector('#followed-btn')
 const followedContent = document.querySelector('.followed-content')
-const catchegorySelected = document.querySelectorAll('.catchegory-selected')
+const selectedCatchegory = document.querySelectorAll('.catchegory-selected')
+const unselectedCatchegory = document.querySelectorAll('.catchegory-unselected')
 
 // EVENT LISTENERS
 Array.from(deleteBtn).forEach(el =>{
@@ -26,8 +27,11 @@ Array.from(deleteCommentBtn).forEach(el =>{
 Array.from(likeBtn).forEach(el =>{
     el.addEventListener('click', likeCatchPost)
 })
-Array.from(catchegorySelected).forEach(el =>{
+Array.from(selectedCatchegory).forEach(el =>{
     el.addEventListener('change', unselectCatchegory)
+})
+Array.from(unselectedCatchegory).forEach(el =>{
+    el.addEventListener('change', selectCatchegory)
 })
 
 followedBtn.addEventListener('click', toggleDropdown)
@@ -242,7 +246,8 @@ async function likeCatchPost(){
 
 async function unselectCatchegory(){
     console.log('catchegories')
-    const user = this.parentNode.parentNode.dataset.id
+    // const user = this.parentNode.parentNode.dataset.id
+    const user = document.body.dataset.user
     const omitCatchegory = this.value
     console.log('omit this catchegory: '+omitCatchegory)
 
@@ -257,6 +262,30 @@ async function unselectCatchegory(){
         })
         const data = response.json()
         console.log('data: '+data)
+        location.reload()
+    }catch(err){
+        console.log(err)
+    }
+}
+
+async function selectCatchegory(){
+    console.log('catchegories')
+    const user = document.body.dataset.user
+    const allowCatchegory = this.value
+    console.log('allow this catchegory: '+allowCatchegory)
+
+    try{
+        const response = await fetch('users/allowCatchegory', {
+            method: 'put',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                'user': user,
+                'allowCatchegory': allowCatchegory
+            })
+        })
+        const data = response.json()
+        console.log('data: '+data)
+        location.reload()
     }catch(err){
         console.log(err)
     }

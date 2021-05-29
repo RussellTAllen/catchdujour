@@ -72,7 +72,21 @@ module.exports = {
                 }})
             console.log('Catchegory Omitted')
             console.log( req.user.omittedCatchegories )
-            res.redirect('/catchPosts')
+            res.redirect('/')
+        }catch(err){
+            console.log(err)
+        }
+    },
+    allowCatchegory: async (req, res)=>{
+        console.log('allowing catchegory from user controller')
+        console.log(req.user._id, req.body.allowCatchegory)
+        try{
+            await User.updateOne( { _id: req.user._id },
+                { $pull: { omittedCatchegories: req.body.allowCatchegory
+                }})
+            console.log('Catchegory Allowed')
+            console.log( req.user.omittedCatchegories )
+            res.redirect('/')
         }catch(err){
             console.log(err)
         }

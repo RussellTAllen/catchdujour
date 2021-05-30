@@ -70,13 +70,14 @@ async function deleteCatchPost(){
     }
 }
 
-// May want to refactor using contenteditable - or just wait to refactor with React
-// function editCatchPost(req, res){  // ummm, don't need the req,res arguments here...
+// Could refactor using contenteditable - or just wait to refactor with React
 function editCatchPost(){
     // DOM variables
     const catchPostId = this.parentNode.dataset.id
     const postTitle = this.parentNode.querySelector('.catch-title')
     const postContent = this.parentNode.querySelector('.catch-post-content')
+    const postCatchegories = this.parentNode.querySelector('.post-catchegories')
+    const editPostCatchegories = this.parentNode.querySelector('.edit-post-catchegories')
     const edit = this.parentNode.querySelector('.edit')
 
     edit.classList.add('selected')
@@ -95,6 +96,10 @@ function editCatchPost(){
     // editInput.setAttribute('onchange', 'autoGrow(this)')
     postContent.replaceWith(editInput)
 
+    // Turn post catchegories into editable input
+    editPostCatchegories.classList.remove('hidden')
+    postCatchegories.classList.add('hidden')
+
     // Handle event listeners
     window.addEventListener('keypress', confirmEdit)
     edit.removeEventListener('click', editCatchPost)
@@ -106,15 +111,32 @@ function editCatchPost(){
         if (eventKey === 'Enter' && !e.shiftKey){
             const catchContent = document.querySelector('.edit-catch-post')
             const catchTitle = document.querySelector('.edit-catch-title')
+            let postCatchegoriesChildren = editPostCatchegories.children
+            let newPostCatchegories = []
+
+            for (let i = 0, len = postCatchegoriesChildren.length; i < len; i++){
+                editPostCatchegories.getElementsByTagName('input').item(i).checked === true
+                if (editPostCatchegories.getElementsByTagName('input').item(i).checked === true){
+                    newPostCatchegories.push(editPostCatchegories.getElementsByTagName('input').item(i).value)
+                }
+            }
+
+            console.log('confirm: '+newPostCatchegories)
 
             postTitle.innerText = catchTitle.value
             postContent.innerText = catchContent.value
+            newPostCatchegories.length > 0 ? postCatchegories.innerText = `Catchegories: ${newPostCatchegories.join(', ')}`
+                                            : postCatchegories.innerText = 'No catchegories selected.'
 
             // Editing/refreshing DOM - a little hacky because it updates client-side before the DB
             editInput.replaceWith(postContent)
             editTitle.replaceWith(postTitle)
             edit.classList.remove('selected')
             edit.addEventListener('click', editCatchPost)
+            editPostCatchegories.classList.add('hidden')
+            postCatchegories.classList.remove('hidden')
+        
+
 
             // Send PUT request to controller
             try{
@@ -125,9 +147,11 @@ function editCatchPost(){
                         'catchPostId': catchPostId,
                         'catchTitleElement': catchTitle,
                         'catchTitle': catchTitle.value,
-                        'catchContent': catchContent.value
+                        'catchContent': catchContent.value,
+                        'catchegories': newPostCatchegories
                     })
                 })
+                location.reload()
             }catch(err){
                 console.log(err)
                 postTitle.replaceWith(editTitle)

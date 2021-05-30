@@ -67,10 +67,21 @@
                 <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy._id %>"><%= el.postedBy.userName %></a></em> on <%= el.date %></h5>
                 <p class="catch-post-content"><%= el.catchContent %></p>
                 <% if (!el.catchegories[0]) { %>
-                    <p>No catchegories selected</p>
+                    <p class="post-catchegories">No catchegories selected.</p>
                 <% } else { %>
-                    <p>Catchegories: <%= el.catchegories %></p>
+                    <p class="post-catchegories">Catchegories: <%= el.catchegories.join(', ') %></p>
                 <% } %>
+                <div class="edit-post-catchegories hidden">
+                    <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
+                        <div>
+                            <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= catchegories[i].catchegory %>"
+                            <% if (el.catchegories.includes(catchegories[i].catchegory)) {%>
+                                checked
+                            <% } %>
+                            <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
+                        </div>
+                    <% } %>
+                </div>
                 <% if (user !== 'guest') {%>
                     <button type="button" class="likes">Likes: </button><%= el.likes %>
                 <% }else{%>

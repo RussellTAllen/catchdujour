@@ -85,7 +85,8 @@ module.exports = {
         try{
             await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },{
                 catchContent: req.body.catchContent,
-                catchTitle: req.body.catchTitle
+                catchTitle: req.body.catchTitle,
+                catchegories: req.body.catchegories
             })
         }catch(err){
             console.log(err)

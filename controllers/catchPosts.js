@@ -18,7 +18,7 @@ module.exports = {
     //         console.log(err)
     //     }
     // },
-    getCatchPostById: async (req,res)=>{
+    getCatchPostById: async (req,res) => {
         console.log('getting post by id: '+req.params.id)
         let user = req.user
         if (!user) user = { userName: 'guest' }
@@ -36,7 +36,7 @@ module.exports = {
             console.log(err)
         }
     },
-    getProfile: async (req,res)=>{
+    getProfile: async (req,res) => {
         try{
             let user = await User.findById(req.user._id)
             const catchPosts = await CatchPost.find({ userId: req.user.id }).sort({ _id: -1 })
@@ -56,7 +56,7 @@ module.exports = {
             console.log(err)
         }
     },
-    getCatchPostsByUserId: async (req,res)=>{
+    getCatchPostsByUserId: async (req,res) => {
         if (!req.user) req.user = { userName: 'guest' }
 
         try{
@@ -81,18 +81,19 @@ module.exports = {
             console.log(err)
         }
     },
-    editCatchPost: async (req, res)=>{
+    editCatchPost: async (req, res) => {
         try{
             await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },{
                 catchContent: req.body.catchContent,
                 catchTitle: req.body.catchTitle,
                 catchegories: req.body.catchegories
             })
+            res.json('Edit catch success!')
         }catch(err){
             console.log(err)
         }
     },
-    editComment: async (req, res)=>{
+    editComment: async (req, res) => {
         try{
             const post = await CatchPost.findById(req.body.catchPostId)
             const comment = post.comments.filter(c => String(c._id) === req.body.commentId)
@@ -103,7 +104,7 @@ module.exports = {
             console.log(err)
         }
     },
-    getCreateCatchPage: async (req, res)=>{
+    getCreateCatchPage: async (req, res) => {
         try{
             const catchegories = await Catchegory.find()
             catchegories.sort((a,b) => b.count - a.count)
@@ -118,7 +119,7 @@ module.exports = {
             console.log(err)
         }
     },
-    createCatchPost: async (req, res)=>{
+    createCatchPost: async (req, res) => {
         try{
             await Catchegory.updateMany( { catchegory: req.body.catchegories },
                 {
@@ -182,7 +183,7 @@ module.exports = {
         }
     },
     // Initialize Catchegory Collection
-    initCatchegory: async (req, res)=>{
+    initCatchegory: async (req, res) => {
         console.log('Initializing catchegory...')
         try{
             await Catchegory.create(
@@ -198,7 +199,7 @@ module.exports = {
         }
     },
     // Add Catchegory to Collection
-    createCatchegory: async (req, res)=>{
+    createCatchegory: async (req, res) => {
         console.log(req.body.createCatchegory)
         try{
             const catchegories = await Catchegory.find()
@@ -215,19 +216,28 @@ module.exports = {
             console.log(err)
         }
     },
-    // omitCatchegory: async (req, res)=>{
-    //     console.log(req.user._id, req.body.omitCatchegory)
-    //     try{
-    //         await User.updateOne( { _id: req.user._id },
-    //             { $push: { omittedCatchegories: req.body.omitCatchegory
-    //             }})
-    //         console.log('Catchegory Omitted')
-    //         console.log( req.user.omittedCatchegories )
-    //         res.redirect('/catchPosts')
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // },
+    updateCatchegoryCount: async (req, res)=>{
+        console.log('controller req.body.newCatchegories: '+req.body.newPostCatchegories)
+        console.log('controller req.body.oldCatchegories: '+req.body.oldPostCatchegories)
+
+        try{
+            const catchPost = CatchPost.findById(req.body.catchPostId)
+
+            await Catchegory.updateMany({ catchegory: req.body.newPostCatchegories },
+                {
+                $inc: { count: 1 }
+                }
+            )
+            await Catchegory.updateMany({ catchegory: req.body.oldPostCatchegories },
+                {
+                $inc: { count: -1 }
+                }
+            )
+            res.json('Updated catchegory count')
+        }catch(err){
+            console.log(err)
+        }
+    },
     deleteCatchPost: async (req, res)=>{
         console.log(req.body.catchPostId)
         try{

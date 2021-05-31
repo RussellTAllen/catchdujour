@@ -54,16 +54,37 @@ async function deleteCatchPost(){
     if (c === false) return
     
     const catchPostId = this.parentNode.dataset.id
+    const oldPostCatchegories = this.parentNode.querySelector('.post-catchegories').innerText.slice(14).split(', ')
+    const newPostCatchegories = []
+
     try{
         const response = await fetch('../catchPosts/deleteCatchPost', {
             method: 'delete',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'catchPostId': catchPostId
+                'catchPostId': catchPostId,
+            })
+        })
+        updateCatchegoryCount(oldPostCatchegories, newPostCatchegories)
+        const data = await response.json()
+        console.log('data: '+ data)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+async function updateCatchegoryCount(oldPostCatchegories, newPostCatchegories){
+    try{
+        const response = await fetch('../catchPosts/updateCatchegoryCount', {
+            method: 'put',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                'newPostCatchegories': newPostCatchegories,
+                'oldPostCatchegories': oldPostCatchegories
             })
         })
         const data = await response.json()
-        console.log('data: '+ data)
+        console.log('data: '+data)
         location.reload()
     }catch(err){
         console.log(err)
@@ -111,33 +132,19 @@ function editCatchPost(){
         if (eventKey === 'Enter' && !e.shiftKey){
             const catchContent = document.querySelector('.edit-catch-post')
             const catchTitle = document.querySelector('.edit-catch-title')
+            const oldPostCatchegories = catchContent.parentNode.querySelector('.post-catchegories').innerText.slice(14).split(', ')
             let postCatchegoriesChildren = editPostCatchegories.children
+            
             let newPostCatchegories = []
-
             for (let i = 0, len = postCatchegoriesChildren.length; i < len; i++){
                 editPostCatchegories.getElementsByTagName('input').item(i).checked === true
                 if (editPostCatchegories.getElementsByTagName('input').item(i).checked === true){
                     newPostCatchegories.push(editPostCatchegories.getElementsByTagName('input').item(i).value)
                 }
             }
-
-            console.log('confirm: '+newPostCatchegories)
-
-            postTitle.innerText = catchTitle.value
-            postContent.innerText = catchContent.value
-            newPostCatchegories.length > 0 ? postCatchegories.innerText = `Catchegories: ${newPostCatchegories.join(', ')}`
-                                            : postCatchegories.innerText = 'No catchegories selected.'
-
-            // Editing/refreshing DOM - a little hacky because it updates client-side before the DB
-            editInput.replaceWith(postContent)
-            editTitle.replaceWith(postTitle)
-            edit.classList.remove('selected')
-            edit.addEventListener('click', editCatchPost)
-            editPostCatchegories.classList.add('hidden')
-            postCatchegories.classList.remove('hidden')
-        
-
-
+            
+            updateCatchegoryCount(oldPostCatchegories, newPostCatchegories)
+       
             // Send PUT request to controller
             try{
                 const response = await fetch ('../../catchPosts/editCatchPost', {
@@ -148,16 +155,16 @@ function editCatchPost(){
                         'catchTitleElement': catchTitle,
                         'catchTitle': catchTitle.value,
                         'catchContent': catchContent.value,
-                        'catchegories': newPostCatchegories
+                        'catchegories': newPostCatchegories,
+                        'oldPostCatchegories': oldPostCatchegories,
+                        'newPostCatchegories': newPostCatchegories
                     })
                 })
-                location.reload()
+                const data = await response.json()
+                console.log('data: ' + data)
+
             }catch(err){
                 console.log(err)
-                postTitle.replaceWith(editTitle)
-                postContent.replaceWith(editInput)
-                edit.classList.add('selected')
-                edit.removeEventListener('click', editCatchPost)
             }
         }
     }

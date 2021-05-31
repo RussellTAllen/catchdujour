@@ -92,7 +92,7 @@
                             <%= el.catchTitle %></a>
                     </h3>
                     <h5>Posted by: <%= el.postedBy.userName %> on <%= el.date %></h5>                
-                    <p class="catch-post-content"><%= el.catchContent %></p>
+                    <p class="catch-post-content"><pre><%= el.catchContent %></pre></p>
                     <% if (el.catchegories.length < 1) { %>
                         <p>No catchegories selected</p>
                     <%} else { %>

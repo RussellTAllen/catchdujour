@@ -43,7 +43,7 @@
                 <em><%= catchPost.postedBy.userName %></em>
             </a> on <%= catchPost.date %>
         </h5>
-        <p class="catch-post-content"><%= catchPost.catchContent %></p>
+        <p class="catch-post-content"><pre><%= catchPost.catchContent %></pre></p>
         <span>Likes: <%= catchPost.likes %></span>
         <% if (user.userName === catchPost.postedBy.userName) {%>
             <button class="edit" type="submit">Edit Post</button>

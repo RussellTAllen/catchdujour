@@ -20,8 +20,7 @@ module.exports = {
     // },
     getCatchPostById: async (req,res) => {
         console.log('getting post by id: '+req.params.id)
-        let user = req.user
-        if (!user) user = { userName: 'guest' }
+        if (!req.user) req.user = {}
 
         try{
             let user = await User.findById(req.user._id)
@@ -57,7 +56,7 @@ module.exports = {
         }
     },
     getCatchPostsByUserId: async (req,res) => {
-        if (!req.user) req.user = { userName: 'guest' }
+        if (!req.user) req.user = {}
 
         try{
             let user = await User.findById(req.user._id)
@@ -217,9 +216,6 @@ module.exports = {
         }
     },
     updateCatchegoryCount: async (req, res)=>{
-        console.log('controller req.body.newCatchegories: '+req.body.newPostCatchegories)
-        console.log('controller req.body.oldCatchegories: '+req.body.oldPostCatchegories)
-
         try{
             const catchPost = CatchPost.findById(req.body.catchPostId)
 

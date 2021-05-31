@@ -65,7 +65,8 @@
                         <%= el.catchTitle %></a>
                 </h3>
                 <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy._id %>"><%= el.postedBy.userName %></a></em> on <%= el.date %></h5>
-                <p class="catch-post-content"><%= el.catchContent %></p>
+
+                 <p class="catch-post-content"><pre><%= el.catchContent %></pre></p>
                 <% if (!el.catchegories[0]) { %>
                     <p class="post-catchegories">No catchegories selected.</p>
                 <% } else { %>

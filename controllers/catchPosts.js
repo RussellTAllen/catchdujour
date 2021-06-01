@@ -26,8 +26,16 @@ module.exports = {
             let user = await User.findById(req.user._id)
             if (!user) user = { userName: 'guest' }
             const catchPost = await CatchPost.findById({ _id: req.params.id })
+            let catchegories = await Catchegory.find()
+            const availableCatchegories = catchegories
+            if (!catchegories) catchegories = []
+            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories.sort((a,b) => b.count - a.count)
+
             res.render('catchPost.ejs', {
-                catchPost: catchPost, 
+                catchPost: catchPost,
+                catchegories: catchegories,
+                availableCatchegories: availableCatchegories,
                 user: user,
                 following: user.following
             })
@@ -40,14 +48,17 @@ module.exports = {
             let user = await User.findById(req.user._id)
             const catchPosts = await CatchPost.find({ userId: req.user.id }).sort({ _id: -1 })
             let catchegories = await Catchegory.find()
+            const availableCatchegories = catchegories
             if (!catchegories) catchegories = []
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
             catchegories.sort((a,b) => b.count - a.count)
+
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: req.user,
                 targetUser: req.user,
                 catchegories: catchegories,
+                availableCatchegories: availableCatchegories,
                 following: user.following,
                 followedBy: user.followedBy
             })
@@ -60,9 +71,11 @@ module.exports = {
 
         try{
             let user = await User.findById(req.user._id)
-            const targetUser = await User.findById(req.params.id)
+            let targetUser = await User.findById(req.params.id)
+            if (targetUser === user) targetUser = { userName: 'guest', omittedCatchegories: [] }
             if (!user) user = { userName: 'guest', omittedCatchegories: [] }
             let catchegories = await Catchegory.find()
+            const availableCatchegories = catchegories
             if (!catchegories) catchegories = []
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
             catchegories.sort((a,b) => b.count - a.count)
@@ -73,6 +86,7 @@ module.exports = {
                 user: user,
                 targetUser: targetUser,
                 catchegories: catchegories,
+                availableCatchegories: availableCatchegories,
                 following: user.following,
                 followedBy: user.followedBy
             })

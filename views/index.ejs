@@ -13,24 +13,11 @@
         <% catchPosts = catchPosts.filter(post => post.catchegories?.every(cat => !user.omittedCatchegories.includes(cat))) %>
     <% } %>
     
-    <header>
+    <header class="container">
         <div class='intro'>
             <h1>Welcome to Catch du Jour!</h1>
             <h3>Read/interact/create the tastiest catch of the day!</h3>
         </div>
-        <% if (user.userName !== 'guest') {%>
-        <div class="followed-container">
-            <button id="followed-btn">Followed (<%= following.length %>)</button>
-            <div id="followed-dropdown" class="followed-content hidden">
-                <% if (following.length === 0) {%>
-                    <span>You are not following anyone</span> 
-                <% } else { %>
-                <% for (let i = 0, len = following.length; i < len; i++){ %>
-                    <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>
-                <% }} %>
-            </div>
-        </div>
-        <% } %>
 
         <nav>
         <% if (user.userName === 'guest' || !user) {%>
@@ -40,6 +27,18 @@
             <h5><%= user.userName %> is logged in</h5>
             <a href="/logout">Logout</a>
             <a href="/catchProfile">Go To Your Profile</a>
+            <div class="followed-container">
+                <button id="followed-btn">Followed (<%= following.length %>)</button>
+                <div id="followed-dropdown" class="followed-content hidden">
+                    <% if (following.length === 0) {%>
+                        <span>You are not following anyone</span> 
+                    <% } else { %>
+                    <% for (let i = 0, len = following.length; i < len; i++){ %>
+                        <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>
+                    <% }} %>
+                </div>
+            </div>
+                
         <% } %>
         </nav>
     </header>
@@ -47,16 +46,18 @@
     <div class="container">
         <main>
             <% if (user.userName !== 'guest' && user) {%>
-                <div class='create-page'>
+                <div class="create-page">
                     <a href="/createCatchPage">Create Your Own Catch</a>
                 </div>
             <% } %>
 
             <!-- Sort by New, Tastiest, Most Talked About -->
-            <a href="/">Freshest</a>  |  
-            <a href="/mostLiked">Tastiest</a>  |  
-            <a href="/mostCommented">Most Chewed On</a>
-
+            <div class="sort">
+                <a href="/">Freshest</a>  |  
+                <a href="/mostLiked">Tastiest</a>  |  
+                <a href="/mostCommented">Most Chewed On</a>
+            </div>
+ 
             <!-- Print posts-->
             <% catchPosts.forEach( el => { %>
             <div class="catch-post" data-id="<%=el._id%>">

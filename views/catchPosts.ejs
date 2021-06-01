@@ -107,11 +107,11 @@
                     <div class="edit-post-catchegories hidden">
                         <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
                             <div>
-                                <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= catchegories[i].catchegory %>"
+                                <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= availableCatchegories[i].catchegory %>"
                                 <% if (el.catchegories.includes(catchegories[i].catchegory)) {%>
                                     checked
                                 <% } %>
-                                <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
+                                <label for="<%= catchegories[i].catchegory %>"><%= availableCatchegories[i].catchegory %></label>
                             </div>
                         <% } %>
                     </div>

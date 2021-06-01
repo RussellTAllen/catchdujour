@@ -75,7 +75,7 @@ async function deleteCatchPost(){
 
 async function updateCatchegoryCount(oldPostCatchegories, newPostCatchegories){
     try{
-        const response = await fetch('../catchPosts/updateCatchegoryCount', {
+        const response = await fetch('../../catchPosts/updateCatchegoryCount', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({

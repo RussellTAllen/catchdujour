@@ -34,11 +34,11 @@ Array.from(unselectedCatchegory).forEach(el =>{
     el.addEventListener('change', selectCatchegory)
 })
 
-followedBtn.addEventListener('click', toggleDropdown)
+followedBtn.addEventListener('click', toggleFollowedDropdown)
 
 
 // FUNCTIONS
-function toggleDropdown(){
+function toggleFollowedDropdown(){
     console.log('toggling...')
     followedContent.classList.toggle('hidden')
 
@@ -104,6 +104,7 @@ function editCatchPost(){
 
     edit.classList.add('selected')
 
+    console.log('user.js says content contains: '+editContent.textContent.includes('\r\n'))
     // Turn title into editable input
     const editTitle = document.createElement('input')
     editTitle.classList.add('edit-catch-title')
@@ -166,7 +167,6 @@ function editCatchPost(){
                 })
                 const data = await response.json()
                 console.log('data: ' + data)
-
             }catch(err){
                 console.log(err)
             }

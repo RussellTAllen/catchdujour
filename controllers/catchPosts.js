@@ -81,9 +81,12 @@ module.exports = {
         }
     },
     editCatchPost: async (req, res) => {
+
+        console.log('edit post controller says content: '+req.body.catchContent.includes('\r\n'))
+
         try{
             await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },{
-                catchContent: req.body.catchContent,
+                catchContent: req.body.catchContent.trim(),
                 catchTitle: req.body.catchTitle,
                 catchegories: req.body.catchegories
             })

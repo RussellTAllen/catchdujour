@@ -26,7 +26,9 @@ input{
   background:rgb(255, 175, 46);
 } */
 /***************/
-
+body{
+  margin: 40px 25px;
+}
 body, *{
   font-family: "Cereal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
@@ -38,6 +40,7 @@ h1{
   margin: 0;
   padding: 0;
 }
+
 .welcome{
   display: flex;
   flex-wrap: wrap;
@@ -68,8 +71,10 @@ header nav{
 header nav h5{
   margin: 0;
 }
-div.container{
+.container{
   display: flex;
+  justify-content: center;
+  padding: 40px 30px;
 }
 main{
   width: 760px;
@@ -80,22 +85,30 @@ aside{
 aside h3{
   margin: 10px 10px;
 }
-
+.catch-title{
+  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  text-decoration: none;
+}
 .catch-post{
     background: rgb(236, 236, 236);
     border: 1px solid black;
-    padding: 10px;
+    padding: 10px 20px;
+
 }
 .catch-post 
 .catch-post-content{
   /* background:rgb(199, 199, 199); */
   width: 100%;
+  font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 22px;
 }
 
-/* .catch-post-content{
+.catch-post-content{
   display: flex;
   flex-direction: column;
-} */
+  white-space: pre-wrap;
+}
 /* .catch-post  */
 .edit-post-content{
   width: 100%;
@@ -105,6 +118,7 @@ aside h3{
   overflow: hidden;
   min-height: 50px;
   max-height: 200px;
+  white-space: pre-wrap;
 }
 .selected{
   background: rgb(197, 197, 255);
@@ -145,6 +159,9 @@ aside h3{
 .omitted-catchegories label{
   /* display: inline-block; */
   justify-content: right;
+}
+.catchegory-selected{
+  background: red;
 }
 input.catch-title{
   width: 200px;

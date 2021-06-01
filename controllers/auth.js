@@ -6,9 +6,13 @@ const User = require('../models/User')
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    // return res.redirect('/catchPosts')
-    return res.redirect('/')
+    // return res.redirect('/')
+    return res.redirect('/welcome')
   }
+  // res.render('login', {
+  //   title: 'Login'
+  // })
+  console.log('line 15 of auth.js')
   res.render('login', {
     title: 'Login'
   })
@@ -35,7 +39,8 @@ exports.postLogin = (req, res, next) => {
       if (err) { return next(err) }
       req.flash('success', { msg: 'Success! You are logged in.' })
       console.log('line 36 is running')
-      res.redirect(req.session.returnTo || '/')
+      // res.redirect(req.session.returnTo || '/')
+      res.redirect(req.session.returnTo || '/welcome')
     })
   })(req, res, next)
 }

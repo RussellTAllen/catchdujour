@@ -7,6 +7,18 @@ module.exports = {
     // getIndex: (req,res)=>{
     //     res.render('index.ejs')
     // }
+    getWelcome: async (req, res) => {
+
+        try{
+            const user = await User.findById(req.user._id)
+            console.log('logged in user: '+user)
+            res.render('welcome.ejs', {
+                user: user
+            })
+        }catch(err){
+            console.log(err)
+        }
+    },
     getIndex: async (req,res)=>{
         if (!req.user) req.user = { userName: 'guest' }
         
@@ -14,16 +26,6 @@ module.exports = {
             let user = await User.findById(req.user._id)
             if (!user) user = { userName: 'guest', omittedCatchegories: [] }
             let catchPosts = await CatchPost.find().sort({ _id: -1 })
-            // let catchPostsFormatted = catchPosts.map(p => {
-            //     return p.catchContent.slice(0, p.catchContent.indexOf('\n')) +
-            //     '<p>' +
-            //     p.catchContent.slice(p.catchContent.indexOf('\n'))
-            // })
-
-
-
-
-
             let catchegories = await Catchegory.find()
             if (!catchegories) catchegories = []
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))

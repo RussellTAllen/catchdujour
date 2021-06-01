@@ -97,6 +97,7 @@ function editCatchPost(){
     const catchPostId = this.parentNode.dataset.id
     const postTitle = this.parentNode.querySelector('.catch-title')
     const postContent = this.parentNode.querySelector('.catch-post-content')
+    const editContent = this.parentNode.querySelector('.edit-post-content')
     const postCatchegories = this.parentNode.querySelector('.post-catchegories')
     const editPostCatchegories = this.parentNode.querySelector('.edit-post-catchegories')
     const edit = this.parentNode.querySelector('.edit')
@@ -110,12 +111,15 @@ function editCatchPost(){
     postTitle.replaceWith(editTitle)
     
     // Turn post content into editable input
-    const editInput = document.createElement('textarea')
-    editInput.classList.add('edit-catch-post')
-    editInput.innerText = postContent.textContent
-    // editInput.style.height = (editInput.scrollHeight, 200)+'px'
-    // editInput.setAttribute('onchange', 'autoGrow(this)')
-    postContent.replaceWith(editInput)
+    ///////////// Old way
+    // const editInput = document.createElement('textarea')
+    // editInput.classList.add('edit-catch-post')
+    // editInput.innerText = postContent.textContent
+    // postContent.replaceWith(editInput)
+    //
+    // New way
+    postContent.classList.add('hidden')
+    editContent.classList.remove('hidden')
 
     // Turn post catchegories into editable input
     editPostCatchegories.classList.remove('hidden')
@@ -130,7 +134,7 @@ function editCatchPost(){
         let eventKey = e.key
         if (e.key == undefined) eventKey = 'Enter'
         if (eventKey === 'Enter' && !e.shiftKey){
-            const catchContent = document.querySelector('.edit-catch-post')
+            const catchContent = document.querySelector('.edit-post-content')
             const catchTitle = document.querySelector('.edit-catch-title')
             const oldPostCatchegories = catchContent.parentNode.querySelector('.post-catchegories').innerText.slice(14).split(', ')
             let postCatchegoriesChildren = editPostCatchegories.children

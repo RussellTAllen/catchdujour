@@ -24,7 +24,7 @@ module.exports = {
 
         try{
             let user = await User.findById(req.user._id)
-            if (!user) user = { userName: 'guest' }
+            if (!user) user = { userName: 'guest', omittedCatchegories: [] }
             const catchPost = await CatchPost.findById({ _id: req.params.id })
             let catchegories = await Catchegory.find()
             const availableCatchegories = catchegories

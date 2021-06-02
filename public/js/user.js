@@ -159,7 +159,8 @@ function editCatchPost(){
                         'catchPostId': catchPostId,
                         'catchTitleElement': catchTitle,
                         'catchTitle': catchTitle.value,
-                        'catchContent': catchContent.value,
+                        // 'catchContent': catchContent.value,
+                        'catchContent': editContent.value,
                         'catchegories': newPostCatchegories,
                         'oldPostCatchegories': oldPostCatchegories,
                         'newPostCatchegories': newPostCatchegories

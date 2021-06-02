@@ -72,7 +72,7 @@
                 <% } %>
 
                 <p class="catch-post-content"><%= el.catchContent %></p>
-                <textarea class="edit-post-content hidden"><%= el.catchContent %></textarea>
+                <textarea class="edit-post-content hidden" name="catchContent"><%= el.catchContent %></textarea>
 
                 <% if (!el.catchegories[0]) { %>
                     <p class="post-catchegories">No catchegories selected.</p>

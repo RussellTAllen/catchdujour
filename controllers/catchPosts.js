@@ -123,8 +123,7 @@ module.exports = {
         }
     },
     editCatchPost: async (req, res) => {
-
-        console.log('edit post controller says content: '+req.body.catchContent.includes('\r\n'))
+        console.log('edit post controller says content: '+req.body.catchContent)
 
         try{
             await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },{

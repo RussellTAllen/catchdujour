@@ -66,21 +66,49 @@ module.exports = {
             console.log(err)
         }
     },
+    // REFERENCE
+    // getIndex: async (req,res)=>{
+    //     if (!req.user) req.user = { userName: 'guest' }
+        
+    //     try{
+    //         let user = await User.findById(req.user._id)
+    //         if (!user) user = { userName: 'guest', omittedCatchegories: [] }
+    //         let catchPosts = await CatchPost.find().sort({ _id: -1 })
+    //         let catchegories = await Catchegory.find()
+    //         if (!catchegories) catchegories = []
+    //         catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+    //         catchegories.sort((a,b) => b.count - a.count)
+            
+    //         await User.findOneAndUpdate({ _id: req.user._id },
+    //             { preferredSort: 'new' })
+    //         res.render('index.ejs', {
+    //             catchPosts: catchPosts, 
+    //             user: user,
+    //             following: user.following,
+    //             catchegories: catchegories
+    //         })
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // },
     getCatchPostsByUserId: async (req,res) => {
         if (!req.user) req.user = {}
 
         try{
+            // let user = await User.findById(req.params._id)
             let user = await User.findById(req.user._id)
             let targetUser = await User.findById(req.params.id)
-            if (targetUser === user) targetUser = { userName: 'guest', omittedCatchegories: [] }
+            // if (targetUser === user) targetUser = { userName: 'guest', omittedCatchegories: [] }
             if (!user) user = { userName: 'guest', omittedCatchegories: [] }
             let catchegories = await Catchegory.find()
             const availableCatchegories = catchegories
             if (!catchegories) catchegories = []
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
             catchegories.sort((a,b) => b.count - a.count)
+            console.log('catchegories on line 108: '+catchegories)
             const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
             catchegories = catchegories.filter(cat => catchPosts.some(post => post.catchegories.includes(cat.catchegory)))
+            console.log('catchegories on line 111: '+catchegories)
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: user,
@@ -137,6 +165,9 @@ module.exports = {
     },
     createCatchPost: async (req, res) => {
         try{
+            if (!req.body.catchLink) req.body.catchLink = 'none'
+
+            console.log(req.body.catchLink)
             await Catchegory.updateMany( { catchegory: req.body.catchegories },
                 {
                 $inc: { count: 1 }
@@ -146,9 +177,11 @@ module.exports = {
                 catchTitle: req.body.catchTitle,
                 catchContent: req.body.catchContent, 
                 catchegories: req.body.catchegories,
+                catchLink: req.body.catchLink,
                 userId: req.user.id,
                 postedBy: req.user,
                 likes: 0,
+
                 date: new Date().toLocaleDateString('en-US', { 
                     year: "numeric",
                     month: "long",

@@ -8,7 +8,6 @@ module.exports = {
     //     res.render('index.ejs')
     // }
     getWelcome: async (req, res) => {
-
         try{
             const user = await User.findById(req.user._id)
             console.log('logged in user: '+user)
@@ -30,14 +29,14 @@ module.exports = {
             if (!catchegories) catchegories = []
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
             catchegories.sort((a,b) => b.count - a.count)
-            
+
             await User.findOneAndUpdate({ _id: req.user._id },
                 { preferredSort: 'new' })
             res.render('index.ejs', {
                 catchPosts: catchPosts, 
                 user: user,
                 following: user.following,
-                catchegories: catchegories
+                catchegories: catchegories,
             })
         }catch(err){
             console.log(err)

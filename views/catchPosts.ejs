@@ -99,26 +99,28 @@
                     <p class="catch-post-content"><%= el.catchContent %></p>
                     <textarea class="edit-post-content hidden"><%= el.catchContent %></textarea>
 
+
+                    <% console.log(el.catchegories[0]) %>
                     <% if (el.catchegories.length < 1) { %>
                         <p class="post-catchegories">No catchegories selected</p>
                     <%} else { %>
-                        <p class="post-catchegories">Catchegories: <%= el.catchegories %></p>
+                        <p class="post-catchegories">Catchegories: <%= el.catchegories.join(', ') %></p>
                     <% } %>
                     <div class="edit-post-catchegories hidden">
                         <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
                             <div>
-                                <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= availableCatchegories[i].catchegory %>"
+                                <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= catchegories[i].catchegory %>"
                                 <% if (el.catchegories.includes(catchegories[i].catchegory)) {%>
                                     checked
                                 <% } %>
-                                <label for="<%= catchegories[i].catchegory %>"><%= availableCatchegories[i].catchegory %></label>
+                                <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
                             </div>
                         <% } %>
                     </div>
                     <button type="button" class="likes">Likes: </button><%= el.likes %>
                     <span>Comments: <%= el.commentsLength %></span>
                     <% if (user.userName === el.postedBy.userName) {%>
-                        <button class="edit">Edit Post</button>
+                        <button class="edit" type="submit">Edit Post</button>
                         <button class="del"> Delete </button>
                     <% } %>
                     </div>
@@ -130,14 +132,18 @@
         </main>
 
         <aside>
+            <% if (targetUser.userName === user.userName){ %>
+                <h3>Your Catchegories</h3>
+            <% } else { %>
             <h3><%= targetUser.userName %>'s Catchegories</h3>
+            <% } %>
             <% if (user.userName === 'guest') {%>
                 <span>(Signup/Login to edit your viewed catchegories)</span>
             <% } %>
             <hr>
             <div class="catchegories">
                 <form action="/users/omitCatchegory?_method=PUT" method="POST">
-                <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
+                <% for (let i = 0, len = catchegories.length; i < len; i++){ %>
                     <div>
                         <input type="checkbox" class="catchegory-selected" name="catchegory" value="<%= catchegories[i].catchegory %>" checked>
                         <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %> (<%= catchegories[i].count %>)</label>

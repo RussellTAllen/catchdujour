@@ -54,6 +54,10 @@ const CatchPostSchema = new mongoose.Schema({
   catchegories: {
     type: Array,
     default: []
+  },
+  catchLink: {
+    type: String,
+    default: 'none'
   }
 })
 

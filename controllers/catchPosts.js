@@ -180,7 +180,6 @@ module.exports = {
                 userId: req.user.id,
                 postedBy: req.user,
                 likes: 0,
-
                 date: new Date().toLocaleDateString('en-US', { 
                     year: "numeric",
                     month: "long",

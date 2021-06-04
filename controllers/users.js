@@ -27,7 +27,7 @@ module.exports = {
                 }
             })
 
-            res.redirect(`/catchPosts/${followedUserId}`)
+            res.redirect(`/catchPosts/${followedUser.userName}`)
         }catch(err){
             console.log(err)
         }
@@ -58,7 +58,7 @@ module.exports = {
                 }
             })
 
-            res.redirect(`/catchPosts/${followedUserId}`)
+            res.redirect(`/catchPosts/${followedUser.userName}`)
         }catch(err){
             console.log(err)
         }

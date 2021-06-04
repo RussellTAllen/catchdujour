@@ -58,7 +58,7 @@ exports.getSignup = (req, res) => {
   if (req.user) {
     console.log('redirecting to /')
     // return res.redirect('/catchPosts')
-    return res.redirect('/')
+    return res.redirect('/welcome')
   }
   res.render('signup', {
     title: 'Create Account'
@@ -99,7 +99,7 @@ exports.postSignup = (req, res, next) => {
           return next(err)
         }
         console.log('line 94 running...')
-        res.redirect('/')
+        res.redirect('/welcome')
       })
     })
   })

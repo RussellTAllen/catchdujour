@@ -39,7 +39,7 @@
     <section data-id="<%= catchPost._id %>">
         <h3><span class="catch-title"><%= catchPost.catchTitle %></span></h3>
         <h5>Posted by: 
-            <a href="/catchPosts/<%= catchPost.postedBy._id %>">
+            <a href="/catchPosts/<%= catchPost.postedBy.userName %>">
                 <em><%= catchPost.postedBy.userName %></em>
             </a> on <%= catchPost.date %>
         </h5>
@@ -90,7 +90,7 @@
         </div>
     <% } %>
 
-    <% if (user) {%>
+    <% if (user.userName !== 'guest') {%>
         <p>Hey <%= user.userName %>, you can comment and like</p>
         <form action="/catchPosts/<%= catchPost._id %>/comment/?_method=PUT" method="POST">
             <label for="text">Enter Comment here: </label>

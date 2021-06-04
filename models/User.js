@@ -12,14 +12,14 @@ const UserSchema = new mongoose.Schema({
       userId: String,
       userName: String
      },
-    { _id: false }
+    { _id: false },
   )],
   followedBy: [new mongoose.Schema(
     { 
       userId: String,
       userName: String
      },
-    { _id: false }
+    { _id: false },
   )],
   omittedCatchegories: {
     type: Array,

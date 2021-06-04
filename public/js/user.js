@@ -202,18 +202,11 @@ function editComment(){
     edit.addEventListener('click', confirmCommentEdit)
 
     async function confirmCommentEdit(e){
-        // console.log('confirm edit')
+        ////// These next three lines make 'Enter' submit the comment edit... not sure if I want this functionality
         // let eventKey = e.key
         // if (e.key == undefined) eventKey = 'Enter'
         // if (eventKey === 'Enter' && !e.shiftKey){
-            // const catchComment = this.parentNode.querySelector('.edit-comment-text')
-
-            // commentText.innerText = editCommentText.value
-
-            // Editing/refreshing DOM - a little hacky because it updates client-side before the DB
-            // editCommentText.replaceWith(commentText)
             edit.classList.remove('selected')
-            // edit.addEventListener('click', editComment)
 
             // Send PUT request to controller
             try{

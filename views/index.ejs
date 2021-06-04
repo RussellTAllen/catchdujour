@@ -34,7 +34,7 @@
                         <span>You are not following anyone</span> 
                     <% } else { %>
                     <% for (let i = 0, len = following.length; i < len; i++){ %>
-                        <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>
+                        <a href="/catchPosts/<%= following[i].userName %>"><%= following[i].userName %></a>
                     <% }} %>
                 </div>
             </div>

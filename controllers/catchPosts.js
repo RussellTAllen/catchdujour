@@ -97,18 +97,20 @@ module.exports = {
         try{
             // let user = await User.findById(req.params._id)
             let user = await User.findById(req.user._id)
-            let targetUser = await User.findById(req.params.id)
+            let targetUser = await User.findOne({ userName: req.params.userName })
             // if (targetUser === user) targetUser = { userName: 'guest', omittedCatchegories: [] }
             if (!user) user = { userName: 'guest', omittedCatchegories: [] }
+            console.log('user: '+user)
+            console.log('targetUser: '+targetUser.userName)
             let catchegories = await Catchegory.find()
             const availableCatchegories = catchegories
             if (!catchegories) catchegories = []
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
             catchegories.sort((a,b) => b.count - a.count)
-            console.log('catchegories on line 108: '+catchegories)
-            const catchPosts = await CatchPost.find({ userId: req.params.id }).sort({ _id: -1 })
+            // console.log('catchegories on line 108: '+catchegories)
+            const catchPosts = await CatchPost.find({ userId: targetUser._id }).sort({ _id: -1 })
             catchegories = catchegories.filter(cat => catchPosts.some(post => post.catchegories.includes(cat.catchegory)))
-            console.log('catchegories on line 111: '+catchegories)
+            // console.log('catchegories on line 111: '+catchegories)
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: user,
@@ -143,6 +145,7 @@ module.exports = {
             comment[0].text = req.body.catchComment
 
             post.save()
+            res.json('Edit comment success!')
         }catch(err){
             console.log(err)
         }

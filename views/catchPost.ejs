@@ -80,6 +80,7 @@
                 <hr>
                 <h4>User <%= comment.user.userName %> said: </h4>
                 <p class='comment-text'><%= comment.text %></p>
+                <textarea class="edit-comment-text hidden"><%= comment.text %></textarea>
                 <% if (user.userName === comment.user.userName) {%>
                     <button class='edit-comment'>Edit Comment</button>
                     <button class='del-comment'>Delete Comment</button>

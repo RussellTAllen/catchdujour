@@ -180,16 +180,20 @@ function editComment(){
     const commentId = this.parentNode.dataset.id
     const commentText = this.parentNode.querySelector('.comment-text')
     const edit = this.parentNode.querySelector('.edit-comment')
+    const editCommentText = this.parentNode.querySelector('.edit-comment-text')
 
     console.log('editComment function: ',catchPostId, commentId)
     
+    commentText.classList.add('hidden')
     edit.classList.add('selected')
+    editCommentText.classList.remove('hidden')
+
 
     // Turn comment into editable input field
-    const editCommentText = document.createElement('textarea')
-    editCommentText.classList.add('edit-catch-post')
-    editCommentText.innerText = commentText.textContent
-    commentText.replaceWith(editCommentText)
+    // const editCommentText = document.createElement('textarea')
+    // editCommentText.classList.add('edit-catch-post')
+    // editCommentText.innerText = commentText.textContent
+    // commentText.replaceWith(editCommentText)
 
 
     // Handle event listeners
@@ -198,17 +202,18 @@ function editComment(){
     edit.addEventListener('click', confirmCommentEdit)
 
     async function confirmCommentEdit(e){
-        let eventKey = e.key
-        if (e.key == undefined) eventKey = 'Enter'
-        if (eventKey === 'Enter' && !e.shiftKey){
-            const catchComment = document.querySelector('.edit-catch-post')
+        // console.log('confirm edit')
+        // let eventKey = e.key
+        // if (e.key == undefined) eventKey = 'Enter'
+        // if (eventKey === 'Enter' && !e.shiftKey){
+            // const catchComment = this.parentNode.querySelector('.edit-comment-text')
 
-            commentText.innerText = catchComment.value
+            // commentText.innerText = editCommentText.value
 
             // Editing/refreshing DOM - a little hacky because it updates client-side before the DB
-            editCommentText.replaceWith(commentText)
+            // editCommentText.replaceWith(commentText)
             edit.classList.remove('selected')
-            edit.addEventListener('click', editComment)
+            // edit.addEventListener('click', editComment)
 
             // Send PUT request to controller
             try{
@@ -218,13 +223,16 @@ function editComment(){
                     body: JSON.stringify({
                         'catchPostId': catchPostId,
                         'commentId': commentId,
-                        'catchComment': catchComment.value
+                        'catchComment': editCommentText.value
                     })
                 })
+                const data = await response.json()
+                console.log(data)
+                location.reload()
             }catch(err){
                 console.log(err)
             }
-        }
+        
     }
 
 }
@@ -236,8 +244,8 @@ function editComment(){
 // }
 
 async function deleteComment(){
-    // const c = confirm('You are about to delete this comment, would you like to continue?')
-    // if (c === false) return
+    const c = confirm('You are about to delete this comment, would you like to continue?')
+    if (c === false) return
     
     const catchPostId = this.parentNode.parentNode.dataset.id
     const commentId = this.parentNode.dataset.id
@@ -264,7 +272,7 @@ async function likeCatchPost(){
     const catchPostId = this.parentNode.dataset.id
     console.log('catchpostID: '+catchPostId)
     try{
-        const response = await fetch('catchPosts/likeCatchPost', {
+        const response = await fetch('../catchPosts/likeCatchPost', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({

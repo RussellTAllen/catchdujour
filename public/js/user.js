@@ -35,28 +35,27 @@ Array.from(unselectedCatchegory).forEach(el =>{
     el.addEventListener('change', selectCatchegory)
 })
 
-follow.addEventListener('click', unfollowRuss)
 followedBtn.addEventListener('click', toggleFollowedDropdown)
 
 
 // FUNCTIONS
-function unfollowRuss(){
-    console.log("REALLY?!?!")
-    if (targetUser.userName === 'RussellCatch'){
-        let c1 = confirm('Are you sure you want to do that?')
-        if (c1 === true) {
-            let c2 = confirm("You know I'm the guy that created this site, right?")
-        }else return
+// function unfollowRuss(){
+//     console.log("REALLY?!?!")
+//     if (targetUser.userName === 'RussellCatch'){
+//         let c1 = confirm('Are you sure you want to do that?')
+//         if (c1 === true) {
+//             let c2 = confirm("You know I'm the guy that created this site, right?")
+//         }else return
 
-        if (c2 === true){
-            let c3 = confirm("And you still don't want to hear from me?")
-        }else return
+//         if (c2 === true){
+//             let c3 = confirm("And you still don't want to hear from me?")
+//         }else return
 
-        if (c3 === true){
-            alert("Okay, well, that makes me sad, but your wish is granted.")
-        }
-    }
-}
+//         if (c3 === true){
+//             alert("Okay, well, that makes me sad, but your wish is granted.")
+//         }
+//     }
+// }
 
 function toggleFollowedDropdown(){
     console.log('toggling...')
@@ -127,6 +126,7 @@ function editCatchPost(){
     console.log('user.js says content contains: '+editContent.textContent.includes('\r\n'))
     // Turn title into editable input
     const editTitle = document.createElement('input')
+    editTitle.setAttribute('maxlength', '60')
     editTitle.classList.add('edit-catch-title')
     editTitle.value = postTitle.innerText
     postTitle.replaceWith(editTitle)
@@ -346,3 +346,5 @@ async function selectCatchegory(){
         console.log(err)
     }
 }
+
+console.log("Long Title, Long Title, Long Title, Long Title, Long Title,".length)

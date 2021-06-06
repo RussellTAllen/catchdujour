@@ -71,7 +71,12 @@
                     <a href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
                 <% } %>
 
-                <p class="catch-post-content"><%= el.catchContent %></p>
+                <% let content = el.catchContent %>
+                <% el.catchContent.length < 300 ? content = el.catchContent : content = el.catchContent.slice(0, 300) + '...' %>
+                <p class="catch-post-content"><%= content %></p>
+                <% if (content.length >= 300){ %>
+                    <a href="catchPosts/<%= el._id %>/catchPost" class="see-more">(See whole catch)</a>
+                <% } %>
                 <textarea class="edit-post-content hidden" name="catchContent"><%= el.catchContent %></textarea>
 
                 <% if (!el.catchegories[0]) { %>
@@ -136,6 +141,8 @@
             <% } %>
         </aside>
     </div>
+
+    <%- include('partials/footer') -%>
 
     <script src="js/main.js"></script>
     <% if (user.userName !== 'guest'){ %>

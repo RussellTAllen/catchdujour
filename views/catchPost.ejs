@@ -45,7 +45,7 @@
         </h5>
 
         <p class="catch-post-content"><%= catchPost.catchContent %></p>
-        <textarea class="edit-post-content hidden"><%= catchPost.catchContent %></textarea> 
+        <textarea class="edit-post-content hidden" maxlength="30000"><%= catchPost.catchContent %></textarea> 
         
         <% if (!catchPost.catchegories[0]) { %>
             <p class="post-catchegories">No catchegories selected.</p>
@@ -100,6 +100,8 @@
     <% }else{ %>
         <p><a href="/signup">Sign up</a> or <a href="/login">Login</a> to comment</p>
     <% } %>
+
+    <%- include('partials/footer') -%>
     
     <script src="../../js/main.js"></script>
     <% if (user.userName !== 'guest'){ %>

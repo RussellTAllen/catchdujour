@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Catch du Jour!</title>
+</head>
+<body>
+    <h1>Bugs & Suggestions Form</h1>
+    <form action="/users/bug" method="POST">
+        <select name="bugsAndSuggestions" id="bugsAndSuggestions">\
+            <option value="">--Please choose an option--</option>
+            <option value="bug">Bug</option>
+            <option value="suggestion">Suggestion</option>
+            <option value="comment">Comment</option>
+        </select>
+        <textarea name="text"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+
+
+<%- include('/partials/footer') -%>

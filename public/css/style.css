@@ -133,6 +133,9 @@ aside input{
 .edit-catch-title{
   background: rgb(197, 197, 255);
 }
+.see-more{
+  margin: 2px 0;
+}
 .followed-by-content,
 .followed-content{
   position: absolute;
@@ -180,6 +183,12 @@ textarea.catch-content{
 aside span{
   font-size: 10px;
   margin: 0 10px;
+}
+footer{
+  text-align: center;
+}
+footer a{
+  display: block;
 }
 
 

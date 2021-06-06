@@ -16,9 +16,9 @@
     <h2>Logged in user: <%= user.userName %></h2>
 
     <form action="/catchPosts/createCatchPost" method="POST">
-        <input class="catch-title" type="text" placeholder="Enter Catch Title" name="catchTitle">
-        <input class="catch-link" type="text" placeholder="Enter URL link (Optional)" name="catchLink">
-        <textarea class="catch-content" placeholder="Enter Catch Content" name="catchContent"></textarea>
+        <input class="catch-title" type="text" placeholder="Enter Catch Title" name="catchTitle" maxlength="60">
+        <input class="catch-link" type="text" placeholder="Enter URL link (Optional)" name="catchLink" maxlength="200">
+        <textarea class="catch-content" placeholder="Enter Catch Content" name="catchContent" maxlength="30000"></textarea>
         
         <div class="catchegories">
         <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
@@ -30,5 +30,8 @@
         </div>
         <input type="submit">
     </form>
+
+    <%- include('partials/footer') -%>
+    
 </body>
 </html>

@@ -70,7 +70,6 @@ exports.postSignup = (req, res, next) => {
   if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: 'Please enter a valid email address.' })
   if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ msg: 'Password must be at least 8 characters long' })
   if (req.body.password !== req.body.confirmPassword) validationErrors.push({ msg: 'Passwords do not match' })
-
   if (validationErrors.length) {
     req.flash('errors', validationErrors)
     return res.redirect('../signup')
@@ -80,7 +79,19 @@ exports.postSignup = (req, res, next) => {
   const user = new User({
     userName: req.body.userName,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    startDate: new Date().toLocaleDateString('en-US', { 
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }),
+    following: [
+      { 
+        userId: '60bab9646147134d4cb28f02',
+        userName: 'RussellCatch'
+       }]
   })
 
   User.findOne({$or: [

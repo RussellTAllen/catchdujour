@@ -7,6 +7,17 @@ const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
+  admin: {
+    type: Boolean,
+    default: false
+  },
+  moderator: {
+    type: Boolean,
+    default: false
+  },
+  startDate: {
+    type: String
+  },
   following: [new mongoose.Schema(
     { 
       userId: String,
@@ -23,12 +34,16 @@ const UserSchema = new mongoose.Schema({
   )],
   omittedCatchegories: {
     type: Array,
-    default: []
+    default: ['nsfw']
+  },
+  tags: {
+    type: Array,
+    default: ['founder']
   },
   preferredSort: {
     type: String,
     default: 'new'
-  }
+  },
 })
 
 // Password hash middleware. 

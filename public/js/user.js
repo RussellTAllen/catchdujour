@@ -6,6 +6,7 @@ const editBtn = document.querySelectorAll('.edit')
 const editCommentBtn = document.querySelectorAll('.edit-comment')
 const deleteCommentBtn = document.querySelectorAll('.del-comment')
 const likeBtn = document.querySelectorAll('.likes')
+const follow = document.querySelector('#follow')
 const followedBtn = document.querySelector('#followed-btn')
 const followedContent = document.querySelector('.followed-content')
 const selectedCatchegory = document.querySelectorAll('.catchegory-selected')
@@ -34,10 +35,29 @@ Array.from(unselectedCatchegory).forEach(el =>{
     el.addEventListener('change', selectCatchegory)
 })
 
+follow.addEventListener('click', unfollowRuss)
 followedBtn.addEventListener('click', toggleFollowedDropdown)
 
 
 // FUNCTIONS
+function unfollowRuss(){
+    console.log("REALLY?!?!")
+    if (targetUser.userName === 'RussellCatch'){
+        let c1 = confirm('Are you sure you want to do that?')
+        if (c1 === true) {
+            let c2 = confirm("You know I'm the guy that created this site, right?")
+        }else return
+
+        if (c2 === true){
+            let c3 = confirm("And you still don't want to hear from me?")
+        }else return
+
+        if (c3 === true){
+            alert("Okay, well, that makes me sad, but your wish is granted.")
+        }
+    }
+}
+
 function toggleFollowedDropdown(){
     console.log('toggling...')
     followedContent.classList.toggle('hidden')

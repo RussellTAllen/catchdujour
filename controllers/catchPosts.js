@@ -141,6 +141,8 @@ module.exports = {
     createCatchPost: async (req, res) => {
         try{
             if (!req.body.catchLink) req.body.catchLink = 'none'
+            if (!req.body.catchegories) req.body.catchegories = []
+            if (req.body.createCatchegory) req.body.catchegories.push(req.body.createCatchegory)
 
             console.log(req.body.catchLink)
             await Catchegory.updateMany( { catchegory: req.body.catchegories },
@@ -230,10 +232,10 @@ module.exports = {
             if (catchegories.every(cat => !cat.catchegory.includes(req.body.createCatchegory.toLowerCase().trim()))){
                 await Catchegory.create({
                         catchegory: req.body.createCatchegory.toLowerCase().trim(), 
-                        count: 0,
+                        count: 1,
                 })
                 console.log('Catchegory has been created!')
-                res.redirect('/catchProfile')
+                // res.redirect('/createCatchPage')
             }
         }catch(err){
             console.log(err)

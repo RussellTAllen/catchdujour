@@ -84,6 +84,11 @@
                 <% } else { %>
                     <p class="post-catchegories">Catchegories: <%= el.catchegories.join(', ') %></p>
                 <% } %>
+
+                <% if (user.userName === el.postedBy.userName) {%>
+                    <button class="edit" type="submit">Edit Post</button>
+                    <button class="del"> Delete </button>
+                <% } %>
                 <div class="edit-post-catchegories hidden">
                     <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
                         <div>
@@ -95,16 +100,9 @@
                         </div>
                     <% } %>
                 </div>
-                <% if (user !== 'guest') {%>
-                    <button type="button" class="likes">Likes: </button><%= el.likes %>
-                <% }else{%>
-                    <span>Likes: <%= el.likes %></span>
-                <% } %>
-                <span>Comments: <%= el.comments.length %></span>
-                <% if (user.userName === el.postedBy.userName) {%>
-                    <button class="edit" type="submit">Edit Post</button>
-                    <button class="del"> Delete </button>
-                <% } %>
+                <button type="button" class="likes">Likes: </button><%= el.likes %>
+                <div>Comments: <%= el.comments.length %></div>
+
             </div>
             <% }) %>    
         </main>

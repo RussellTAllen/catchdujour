@@ -53,6 +53,11 @@
             <p class="post-catchegories">Catchegories: <%= catchPost.catchegories.join(', ') %></p>
         <% } %>
 
+        <% if (user.userName === catchPost.postedBy.userName) {%>
+            <button class="edit" type="submit">Edit Post</button>
+            <span>If you wish to delete this post, do so from your <a href="/catchProfile">profile page</a>.</span>
+        <% } %>
+        
         <div class="edit-post-catchegories hidden">
             <% for (let i = 0, len = availableCatchegories.length; i < len; i++) {%>
                 <div>
@@ -68,10 +73,7 @@
 
 
         <span>Likes: <%= catchPost.likes %></span>
-        <% if (user.userName === catchPost.postedBy.userName) {%>
-            <button class="edit" type="submit">Edit Post</button>
-            <span>If you wish to delete this post, do so from your <a href="/catchProfile">profile page</a>.</span>
-        <% } %>
+
     </section>
     <hr>
     <h2>Comments:</h2>

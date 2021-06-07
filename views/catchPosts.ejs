@@ -103,15 +103,6 @@
                             <% } %>
                         </div>
                     </div>
-
-
-                    <div>
-                        <h3>Which catchegory would you like to create?</h3>
-                        <form action="/catchPosts/createCatchegory?_method=PUT" method="POST">
-                            <input type="text" name="createCatchegory">
-                            <input type="submit">
-                        </form>
-                    </div>
                     <% } %>
             <% } %>
             <!-- ------------------------------------------------------------ -->
@@ -136,6 +127,10 @@
                     <%} else { %>
                         <p class="post-catchegories">Catchegories: <%= el.catchegories.join(', ') %></p>
                     <% } %>
+                    <% if (user.userName === el.postedBy.userName) {%>
+                        <button class="edit" type="submit">Edit Post</button>
+                        <button class="del"> Delete </button>
+                    <% } %>
                     <div class="edit-post-catchegories hidden">
                         <% for (let i = 0, len = availableCatchegories.length; i < len; i++) {%>
                             <div>
@@ -149,10 +144,7 @@
                     </div>
                     <button type="button" class="likes">Likes: </button><%= el.likes %>
                     <span>Comments: <%= el.commentsLength %></span>
-                    <% if (user.userName === el.postedBy.userName) {%>
-                        <button class="edit" type="submit">Edit Post</button>
-                        <button class="del"> Delete </button>
-                    <% } %>
+
                     </div>
             <% }) %>    
             </ul>

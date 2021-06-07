@@ -12,6 +12,7 @@ const followedContent = document.querySelector('.followed-content')
 const selectedCatchegory = document.querySelectorAll('.catchegory-selected')
 const unselectedCatchegory = document.querySelectorAll('.catchegory-unselected')
 
+
 // EVENT LISTENERS
 Array.from(deleteBtn).forEach(el =>{
     el.addEventListener('click', deleteCatchPost)
@@ -38,6 +39,7 @@ Array.from(unselectedCatchegory).forEach(el =>{
 followedBtn.addEventListener('click', toggleFollowedDropdown)
 
 
+
 // FUNCTIONS
 // function unfollowRuss(){
 //     console.log("REALLY?!?!")
@@ -56,6 +58,8 @@ followedBtn.addEventListener('click', toggleFollowedDropdown)
 //         }
 //     }
 // }
+
+
 
 function toggleFollowedDropdown(){
     console.log('toggling...')
@@ -122,6 +126,7 @@ function editCatchPost(){
     const edit = this.parentNode.querySelector('.edit')
 
     edit.classList.add('selected')
+    edit.innerText = "Submit Edit"
 
     console.log('user.js says content contains: '+editContent.textContent.includes('\r\n'))
     // Turn title into editable input
@@ -340,5 +345,3 @@ async function selectCatchegory(){
         console.log(err)
     }
 }
-
-console.log("Long Title, Long Title, Long Title, Long Title, Long Title,".length)

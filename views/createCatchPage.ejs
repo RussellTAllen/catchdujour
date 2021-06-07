@@ -20,6 +20,7 @@
         <input class="catch-link" type="text" placeholder="Enter URL link (Optional)" name="catchLink" maxlength="200">
         <textarea class="catch-content" placeholder="Enter Catch Content" name="catchContent" maxlength="30000" required></textarea>
         
+
         <div class="catchegories">
         <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
             <div>
@@ -27,11 +28,15 @@
                 <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
             </div>
         <% } %>
+            <div class="create-catchegory">
+                <input type="checkbox" class="catchegory-options">
+                <input type="text" id="new-catchegory" name="createCatchegory" placeholder="Create a new Catchegory">
+            </div>
         </div>
-        <input type="submit">
+        <button id="create-catch" type="submit">Submit</button>
     </form>
 
     <%- include('partials/footer') -%>
-    
+    <script src="js/createCatch.js"></script> 
 </body>
 </html>

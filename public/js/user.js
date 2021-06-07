@@ -156,8 +156,8 @@ function editCatchPost(){
         // let eventKey = e.key
         // if (e.key == undefined) eventKey = 'Enter'
         // if (eventKey === 'Enter' && !e.shiftKey){
-            const catchContent = document.querySelector('.edit-post-content')
-            const catchTitle = document.querySelector('.edit-catch-title')
+            const catchContent = this.parentNode.querySelector('.edit-post-content')
+            const catchTitle = this.parentNode.querySelector('.edit-catch-title')
             const oldPostCatchegories = catchContent.parentNode.querySelector('.post-catchegories').innerText.slice(14).split(', ')
             let postCatchegoriesChildren = editPostCatchegories.children
 
@@ -217,45 +217,31 @@ function editComment(){
     editCommentText.classList.remove('hidden')
 
 
-    // Turn comment into editable input field
-    // const editCommentText = document.createElement('textarea')
-    // editCommentText.classList.add('edit-catch-post')
-    // editCommentText.innerText = commentText.textContent
-    // commentText.replaceWith(editCommentText)
-
-
     // Handle event listeners
-    window.addEventListener('keypress', confirmCommentEdit)
+    // window.addEventListener('keypress', confirmCommentEdit)
     edit.removeEventListener('click', editComment)
     edit.addEventListener('click', confirmCommentEdit)
 
     async function confirmCommentEdit(e){
-        ////// These next three lines make 'Enter' submit the comment edit... not sure if I want this functionality
-        // let eventKey = e.key
-        // if (e.key == undefined) eventKey = 'Enter'
-        // if (eventKey === 'Enter' && !e.shiftKey){
-            edit.classList.remove('selected')
-
-            // Send PUT request to controller
-            try{
-                const response = await fetch ('../../catchPosts/editComment', {
-                    method: 'put',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        'catchPostId': catchPostId,
-                        'commentId': commentId,
-                        'catchComment': editCommentText.value
-                    })
+        edit.classList.remove('selected')
+        // Send PUT request to controller
+        try{
+            const response = await fetch ('../../catchPosts/editComment', {
+                method: 'put',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    'catchPostId': catchPostId,
+                    'commentId': commentId,
+                    'catchComment': editCommentText.value
                 })
-                const data = await response.json()
-                console.log(data)
-                location.reload()
-            }catch(err){
-                console.log(err)
-            }
-        
+            })
+            const data = await response.json()
+            console.log(data)
+            location.reload()
+        }catch(err){
+            console.log(err)
+        }
     }
-
 }
 
 // Function to auto-grow textarea element based on text within...

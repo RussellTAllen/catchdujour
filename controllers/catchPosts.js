@@ -240,9 +240,9 @@ module.exports = {
         }
     },
     updateCatchegoryCount: async (req, res)=>{
+        console.log('newPostCatchegories: '+req.body.newPostCatchegories)
+        console.log('oldPostCatchegories: '+req.body.oldPostCatchegories)
         try{
-            const catchPost = CatchPost.findById(req.body.catchPostId)
-
             await Catchegory.updateMany({ catchegory: req.body.newPostCatchegories },
                 {
                 $inc: { count: 1 }
@@ -274,7 +274,8 @@ module.exports = {
         try{
             await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },
                 {
-                    $pull: {"comments": { _id: req.body.commentId }}
+                    $pull: { comments: { _id: req.body.commentId }},
+                    $inc: { commentsLength: -1 }
                 })
             console.log('Deleted Comment')
             res.json('Delete Comment')

@@ -124,6 +124,9 @@ aside input{
   max-height: 200px;
   white-space: pre-wrap;
 }
+.comment-text{
+  white-space: pre-wrap
+}
 .selected{
   background: rgb(197, 197, 255);
 }
@@ -179,6 +182,12 @@ textarea.catch-content{
   width: 450px;
   height: 350px;
   resize: none;
+}
+textarea.edit-comment-text
+textarea{
+  resize: none;
+  width: 600px;
+  height: 350px;
 }
 aside span{
   font-size: 10px;

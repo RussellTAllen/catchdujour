@@ -19,11 +19,11 @@ module.exports = {
         }
     },
     getIndex: async (req,res)=>{
-        if (!req.user) req.user = { userName: 'guest' }
+        if (!req.user) req.user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
         
         try{
             let user = await User.findById(req.user._id)
-            if (!user) user = { userName: 'guest', omittedCatchegories: [] }
+            if (!user) user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
             let catchPosts = await CatchPost.find().sort({ _id: -1 })
             let catchegories = await Catchegory.find()
             if (!catchegories) catchegories = []
@@ -43,11 +43,11 @@ module.exports = {
         }
     },
     getIndexByMostLiked: async (req,res)=>{
-        if (!req.user) req.user = { userName: 'guest' }
+        if (!req.user) req.user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
 
         try{
             let user = await User.findById(req.user._id)
-            if (!user) user = { userName: 'guest', omittedCatchegories: [] }
+            if (!user) user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
             const catchPosts = await CatchPost.find().sort({ likes: -1 })
             let catchegories = await Catchegory.find()
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
@@ -65,11 +65,11 @@ module.exports = {
         }
     },
     getIndexByMostCommented: async (req,res)=>{
-        if (!req.user) req.user = { userName: 'guest' }
+        if (!req.user) req.user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
         
         try{
             let user = await User.findById(req.user._id)
-            if (!user) user = { userName: 'guest', omittedCatchegories: [] }
+            if (!user) user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
             const catchPosts = await CatchPost.find().sort({ commentsLength: -1 })
             let catchegories = await Catchegory.find()
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))

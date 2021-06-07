@@ -126,7 +126,7 @@
                 </form>
             </div>
       
-            <% if (user.userName !== 'guest' && user.omittedCatchegories.length > 0) {%>
+            <% if (user.omittedCatchegories.length > 0) {%>
             <h3>Unseen Catchegories</h3>
             <div class='omitted-catchegories'>
                 <form action="/users/omitCatchegory?_method=PUT" method="POST">

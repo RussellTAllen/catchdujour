@@ -45,7 +45,7 @@
         </h5>
 
         <p class="catch-post-content"><%= catchPost.catchContent %></p>
-        <textarea class="edit-post-content hidden" maxlength="30000"><%= catchPost.catchContent %></textarea> 
+        <textarea class="edit-post-content hidden" maxlength="30000" required><%= catchPost.catchContent %></textarea> 
         
         <% if (!catchPost.catchegories[0]) { %>
             <p class="post-catchegories">No catchegories selected.</p>
@@ -54,16 +54,18 @@
         <% } %>
 
         <div class="edit-post-catchegories hidden">
-            <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
+            <% for (let i = 0, len = availableCatchegories.length; i < len; i++) {%>
                 <div>
                     <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= availableCatchegories[i].catchegory %>"
-                    <% if (catchPost.catchegories.includes(catchegories[i].catchegory)) {%>
+                    <% if (catchPost.catchegories.includes(availableCatchegories[i].catchegory)) {%>
                         checked
                     <% } %>
-                    <label for="<%= catchegories[i].catchegory %>"><%= availableCatchegories[i].catchegory %></label>
+                    <label for="<%= availableCatchegories[i].catchegory %>"><%= availableCatchegories[i].catchegory %></label>
                 </div>
             <% } %>
         </div>
+
+
 
         <span>Likes: <%= catchPost.likes %></span>
         <% if (user.userName === catchPost.postedBy.userName) {%>

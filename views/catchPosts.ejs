@@ -10,7 +10,37 @@
 <body>
     <!--% console.log('user from ejs' +user) -->
     <!--% console.log('catchpost.postedby.username ' +catchPosts[0]?.postedBy.userName) %-->
-    <header>
+    <header class="container">
+        <div class='intro'>
+            <h1>Welcome to Catch du Jour!</h1>
+            <h3>Read/interact/create the tastiest catch of the day!</h3>
+        </div>
+
+        <nav>
+        <% if (user.userName === 'guest' || !user) {%>
+            <a href="/login"> Login</a>
+            <a href="/signup"> Signup</a>
+        <% } else {%>
+            <h5><%= user.userName %> is logged in</h5>
+            <a href="/logout">Logout</a>
+            <a href="/catchProfile">Go To Your Profile</a>
+            <div class="followed-container">
+                <button id="followed-btn">Followed (<%= following.length %>)</button>
+                <div id="followed-dropdown" class="followed-content hidden">
+                    <% if (following.length === 0) {%>
+                        <span>You are not following anyone</span> 
+                    <% } else { %>
+                    <% for (let i = 0, len = following.length; i < len; i++){ %>
+                        <a href="/catchPosts/<%= following[i].userName %>"><%= following[i].userName %></a>
+                    <% }} %>
+                </div>
+            </div>
+                
+        <% } %>
+        </nav>
+    </header>
+    <hr>
+    <div>
         <a href="/">Back to Main</a>
         <% if (user.userName === 'guest' || !user) {%>
             <a href="/login"> Login</a>
@@ -34,7 +64,7 @@
                 </div>
             </div>
             <% } %>
-    </header>
+    </div>
 
     <% if (user.userName !== 'guest') {%>
         <% catchPosts = catchPosts.filter(post => post.catchegories?.every(cat => !user.omittedCatchegories.includes(cat))) %>

@@ -127,6 +127,7 @@ function editCatchPost(){
     // Turn title into editable input
     const editTitle = document.createElement('input')
     editTitle.setAttribute('maxlength', '60')
+    editTitle.setAttribute('required', 'true')
     editTitle.classList.add('edit-catch-title')
     editTitle.value = postTitle.innerText
     postTitle.replaceWith(editTitle)
@@ -147,18 +148,25 @@ function editCatchPost(){
     postCatchegories.classList.add('hidden')
 
     // Handle event listeners
-    window.addEventListener('keypress', confirmEdit)
+    // window.addEventListener('keypress', confirmEdit)
     edit.removeEventListener('click', editCatchPost)
     edit.addEventListener('click', confirmEdit)
     
     async function confirmEdit(e){
-        let eventKey = e.key
-        if (e.key == undefined) eventKey = 'Enter'
-        if (eventKey === 'Enter' && !e.shiftKey){
+        // let eventKey = e.key
+        // if (e.key == undefined) eventKey = 'Enter'
+        // if (eventKey === 'Enter' && !e.shiftKey){
             const catchContent = document.querySelector('.edit-post-content')
             const catchTitle = document.querySelector('.edit-catch-title')
             const oldPostCatchegories = catchContent.parentNode.querySelector('.post-catchegories').innerText.slice(14).split(', ')
             let postCatchegoriesChildren = editPostCatchegories.children
+
+            console.log('length: ' +catchContent.value.length)
+
+            if (catchContent.value.length === 0 || catchTitle.value.length === 0){
+                alert('Catch title and content must not be blank')
+                return
+            }
             
             let newPostCatchegories = []
             for (let i = 0, len = postCatchegoriesChildren.length; i < len; i++){
@@ -190,7 +198,7 @@ function editCatchPost(){
             }catch(err){
                 console.log(err)
             }
-        }
+        // }
     }
 }
 

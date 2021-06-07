@@ -24,7 +24,7 @@ module.exports = {
 
         try{
             let user = await User.findById(req.user._id)
-            if (!user) user = { userName: 'guest', omittedCatchegories: [] }
+            if (!user) user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
             const catchPost = await CatchPost.findById({ _id: req.params.id })
             let catchegories = await Catchegory.find()
             const availableCatchegories = catchegories
@@ -73,7 +73,7 @@ module.exports = {
             let user = await User.findById(req.user._id)
             let targetUser = await User.findOne({ userName: req.params.userName })
             console.log('controller - targetUser: '+targetUser)
-            if (!user) user = { userName: 'guest', omittedCatchegories: [] }
+            if (!user) user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
             let catchegories = await Catchegory.find()
             const availableCatchegories = catchegories
             if (!catchegories) catchegories = []

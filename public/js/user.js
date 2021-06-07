@@ -77,6 +77,7 @@ async function deleteCatchPost(){
     const newPostCatchegories = []
 
     try{
+        await updateCatchegoryCount(oldPostCatchegories, newPostCatchegories)
         const response = await fetch('../catchPosts/deleteCatchPost', {
             method: 'delete',
             headers: {'Content-type': 'application/json'},
@@ -84,7 +85,6 @@ async function deleteCatchPost(){
                 'catchPostId': catchPostId,
             })
         })
-        updateCatchegoryCount(oldPostCatchegories, newPostCatchegories)
         const data = await response.json()
         console.log('data: '+ data)
     }catch(err){
@@ -176,10 +176,10 @@ function editCatchPost(){
                 }
             }
             
-            updateCatchegoryCount(oldPostCatchegories, newPostCatchegories)
-       
+            
             // Send PUT request to controller
             try{
+                await updateCatchegoryCount(oldPostCatchegories, newPostCatchegories)
                 const response = await fetch ('../../catchPosts/editCatchPost', {
                     method: 'put',
                     headers: {'Content-Type': 'application/json'},

@@ -13,35 +13,8 @@
         <% catchPosts = catchPosts.filter(post => post.catchegories?.every(cat => !user.omittedCatchegories.includes(cat))) %>
     <% } %>
     
-    <header class="container">
-        <div class='intro'>
-            <h1>Welcome to Catch du Jour!</h1>
-            <h3>Read/interact/create the tastiest catch of the day!</h3>
-        </div>
+    <%- include('partials/header') -%>
 
-        <nav>
-        <% if (user.userName === 'guest' || !user) {%>
-            <a href="/login"> Login</a>
-            <a href="/signup"> Signup</a>
-        <% } else {%>
-            <h5><%= user.userName %> is logged in</h5>
-            <a href="/logout">Logout</a>
-            <a href="/catchProfile">Go To Your Profile</a>
-            <div class="followed-container">
-                <button id="followed-btn">Followed (<%= following.length %>)</button>
-                <div id="followed-dropdown" class="followed-content hidden">
-                    <% if (following.length === 0) {%>
-                        <span>You are not following anyone</span> 
-                    <% } else { %>
-                    <% for (let i = 0, len = following.length; i < len; i++){ %>
-                        <a href="/catchPosts/<%= following[i].userName %>"><%= following[i].userName %></a>
-                    <% }} %>
-                </div>
-            </div>
-                
-        <% } %>
-        </nav>
-    </header>
 
     <div class="container">
         <main>
@@ -86,8 +59,10 @@
                 <% } %>
 
                 <% if (user.userName === el.postedBy.userName) {%>
+                <div class="edit-and-delete">
                     <button class="edit" type="submit">Edit Post</button>
                     <button class="del"> Delete </button>
+                </div>
                 <% } %>
                 <div class="edit-post-catchegories hidden">
                     <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
@@ -100,7 +75,7 @@
                         </div>
                     <% } %>
                 </div>
-                <button type="button" class="likes">Likes: </button><%= el.likes %>
+                <button type="button" class="likes">Likes: </button><span><%= el.likes %></span>
                 <div>Comments: <%= el.comments.length %></div>
 
             </div>

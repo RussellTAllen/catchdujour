@@ -7,103 +7,89 @@
     <link rel="stylesheet" href="../../css/style.css">
     <title>Document</title>
 </head>
-<header>
-    <a href="/">Back to Main</a>
-    <% if (user === 'guest' || !user) {%>
-        <a href="/login"> Login</a>
-        <a href="/signup"> Signup</a>
-    <% } else {%>
-        <a href="/logout">Logout</a>
-        <a href="/catchProfile">Go To Your Profile</a>
-        <a href="/catchPosts">Create Your Own Catch</a>
-    <% } %>
 
-    <% if (user.userName !== 'guest') {%>
-        <div class="followed-container">
-            <button id="followed-btn">Followed (<%= following.length %>)</button>
-            <div id="followed-dropdown" class="followed-content hidden">
-                <% for (let i = 0, len = following.length; i < len; i++){ %>
-                    <a href="/catchPosts/<%= following[i].userId %>"><%= following[i].userName %></a>
-                <% } %>
-            </div>
-        </div>
-    <% } %>
-</header>
+<%- include('partials/header') -%>
+
+
 
 <body>
-    <h1> One Catch Post, Plz!</h1>
-    <% if (user.userName !== 'guest') {%>
-        <h2>Logged in User: <%= user.userName %></h2>
-    <% } %>
-    <hr>
-    <section data-id="<%= catchPost._id %>">
-        <h3><span class="catch-title"><%= catchPost.catchTitle %></span></h3>
-        <h5>Posted by: 
-            <a href="/catchPosts/<%= catchPost.postedBy.userName %>">
-                <em><%= catchPost.postedBy.userName %></em>
-            </a> on <%= catchPost.date %>
-        </h5>
+    <div class="container">
+    <main>
+        <section data-id="<%= catchPost._id %>" class="catch-post single-catch">
+            <h3><span class="catch-title"><%= catchPost.catchTitle %></span></h3>
+            <h5>Posted by: 
+                <a href="/catchPosts/<%= catchPost.postedBy.userName %>">
+                    <em><%= catchPost.postedBy.userName %></em>
+                </a> on <%= catchPost.date %>
+            </h5>
 
-        <p class="catch-post-content"><%= catchPost.catchContent %></p>
-        <textarea class="edit-post-content hidden" maxlength="30000" required><%= catchPost.catchContent %></textarea> 
-        
-        <% if (!catchPost.catchegories[0]) { %>
-            <p class="post-catchegories">No catchegories selected.</p>
-        <% } else { %>
-            <p class="post-catchegories">Catchegories: <%= catchPost.catchegories.join(', ') %></p>
-        <% } %>
+            <p class="catch-post-content"><%= catchPost.catchContent %></p>
+            <textarea class="edit-post-content hidden" maxlength="30000" required><%= catchPost.catchContent %></textarea> 
+            
+            <% if (!catchPost.catchegories[0]) { %>
+                <p class="post-catchegories">No catchegories selected.</p>
+            <% } else { %>
+                <p class="post-catchegories">Catchegories: <%= catchPost.catchegories.join(', ') %></p>
+            <% } %>
 
-        <% if (user.userName === catchPost.postedBy.userName) {%>
-            <button class="edit" type="submit">Edit Post</button>
-            <span>If you wish to delete this post, do so from your <a href="/catchProfile">profile page</a>.</span>
-        <% } %>
-        
-        <div class="edit-post-catchegories hidden">
-            <% for (let i = 0, len = availableCatchegories.length; i < len; i++) {%>
-                <div>
-                    <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= availableCatchegories[i].catchegory %>"
-                    <% if (catchPost.catchegories.includes(availableCatchegories[i].catchegory)) {%>
-                        checked
-                    <% } %>
-                    <label for="<%= availableCatchegories[i].catchegory %>"><%= availableCatchegories[i].catchegory %></label>
+            <% if (user.userName === catchPost.postedBy.userName) {%>
+            <div class="edit-and-delete">
+                <button class="edit" type="submit">Edit Post</button>
+            </div>
+            <% } %>
+
+            <div class="edit-post-catchegories hidden">
+                <% for (let i = 0, len = availableCatchegories.length; i < len; i++) {%>
+                    <div>
+                        <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= availableCatchegories[i].catchegory %>"
+                        <% if (catchPost.catchegories.includes(availableCatchegories[i].catchegory)) {%>
+                            checked
+                        <% } %>
+                        <label for="<%= availableCatchegories[i].catchegory %>"><%= availableCatchegories[i].catchegory %></label>
+                    </div>
+                <% } %>
+            </div>
+
+            <button type="button" class="likes">Likes: </button><span><%= catchPost.likes %></span>
+
+        </section>
+        <hr>
+        <div class="comments">
+            <h2>Comments:</h2>
+            <% if (catchPost.comments.length > 0) { %>
+                <div data-id="<%= catchPost._id %>">
+                <% catchPost.comments.forEach(comment => {%>
+                    <div class="comment" data-id="<%= comment._id %>">
+                        <hr>
+                        <h4>User <%= comment.user.userName %> said: </h4>
+                        <p class='comment-text'><%= comment.text %></p>
+                        <textarea class="edit-comment-text hidden"><%= comment.text %></textarea>
+                        <% if (user.userName === comment.user.userName) {%>
+                            <button class='edit-comment'>Edit Comment</button>
+                            <button class='del-comment'>Delete Comment</button>
+                        <% } %>
+                    </div>
+                <% }) %>
                 </div>
+            <% } else { %>
+                <p>There are no comments on this catch.</p>
             <% } %>
         </div>
 
-
-
-        <span>Likes: <%= catchPost.likes %></span>
-
-    </section>
-    <hr>
-    <h2>Comments:</h2>
-    <% if (catchPost.comments.length > 0) { %>
-        <div data-id="<%= catchPost._id %>">
-        <% catchPost.comments.forEach(comment => {%>
-            <div class="comment" data-id="<%= comment._id %>">
-                <hr>
-                <h4>User <%= comment.user.userName %> said: </h4>
-                <p class='comment-text'><%= comment.text %></p>
-                <textarea class="edit-comment-text hidden"><%= comment.text %></textarea>
-                <% if (user.userName === comment.user.userName) {%>
-                    <button class='edit-comment'>Edit Comment</button>
-                    <button class='del-comment'>Delete Comment</button>
-                <% } %>
+        <% if (user.userName !== 'guest') {%>
+            <hr>
+            <div class="comment-box">
+                <form action="/catchPosts/<%= catchPost._id %>/comment/?_method=PUT" method="POST">
+                    <label for="text">Enter Comment here: </label>
+                        <textarea name="text" class="comment-area"></textarea>
+                    <input type="submit">
+                </form>
             </div>
-        <% }) %>
-        </div>
-    <% } %>
-
-    <% if (user.userName !== 'guest') {%>
-        <p>Hey <%= user.userName %>, you can comment and like</p>
-        <form action="/catchPosts/<%= catchPost._id %>/comment/?_method=PUT" method="POST">
-            <label for="text">Enter Comment here: </label>
-                <textarea name="text"></textarea>
-            <input type="submit">
-        </form>
-    <% }else{ %>
-        <p><a href="/signup">Sign up</a> or <a href="/login">Login</a> to comment</p>
-    <% } %>
+        <% }else{ %>
+            <p><a href="/signup">Sign up</a> or <a href="/login">Login</a> to comment</p>
+        <% } %>
+    </main>
+    </div>
 
     <%- include('partials/footer') -%>
     

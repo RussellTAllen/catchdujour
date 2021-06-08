@@ -76,8 +76,8 @@ async function deleteCatchPost(){
     const c = confirm('You are about to delete this post, would you like to continue?')
     if (c === false) return
     
-    const catchPostId = this.parentNode.dataset.id
-    const oldPostCatchegories = this.parentNode.querySelector('.post-catchegories').innerText.slice(14).split(', ')
+    const catchPostId = this.parentNode.parentNode.dataset.id
+    const oldPostCatchegories = this.parentNode.parentNode.querySelector('.post-catchegories').innerText.slice(14).split(', ')
     const newPostCatchegories = []
 
     try{
@@ -117,12 +117,12 @@ async function updateCatchegoryCount(oldPostCatchegories, newPostCatchegories){
 // Could refactor using contenteditable - or just wait to refactor with React
 function editCatchPost(){
     // DOM variables
-    const catchPostId = this.parentNode.dataset.id
-    const postTitle = this.parentNode.querySelector('.catch-title')
-    const postContent = this.parentNode.querySelector('.catch-post-content')
-    const editContent = this.parentNode.querySelector('.edit-post-content')
-    const postCatchegories = this.parentNode.querySelector('.post-catchegories')
-    const editPostCatchegories = this.parentNode.querySelector('.edit-post-catchegories')
+    const catchPostId = this.parentNode.parentNode.dataset.id
+    const postTitle = this.parentNode.parentNode.querySelector('.catch-title')
+    const postContent = this.parentNode.parentNode.querySelector('.catch-post-content')
+    const editContent = this.parentNode.parentNode.querySelector('.edit-post-content')
+    const postCatchegories = this.parentNode.parentNode.querySelector('.post-catchegories')
+    const editPostCatchegories = this.parentNode.parentNode.querySelector('.edit-post-catchegories')
     const edit = this.parentNode.querySelector('.edit')
 
     edit.classList.add('selected')
@@ -161,8 +161,8 @@ function editCatchPost(){
         // let eventKey = e.key
         // if (e.key == undefined) eventKey = 'Enter'
         // if (eventKey === 'Enter' && !e.shiftKey){
-            const catchContent = this.parentNode.querySelector('.edit-post-content')
-            const catchTitle = this.parentNode.querySelector('.edit-catch-title')
+            const catchContent = this.parentNode.parentNode.querySelector('.edit-post-content')
+            const catchTitle = this.parentNode.parentNode.querySelector('.edit-catch-title')
             const oldPostCatchegories = catchContent.parentNode.querySelector('.post-catchegories').innerText.slice(14).split(', ')
             let postCatchegoriesChildren = editPostCatchegories.children
 
@@ -284,7 +284,7 @@ async function likeCatchPost(){
     const catchPostId = this.parentNode.dataset.id
     console.log('catchpostID: '+catchPostId)
     try{
-        const response = await fetch('../catchPosts/likeCatchPost', {
+        const response = await fetch('../../catchPosts/likeCatchPost', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({

@@ -18,6 +18,10 @@ const UserSchema = new mongoose.Schema({
   startDate: {
     type: String
   },
+  catchCount: {
+    type: Number,
+    default: 0
+  },
   following: [new mongoose.Schema(
     { 
       userId: String,

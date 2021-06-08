@@ -37,6 +37,7 @@ module.exports = {
                 user: user,
                 following: user.following,
                 catchegories: catchegories,
+                targetUser: 'none'
             })
         }catch(err){
             console.log(err)
@@ -58,7 +59,8 @@ module.exports = {
                 catchPosts: catchPosts, 
                 user: req.user,
                 following: user.following,
-                catchegories: catchegories
+                catchegories: catchegories,
+                targetUser: 'none'
             })
         }catch(err){
             console.log(err)
@@ -80,7 +82,8 @@ module.exports = {
                 catchPosts: catchPosts, 
                 user: req.user,
                 following: user.following,
-                catchegories: catchegories
+                catchegories: catchegories,
+                targetUser: 'none'
             })
         }catch(err){
             console.log(err)

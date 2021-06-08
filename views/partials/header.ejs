@@ -1,21 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catch du Jour!</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <header>
-        <h1>Catch your very own blog space!</h1>
-        <% if (user === 'guest' || !user) {%>
+    <header class="container">
+        <div class='intro'>
+            <a href="/">
+                <% if (targetUser === 'none'){ %>
+                <h1>Welcome to Catch du Jour!</h1>
+                <% } else { %>
+                <h1><%= targetUser.userName %>'s Catch Page!</h1>
+                <% } %>
+                <h3>Read/interact/create the tastiest catch of the day!</h3>
+            </a>
+        </div>
+
+        <nav>
+        <% if (user.userName === 'guest' || !user) {%>
             <a href="/login"> Login</a>
             <a href="/signup"> Signup</a>
         <% } else {%>
+            <h5><%= user.userName %> is logged in</h5>
             <a href="/logout">Logout</a>
-            <a href="/catchPosts">Create Your Own Post</a>
-        <% } %>
-
+            <a href="/catchProfile">Go To Your Profile</a>
+            <div class="followed-container">
+                <button id="followed-btn">Followed (<%= following.length %>)</button>
+                <div id="followed-dropdown" class="followed-content hidden">
+                    <% if (following.length === 0) {%>
+                        <span>You are not following anyone</span> 
+                    <% } else { %>
+                    <% for (let i = 0, len = following.length; i < len; i++){ %>
+                        <a href="/catchPosts/<%= following[i].userName %>"><%= following[i].userName %></a>
+                    <% }} %>
+                </div>
+            </div>
+            <% } %>
+        </nav>
     </header>
+    <hr>

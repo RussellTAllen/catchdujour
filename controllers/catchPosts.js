@@ -37,7 +37,8 @@ module.exports = {
                 catchegories: catchegories,
                 availableCatchegories: availableCatchegories,
                 user: user,
-                following: user.following
+                following: user.following,
+                targetUser: { userName: catchPost.postedBy.userName }
             })
         }catch(err){
             console.log(err)
@@ -166,6 +167,11 @@ module.exports = {
                     minute: "2-digit"
                 })
             })
+            await User.updateOne({ _id: req.user._id },
+                { 
+                $inc: { catchCount: 1 }
+                }
+            )
             console.log('CatchPost has been added!')
             res.redirect('/')
         }catch(err){
@@ -264,6 +270,11 @@ module.exports = {
         console.log(req.body.catchPostId)
         try{
             await CatchPost.findOneAndDelete({ _id:req.body.catchPostId })
+            await User.updateOne({ _id: req.user._id },
+                {
+                    $inc: { catchCount: -1 }
+                }
+            )
             console.log('Deleted CatchPost')
             res.json('Deleted Catchpost')
         }catch(err){

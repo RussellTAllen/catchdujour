@@ -159,13 +159,14 @@ module.exports = {
                 userId: req.user.id,
                 postedBy: req.user,
                 likes: 0,
-                date: new Date().toLocaleDateString('en-US', { 
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit"
-                })
+                date: new Date()
+                // .toLocaleDateString('en-US', { 
+                //     year: "numeric",
+                //     month: "long",
+                //     day: "numeric",
+                //     hour: "2-digit",
+                //     minute: "2-digit"
+                // })
             })
             await User.updateOne({ _id: req.user._id },
                 { 

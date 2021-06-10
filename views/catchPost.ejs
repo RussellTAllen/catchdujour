@@ -17,6 +17,7 @@
     <main>
         <h3>Date test: <%= catchPost.date %></h3>
         <h3>Date test: <%= catchPost.date.toLocaleDateString(undefined, {year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" }) %></h3>
+        <h3>Date test: <%= catchPost.date.toLocaleDateString(moment.tz.guess, {year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" }) %></h3>
 
         <section data-id="<%= catchPost._id %>" class="catch-post single-catch">
             <h3><span class="catch-title"><%= catchPost.catchTitle %></span></h3>

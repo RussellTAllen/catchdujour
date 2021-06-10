@@ -2,6 +2,7 @@ const User = require('../models/User')
 const CatchPost = require('../models/CatchPost')
 const Comment = require('../models/CatchPost')
 const Catchegory = require('../models/Catchegory')
+const moment = require('moment-timezone')
 
 
 
@@ -38,7 +39,8 @@ module.exports = {
                 availableCatchegories: availableCatchegories,
                 user: user,
                 following: user.following,
-                targetUser: { userName: catchPost.postedBy.userName }
+                targetUser: { userName: catchPost.postedBy.userName },
+                moment: moment
             })
         }catch(err){
             console.log(err)
@@ -298,3 +300,21 @@ module.exports = {
         }
     }
 }    
+
+console.log('catchposts.js')
+console.log('date ' + new Date().toLocaleDateString(moment.tz.guess, { 
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        }))
+console.log('moment ' +moment.tz.guess())
+
+// toLocaleString(undefined, { 
+//         year: "numeric",
+//         month: "long",
+//         day: "numeric",
+//         hour: "2-digit",
+//         minute: "2-digit"
+//     }))

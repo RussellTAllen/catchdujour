@@ -41,7 +41,7 @@
                         href="catchPosts/<%= el._id%>/catchPost">
                         <%= el.catchTitle %></a>
                 </h3>
-                <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(catchPost.date).fromNow() %></h5>
+                <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= catchPost.date %></h5>
 
                 <% if (el.catchLink !== 'none'){ %>
                     <a href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>

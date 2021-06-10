@@ -12,6 +12,8 @@
 
 <% catchPost.date = catchPost.date %>
 
+
+
 <body>
     <div class="container">
     <main>
@@ -19,6 +21,8 @@
         <h3>Date test: <%= catchPost.date.toLocaleDateString(undefined, {year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" }) %></h3>
         <h3>Date test: <%= catchPost.date.toLocaleDateString(undefined, {year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" }) %></h3>
         <h3>Date test: <%= moment.tz(catchPost.date, moment.tz.guess()) %></h3>
+        <h3>Date test: <%= moment.tz(catchPost.date, moment.tz.guess()).format('MMMM Do, YYYY, HH:MM:SS') %></h3>
+        <h3 id='date-test'></h3>
 
         <section data-id="<%= catchPost._id %>" class="catch-post single-catch">
             <h3><span class="catch-title"><%= catchPost.catchTitle %></span></h3>
@@ -102,5 +106,15 @@
     <% if (user.userName !== 'guest'){ %>
         <script src="../../js/user.js"></script>
     <% } %>
+
+    <script>
+        const date = new Intl.DateTimeFormat([], {
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        }).format(new Date('<%= catchPost.date %>'));
+
+        
+      
+        document.querySelector('#date-test').innerText = date;
+      </script>
 </body>
 </html>

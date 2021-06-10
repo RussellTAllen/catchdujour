@@ -1,6 +1,8 @@
 const CatchPost = require('../models/CatchPost')
 const User = require('../models/User')
 const Catchegory = require('../models/Catchegory')
+const moment = require('moment-timezone')
+
 
 
 module.exports = {
@@ -37,7 +39,8 @@ module.exports = {
                 user: user,
                 following: user.following,
                 catchegories: catchegories,
-                targetUser: 'none'
+                targetUser: 'none',
+                moment: moment
             })
         }catch(err){
             console.log(err)
@@ -60,7 +63,8 @@ module.exports = {
                 user: req.user,
                 following: user.following,
                 catchegories: catchegories,
-                targetUser: 'none'
+                targetUser: 'none',
+                moment: moment
             })
         }catch(err){
             console.log(err)
@@ -83,7 +87,8 @@ module.exports = {
                 user: req.user,
                 following: user.following,
                 catchegories: catchegories,
-                targetUser: 'none'
+                targetUser: 'none',
+                moment: moment
             })
         }catch(err){
             console.log(err)

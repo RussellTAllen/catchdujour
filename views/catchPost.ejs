@@ -10,19 +10,9 @@
 
 <%- include('partials/header') -%>
 
-<% catchPost.date = catchPost.date %>
-
-
-
 <body>
     <div class="container">
     <main>
-        <h3>Date test: <%= catchPost.date %></h3>
-        <h3>Date test: <%= catchPost.date.toLocaleDateString(undefined, {year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" }) %></h3>
-        <h3>Date test: <%= catchPost.date.toLocaleDateString(undefined, {year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" }) %></h3>
-        <h3>Date test: <%= moment.tz.guess() %></h3>
-        <h3>Date test: <%= moment.tz(catchPost.date, moment.tz.guess()) %></h3>
-        <h3>Date test: <%= moment.tz(catchPost.date, moment.tz.guess()).format('MMMM Do, YYYY, hh:mm a') %></h3>
         <h3 id='date-test'></h3>
 
         <section data-id="<%= catchPost._id %>" class="catch-post single-catch">
@@ -30,7 +20,7 @@
             <h5>Posted by: 
                 <a href="/catchPosts/<%= catchPost.postedBy.userName %>">
                     <em><%= catchPost.postedBy.userName %></em>
-                </a> on <%= catchPost.date %>
+                </a>  <%= moment(catchPost.date).fromNow() %>
             </h5>
 
             <p class="catch-post-content"><%= catchPost.catchContent %></p>
@@ -71,7 +61,7 @@
                 <% catchPost.comments.forEach(comment => {%>
                     <div class="comment" data-id="<%= comment._id %>">
                         <hr>
-                        <h4>User <%= comment.user.userName %> said: </h4>
+                        <h4><%= moment(comment.date).fromNow() %> <a href="/catchPosts/<%= comment.user.userName %>"><em><%= comment.user.userName %></em></a> said: </h4>
                         <p class='comment-text'><%= comment.text %></p>
                         <textarea class="edit-comment-text hidden"><%= comment.text %></textarea>
                         <% if (user.userName === comment.user.userName) {%>

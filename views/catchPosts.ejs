@@ -50,7 +50,7 @@
                             href="../catchPosts/<%= el._id%>/catchPost">
                             <%= el.catchTitle %></a>
                     </h3>
-                    <h5>Posted by: <%= el.postedBy.userName %> on <%= el.date %></h5>  
+                    <h5>Posted by: <em><%= el.postedBy.userName %></em> <%= moment(el.date).fromNow() %> </h5>  
 
                     <p class="catch-post-content"><%= el.catchContent %></p>
                     <textarea class="edit-post-content hidden" maxlength="10000"><%= el.catchContent %></textarea>

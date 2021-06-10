@@ -63,7 +63,8 @@ module.exports = {
                 catchegories: catchegories,
                 availableCatchegories: availableCatchegories,
                 following: user.following,
-                followedBy: user.followedBy
+                followedBy: user.followedBy,
+                moment: moment
             })
         }catch(err){
             console.log(err)
@@ -94,7 +95,8 @@ module.exports = {
                 catchegories: catchegories,
                 availableCatchegories: availableCatchegories,
                 following: user.following,
-                followedBy: user.followedBy
+                followedBy: user.followedBy,
+                moment: moment
             })
         }catch(err){
             console.log(err)
@@ -161,7 +163,7 @@ module.exports = {
                 userId: req.user.id,
                 postedBy: req.user,
                 likes: 0,
-                date: new Date()
+                date: new Date(),
                 // .toLocaleDateString('en-US', { 
                 //     year: "numeric",
                 //     month: "long",
@@ -169,6 +171,7 @@ module.exports = {
                 //     hour: "2-digit",
                 //     minute: "2-digit"
                 // })
+                moment: moment
             })
             await User.updateOne({ _id: req.user._id },
                 { 
@@ -205,7 +208,8 @@ module.exports = {
                 $push: {
                     comments: {
                         text: req.body.text,
-                        user: req.user
+                        user: req.user,
+                        date: new Date()
                     }
                 },
                 $inc: { commentsLength: 1 }

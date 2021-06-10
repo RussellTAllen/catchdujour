@@ -13,6 +13,7 @@
     <div class="container">
         <main>
             <% if (user.userName !== 'guest') {%>
+
                 <% if (Object.keys(catchPosts).length !== 0){ %>
                     <% if (user.userName !== targetUser.userName &&
                             user.following.every(u => u.userName !== catchPosts[0]?.postedBy.userName)) {%>
@@ -39,6 +40,10 @@
                         </div>
                     </div>
                     <% } %>
+
+                    <div class="create-page right">
+                        <a href="/createCatchPage">Create Your Own Catch</a>
+                    </div>
             <% } %>
             <!-- ------------------------------------------------------------ -->
 

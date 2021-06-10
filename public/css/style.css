@@ -243,6 +243,10 @@ footer{
 footer span{
   display: block;
 }
+.right{
+  text-align: right;
+  margin-right: 15px;
+}
 
 
 

@@ -166,13 +166,6 @@ module.exports = {
                 postedBy: req.user,
                 likes: 0,
                 date: new Date(),
-                // .toLocaleDateString('en-US', { 
-                //     year: "numeric",
-                //     month: "long",
-                //     day: "numeric",
-                //     hour: "2-digit",
-                //     minute: "2-digit"
-                // })
                 moment: moment
             })
             await User.updateOne({ _id: req.user._id },

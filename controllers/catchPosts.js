@@ -147,6 +147,8 @@ module.exports = {
         try{
             if (!req.body.catchLink) req.body.catchLink = 'none'
             if (!req.body.catchegories) req.body.catchegories = []
+            console.log('req.body.catchegories = '+req.body.catchegories)
+            if (typeof req.body.catchegories === 'string') req.body.catchegories = [req.body.catchegories]
             if (req.body.createCatchegory) req.body.catchegories.push(req.body.createCatchegory)
 
             console.log(req.body.catchLink)

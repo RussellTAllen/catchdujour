@@ -29,7 +29,7 @@ app.use(methodOverride('_method'))
 // Sessions
 app.use(
     session({
-      secret: process.env.SESSION_SECRET,
+      secret: 'keyboard cat',
       resave: false,
       saveUninitialized: false,
       store: new MongoStore({ mongooseConnection: mongoose.connection }),

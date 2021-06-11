@@ -117,9 +117,10 @@ button{
 .catch-post h5{
   margin: 5px 0;
 }
+
 .likes{
-  margin: 0 10px 10px 0;
-  
+  /* display: block; */
+  margin: 18px 10px 10px 0;
   font-weight: bold;
 }
 .likes + span{
@@ -215,7 +216,8 @@ main{
   background: rgb(197, 197, 255);
 }
 .see-more{
-  margin: 2px 0;
+  display: block;
+  margin: 0 0 10px 0;
 }
 .followed-by-content,
 .followed-content{

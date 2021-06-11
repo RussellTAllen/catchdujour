@@ -45,7 +45,9 @@ const CatchPostSchema = new mongoose.Schema({
     default: 0
   },
   likedBy: {
-    type: [User.UserSchema],
+    type: [User.UserSchema,
+    { unique: false,
+    sparse: true}],
     default: [],
     sparse: true,
     unique: false,

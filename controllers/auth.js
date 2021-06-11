@@ -83,7 +83,7 @@ exports.postSignup = (req, res, next) => {
     startDate: new Date(),
     following: [
       { 
-        userId: '60c2e4a9f046b61bbc4861b7',
+        userId: '60c321ada7991f2ae0266a8f',
         userName: 'RussellCatch'
        }]
   })
@@ -104,7 +104,7 @@ exports.postSignup = (req, res, next) => {
           return next(err)
         }
 
-        User.findByIdAndUpdate('60c2e4a9f046b61bbc4861b7', {
+        User.findByIdAndUpdate('60c321ada7991f2ae0266a8f', {
           $addToSet: { 
               followedBy: { 
                   userId: user._id,

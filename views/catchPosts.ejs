@@ -46,6 +46,8 @@
                     </div>
             <% } %>
             <!-- ------------------------------------------------------------ -->
+            <!-- Filter out unselected catchegories         -->
+            <% catchPosts = catchPosts.filter(post => post.catchegories?.every(cat => !user.omittedCatchegories.includes(cat))) %>
 
             <!-- Print All Posts from User -->
             <ul>

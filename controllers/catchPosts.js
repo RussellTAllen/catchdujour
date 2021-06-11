@@ -242,7 +242,7 @@ module.exports = {
             if (catchegories.every(cat => !cat.catchegory.includes(req.body.createCatchegory.toLowerCase().trim()))){
                 await Catchegory.create({
                         catchegory: req.body.createCatchegory.toLowerCase().trim(), 
-                        count: 1,
+                        count: 0,
                 })
                 console.log('Catchegory has been created!')
                 // res.redirect('/createCatchPage')
@@ -276,7 +276,7 @@ module.exports = {
             await CatchPost.findOneAndDelete({ _id:req.body.catchPostId })
             await User.updateOne({ _id: req.user._id },
                 {
-                    $inc: { catchCount: -1 }
+                $inc: { catchCount: -1 }
                 }
             )
             console.log('Deleted CatchPost')

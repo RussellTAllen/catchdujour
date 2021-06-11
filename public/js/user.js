@@ -302,16 +302,17 @@ async function likeCatchPost(){
 async function unselectCatchegory(){
     console.log('catchegories')
     // const user = this.parentNode.parentNode.dataset.id
-    const user = document.body.dataset.user
+    const userId = document.body.dataset.user
     const omitCatchegory = this.value
     console.log('omit this catchegory: '+omitCatchegory)
+    console.log('for this user: '+userId)
 
     try{
         const response = await fetch('../users/omitCatchegory', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
-                'user': user,
+                'userId': userId,
                 'omitCatchegory': omitCatchegory
             })
         })
@@ -325,7 +326,7 @@ async function unselectCatchegory(){
 
 async function selectCatchegory(){
     console.log('catchegories')
-    const user = document.body.dataset.user
+    const userId = document.body.dataset.user
     const allowCatchegory = this.value
     console.log('allow this catchegory: '+allowCatchegory)
 
@@ -334,7 +335,7 @@ async function selectCatchegory(){
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
-                'user': user,
+                'userId': userId,
                 'allowCatchegory': allowCatchegory
             })
         })

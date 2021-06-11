@@ -65,9 +65,9 @@ module.exports = {
     },
     omitCatchegory: async (req, res)=>{
         console.log('omitting from user controller')
-        console.log(req.user._id, req.body.omitCatchegory)
+        console.log('userid: '+req.body.userId)
         try{
-            await User.updateOne( { _id: req.user._id },
+            await User.updateOne( { _id: req.body.userId },
                 { $addToSet: { omittedCatchegories: req.body.omitCatchegory
                 }})
             console.log('Catchegory Omitted')
@@ -79,9 +79,8 @@ module.exports = {
     },
     allowCatchegory: async (req, res)=>{
         console.log('allowing catchegory from user controller')
-        console.log(req.user._id, req.body.allowCatchegory)
         try{
-            await User.updateOne( { _id: req.user._id },
+            await User.updateOne( { _id: req.body.userId },
                 { $pull: { omittedCatchegories: req.body.allowCatchegory
                 }})
             console.log('Catchegory Allowed')

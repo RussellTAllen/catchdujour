@@ -7,11 +7,9 @@
     <title>Catch du Jour!</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-user="<%= user %>">
+<body data-user="<%= user._id %>">
     <!-- Filter out user's omitted catchegories -->
-    <% if (user.userName !== 'guest') {%>
-        <% catchPosts = catchPosts.filter(post => post.catchegories?.every(cat => !user.omittedCatchegories.includes(cat))) %>
-    <% } %>
+    <% catchPosts = catchPosts.filter(post => post.catchegories?.every(cat => !user.omittedCatchegories.includes(cat))) %>
     
     <%- include('partials/header') -%>
 

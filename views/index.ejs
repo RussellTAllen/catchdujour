@@ -43,6 +43,14 @@
                 </h3>
                 <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(el.date).fromNow() %></h5>
 
+                <hr>
+                <% if (!el.catchegories[0]) { %>
+                    <h4 class="post-catchegories">No catchegories selected.</h4>
+                <% } else { %>
+                    <h4 class="post-catchegories">Catchegories: <span><%= el.catchegories.join(', ') %></span></h4>
+                <% } %>
+                <hr>
+
                 <% if (el.catchLink !== 'none'){ %>
                     <a href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
                 <% } %>
@@ -54,12 +62,6 @@
                     <a href="catchPosts/<%= el._id %>/catchPost" class="see-more">(See whole catch)</a>
                 <% } %>
                 <textarea class="edit-post-content hidden" name="catchContent"><%= el.catchContent %></textarea>
-
-                <% if (!el.catchegories[0]) { %>
-                    <p class="post-catchegories">No catchegories selected.</p>
-                <% } else { %>
-                    <p class="post-catchegories">Catchegories: <%= el.catchegories.join(', ') %></p>
-                <% } %>
 
                 <% if (user.userName === el.postedBy.userName) {%>
                 <div class="edit-and-delete">

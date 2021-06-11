@@ -96,6 +96,27 @@ button{
 .edit-and-delete{
   margin: 10px 0;
 }
+.catch-post h3{
+  margin: 5px 0;
+}
+.post-catchegories{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: rgb(80, 142, 255);
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0;
+  letter-spacing: .05rem;
+}
+.post-catchegories span{
+  font-family: "Cereal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: .15rem;
+
+}
+.catch-post h5{
+  margin: 5px 0;
+}
 .likes{
   margin: 0 10px 10px 0;
   
@@ -119,10 +140,11 @@ main{
   font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 28px;
   text-decoration: none;
-}
-.catch-title a{
   color: rgb(80, 142, 255);
 }
+/* .catch-title a{
+  color: rgb(80, 142, 255);
+} */
 .catch-post{
     background: rgb(250, 250, 250);
     /* border: 1px solid black; */
@@ -151,6 +173,7 @@ main{
 .single-catch{
   margin: 0 auto;
 }
+
 .comment-area,
 .edit-post-content{
   width: 100%;
@@ -237,7 +260,7 @@ input[type=checkbox]:checked:after{
   border: 1px solid rgb(125, 70, 255);
   border-radius: 4px;
   cursor: pointer;
-  background-color:rgb(197, 197, 255);
+  background-color: rgb(118, 166, 255);
   border: 1px solid #adb8c0;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
   content: '\2714';

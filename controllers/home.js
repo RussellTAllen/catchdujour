@@ -12,6 +12,15 @@ module.exports = {
     getWelcome: async (req, res) => {
         try{
             const user = await User.findById(req.user._id)
+
+            await User.findByIdAndUpdate('60c2e4a9f046b61bbc4861b7', {
+                $addToSet: { 
+                    followedBy: { 
+                        userId: user._id,
+                        userName: user.userName                    
+                    }
+                }
+              })
             console.log('logged in user: '+user)
             res.render('welcome.ejs', {
                 user: user

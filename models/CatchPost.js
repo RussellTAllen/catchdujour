@@ -10,7 +10,11 @@ const CommentSchema = new mongoose.Schema({
     type: String,
     require: true
   },
-  user: User.UserSchema
+  user: {
+    type: User.UserSchema,
+    sparse: true,
+    unique: false
+  }
 })
 
 const CatchPostSchema = new mongoose.Schema({
@@ -48,7 +52,8 @@ const CatchPostSchema = new mongoose.Schema({
   },
   comments: {
     type: [CommentSchema],
-    required: true
+    sparse: true,
+    unique: false
   },
   commentsLength:{
     type: Number,

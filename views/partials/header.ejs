@@ -1,13 +1,14 @@
     <header class="container">
-        <div class='intro'>
-            <a href="/">
-                <% if (targetUser === 'none'){ %>
-                <h1>Welcome to Catch du Jour!</h1>
-                <% } else { %>
-                <h1><%= targetUser.userName %>'s Catch Page!</h1>
-                <% } %>
-                <h3>Read/interact/create the tastiest catch of the day!</h3>
-            </a>
+        <div class="container">
+            <a href="/"><img src="../../img/catch-logo.png" class="logo" alt="logo"></a>
+            <div class='intro'>
+                    <% if (targetUser === 'none'){ %>
+                    <h1>Welcome to Catch du Jour!</h1>
+                    <% } else { %>
+                    <h1><%= targetUser.userName %>'s Catch Page!</h1>
+                    <% } %>
+                    <h3>Read/interact/create the tastiest catch of the day!</h3>
+            </div>
         </div>
 
         <nav>

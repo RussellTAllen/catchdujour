@@ -13,8 +13,6 @@
 <body>
     <div class="container">
     <main>
-        <h3 id='date-test'></h3>
-
         <section data-id="<%= catchPost._id %>" class="catch-post single-catch">
             <h3><span class="catch-title"><%= catchPost.catchTitle %></span></h3>
             <h5>Posted by: 
@@ -97,15 +95,5 @@
     <% if (user.userName !== 'guest'){ %>
         <script src="../../js/user.js"></script>
     <% } %>
-
-    <script>
-        const date = new Intl.DateTimeFormat([], {
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-        }).format(new Date('<%= catchPost.date %>'));
-
-        
-      
-        document.querySelector('#date-test').innerText = date;
-      </script>
 </body>
 </html>

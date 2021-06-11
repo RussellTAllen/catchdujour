@@ -136,7 +136,9 @@ module.exports = {
             res.render('createCatchPage.ejs',
                 { 
                 user: req.user,
-                catchegories: catchegories        
+                catchegories: catchegories,
+                targetUser: 'none',
+                following: req.user.following        
                 }
             )
         }catch(err){

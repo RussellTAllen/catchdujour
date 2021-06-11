@@ -8,12 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="/logout">Logout</a>
-    <a href="/">Back to Main</a>
-    <a href="/catchProfile">Go To Your Profile</a>
-    
+
+    <%- include('partials/header') -%>
+
     <h1>Create A Catch!!!</h1>
-    <h2>Logged in user: <%= user.userName %></h2>
 
     <form action="/catchPosts/createCatchPost" method="POST">
         <input class="catch-title" type="text" placeholder="Enter Catch Title" name="catchTitle" maxlength="60" required>
@@ -38,5 +36,7 @@
 
     <%- include('partials/footer') -%>
     <script src="js/createCatch.js"></script> 
+    <script src="js/user.js"></script> 
+
 </body>
 </html>

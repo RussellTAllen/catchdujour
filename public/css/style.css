@@ -27,23 +27,42 @@ input{
 } */
 /***************/
 body{
-  margin: 40px 25px;
+  margin: 20px 25px;
 }
 body, *{
   font-family: "Cereal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
+.logo{
+  height: 80px;
+  width: 80px;
+  margin-top: 0;
+}
 header.container{
   display: flex;
-  margin: 20px auto;
+  margin: 10px auto;
   max-width: 1215px;
   justify-content: space-between;
 }
 .intro{
   margin-left: 14px;
 }
+.intro h1{
+  /* flex-basis: 90%; */
+  /* margin-left: 10px; */
+  margin-top: 3px;
+}
+.intro h3{
+  /* position: relative; */
+  text-indent: 3px;
+  flex-basis: 100%;
+  /* bottom: 25px; */
+}
+.intro img{
+  margin-top: 10px;
+}
 .intro a{
-  text-decoration: none;
   color: black;
+  text-decoration: none;
 }
 header div.intro h3{
   margin: 0 0 10px 0;
@@ -120,6 +139,7 @@ main{
   max-width: 800px;
   font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 18px;
+  white-space: pre-wrap;
 }
 .catch-post a{
   text-decoration: none;
@@ -205,12 +225,40 @@ main{
   /* display: inline-block; */
   justify-content: right;
 }
-.catchegory-selected{
-  background: red;
+input[type=checkbox]{
+  margin: 5px 0;
+  padding: 5px;
+}
+input[type=checkbox]:checked:after{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid rgb(125, 70, 255);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color:rgb(197, 197, 255);
+  border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+  content: '\2714';
+	font-size: 14px;
+}
+input[type=checkbox]:hover:after{
+  background-color: rgb(255, 82, 82);
 }
 input.catch-title{
-  width: 200px;
+  width: 400px;
+  margin: 10px 0;
+  font-size: 18px;
+}
+input.catch-link{
+  display: block;
+  width: 400px;
   margin-bottom: 10px;
+  font-size: 16px;
+}
+textarea{
+  font-size: 16px;
 }
 textarea.catch-content{
   display: block;

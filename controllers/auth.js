@@ -80,20 +80,14 @@ exports.postSignup = (req, res, next) => {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
-    startDate: new Date().toLocaleDateString('en-US', { 
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    }),
+    startDate: new Date(),
     following: [
       { 
-        userId: '60bab9646147134d4cb28f02',
+        userId: '60c2e4a9f046b61bbc4861b7',
         userName: 'RussellCatch'
        }]
   })
-
+ 
   User.findOne({$or: [
     {email: req.body.email},
     {userName: req.body.userName}
@@ -109,7 +103,15 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err)
         }
-        console.log('line 94 running...')
+
+        User.findByIdAndUpdate('60c2e4a9f046b61bbc4861b7', {
+          $addToSet: { 
+              followedBy: { 
+                  userId: user._id,
+                  userName: user.userName                    
+              }
+          }
+        })
         res.redirect('/welcome')
       })
     })

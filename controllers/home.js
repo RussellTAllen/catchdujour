@@ -13,7 +13,7 @@ module.exports = {
         try{
             const user = await User.findById(req.user._id)
 
-            await User.findByIdAndUpdate('60c2e4a9f046b61bbc4861b7', {
+            await User.findByIdAndUpdate('60c321ada7991f2ae0266a8f', {
                 $addToSet: { 
                     followedBy: { 
                         userId: user._id,

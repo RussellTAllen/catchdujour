@@ -4,9 +4,10 @@ const passport = require('passport')
 const validator = require('validator')
 const User = require('../models/User')
 
-exports.getLogin = (req, res) => {
+exports.getLogin = async (req, res) => {
+  await req.user
   if (req.user) {
-    // return res.redirect('/')
+    
     return res.redirect('/welcome')
   }
   // res.render('login', {

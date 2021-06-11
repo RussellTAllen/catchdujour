@@ -62,3 +62,8 @@ img{
     width: 200px;
     margin: 0 auto;
 }
+.alert-danger{
+    display: block;
+    margin: 0 auto;
+    color: red;
+}

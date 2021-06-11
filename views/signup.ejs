@@ -8,11 +8,7 @@
     <link rel="stylesheet" href="css/welcome.css">
 </head>
 <body>
-    <% if (locals.messages.errors) { %>
-        <% messages.errors.forEach( el => { %>
-            <div class="alert alert-danger"><%= el.msg %></div>
-        <% }) %>    
-    <% } %>
+
     
     <main class="welcome">
         <h1>Welcome to Catch du Jour!</h1>
@@ -27,6 +23,12 @@
         
         <p>If you do not agree to these terms, please leave the site now.
         By continuing, you are agreeing to these terms of use.</p>
+
+        <% if (locals.messages.errors) { %>
+            <% messages.errors.forEach( el => { %>
+                <div class="alert alert-danger"><%= el.msg %></div>
+            <% }) %>    
+        <% } %>
 
         <section class='signup'>
             <form action="/signup" method="POST">

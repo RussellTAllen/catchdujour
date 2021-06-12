@@ -145,7 +145,18 @@ module.exports = {
             if (!req.body.catchLink) req.body.catchLink = 'none'
             if (!req.body.catchegories) req.body.catchegories = []
             if (typeof req.body.catchegories === 'string') req.body.catchegories = [req.body.catchegories]
-            if (req.body.createCatchegory) req.body.catchegories.push(req.body.createCatchegory.toLowerCase())
+            // If new catchegory field is filled out - create the new catchegory
+            if (req.body.createCatchegory) {
+                req.body.catchegories.push(req.body.createCatchegory.toLowerCase())
+                const catchegories = await Catchegory.find()
+                if (catchegories.every(cat => !cat.catchegory.includes(req.body.createCatchegory.toLowerCase().trim()))){
+                    await Catchegory.create({
+                            catchegory: req.body.createCatchegory.toLowerCase().trim(), 
+                            count: 0,
+                    })
+                    console.log('Catchegory has been created!')
+                }
+            }
 
             await Catchegory.updateMany( { catchegory: req.body.catchegories },
                 {
@@ -226,7 +237,7 @@ module.exports = {
             console.log(err)
         }
     },
-    // Add Catchegory to Collection
+    // Add Catchegory to Collection - this function is not being used directly at this time 
     createCatchegory: async (req, res) => {
         console.log('creating catchegory: '+req.body.createCatchegory)
         try{
@@ -238,7 +249,6 @@ module.exports = {
                         count: 1,
                 })
                 console.log('Catchegory has been created!')
-                // res.redirect('/createCatchPage')
             }
         }catch(err){
             console.log(err)

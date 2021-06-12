@@ -5,34 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Catch du Jour!</title>
 </head>
 <body>
 
     <%- include('partials/header') -%>
+    <div class="container">
+        <main>
+            <h1>Create A Catch!!!</h1>
 
-    <h1>Create A Catch!!!</h1>
+            <form action="/catchPosts/createCatchPost" method="POST">
+                <input class="catch-title" type="text" placeholder="Enter Catch Title" name="catchTitle" maxlength="60" required>
+                <input class="catch-link" type="text" placeholder="Enter URL link (Optional)" name="catchLink" maxlength="200">
+                <textarea class="catch-content" placeholder="Enter Catch Content" name="catchContent" maxlength="30000" required></textarea>
+                
 
-    <form action="/catchPosts/createCatchPost" method="POST">
-        <input class="catch-title" type="text" placeholder="Enter Catch Title" name="catchTitle" maxlength="60" required>
-        <input class="catch-link" type="text" placeholder="Enter URL link (Optional)" name="catchLink" maxlength="200">
-        <textarea class="catch-content" placeholder="Enter Catch Content" name="catchContent" maxlength="30000" required></textarea>
-        
-
-        <div class="catchegories">
-        <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
-            <div>
-                <input type="checkbox" class="catchegory-options" name="catchegories" value="<%= catchegories[i].catchegory %>">
-                <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
-            </div>
-        <% } %>
-            <div class="create-catchegory">
-                <input type="checkbox" class="catchegory-options">
-                <input type="text" id="new-catchegory" name="createCatchegory" placeholder="Create a new Catchegory" maxlength="25">
-            </div>
-        </div>
-        <button id="create-catch" type="submit">Submit</button>
-    </form>
+                <div class="catchegories">
+                <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
+                    <div>
+                        <input type="checkbox" class="catchegory-options" name="catchegories" value="<%= catchegories[i].catchegory %>">
+                        <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
+                    </div>
+                <% } %>
+                    <div class="create-catchegory">
+                        <input type="checkbox" class="catchegory-options">
+                        <input type="text" id="new-catchegory" name="createCatchegory" placeholder="Create a new Catchegory" maxlength="25">
+                    </div>
+                </div>
+                <button id="create-catch" type="submit">Submit</button>
+            </form>
+        </main>
+    </div>
 
     <%- include('partials/footer') -%>
     <script src="js/createCatch.js"></script> 

@@ -20,7 +20,6 @@ module.exports = {
     //     }
     // },
     getCatchPostById: async (req,res) => {
-        console.log('getting post by id: '+req.params.id)
         if (!req.user) req.user = {}
 
         try{
@@ -76,18 +75,14 @@ module.exports = {
         try{
             let user = await User.findById(req.user._id)
             let targetUser = await User.findOne({ userName: req.params.userName })
-            console.log('controller - targetUser: '+targetUser)
             if (!user) user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
             let catchegories = await Catchegory.find()
             const availableCatchegories = catchegories
             if (!catchegories) catchegories = []
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
             catchegories.sort((a,b) => b.count - a.count)
-            // console.log('catchegories on line 108: '+catchegories)
             const catchPosts = await CatchPost.find({ userId: targetUser._id }).sort({ _id: -1 })
-            console.log('catchPosts: '+catchPosts)
             catchegories = catchegories.filter(cat => catchPosts.some(post => post.catchegories.includes(cat.catchegory)))
-            // console.log('catchegories on line 111: '+catchegories)
             res.render('catchPosts.ejs', {
                 catchPosts: catchPosts, 
                 user: user,
@@ -149,11 +144,9 @@ module.exports = {
         try{
             if (!req.body.catchLink) req.body.catchLink = 'none'
             if (!req.body.catchegories) req.body.catchegories = []
-            console.log('req.body.catchegories = '+req.body.catchegories)
             if (typeof req.body.catchegories === 'string') req.body.catchegories = [req.body.catchegories]
-            if (req.body.createCatchegory) req.body.catchegories.push(req.body.createCatchegory)
+            if (req.body.createCatchegory) req.body.catchegories.push(req.body.createCatchegory.toLowerCase())
 
-            console.log(req.body.catchLink)
             await Catchegory.updateMany( { catchegory: req.body.catchegories },
                 {
                 $inc: { count: 1 }
@@ -235,14 +228,14 @@ module.exports = {
     },
     // Add Catchegory to Collection
     createCatchegory: async (req, res) => {
-        console.log(req.body.createCatchegory)
+        console.log('creating catchegory: '+req.body.createCatchegory)
         try{
             const catchegories = await Catchegory.find()
 
             if (catchegories.every(cat => !cat.catchegory.includes(req.body.createCatchegory.toLowerCase().trim()))){
                 await Catchegory.create({
                         catchegory: req.body.createCatchegory.toLowerCase().trim(), 
-                        count: 0,
+                        count: 1,
                 })
                 console.log('Catchegory has been created!')
                 // res.redirect('/createCatchPage')

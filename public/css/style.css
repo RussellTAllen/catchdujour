@@ -2,16 +2,29 @@
 
 /******************************************
 /* CSS
-/*******************************************/
+/******************************************/
 
 /* Box Model Hack */
 *{
     box-sizing: border-box;
   }
 
+/******************************************  
+/* CSS Variables */
+/******************************************/
+:root{
+  --main-red: #ff0000;
+  --maroon: #400000;
+  --super-dark-red: #0d0000;
+  --dark-red: #bf0000;
+  --dark-purple: #330c2d;
+  --light-purple: #bd88a1;
+}
+
+
 /******************************************
 /* LAYOUT
-/*******************************************/
+/******************************************/
 
 /* DARK MODE */
 /* body,
@@ -75,7 +88,6 @@ header nav{
   /* position: absolute;
   right: 10px;
   top: 45px; */
-  
 }
 header nav h5{
   margin: 0;
@@ -96,12 +108,53 @@ button{
 .edit-and-delete{
   margin: 10px 0;
 }
-.catch-post h3{
+.catch-header{
+  display: flex;
+  width: 100%;
+}
+.catch-title{
+}
+.catch-title h3{
+  display: inline-block;
+  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  text-decoration: none;
+  color: rgb(80, 142, 255);
   margin: 5px 0;
+}
+.comment-bubble{
+  display: inline-block;
+  margin-left: auto;
+  margin-top: 15px;
+ 
+}
+.fa-layers-counter{
+  position: relative;
+  right: 39px;
+  bottom: 14px;
+}
+.fa-fish{
+  color: red;
+}
+.likes{
+  display: inline-block;
+  cursor: pointer;
+  /* margin: 18px 10px 10px 0; */
+  font-weight: bold;
+  margin-top: 10px;
+}
+.likes + span{
+  font-weight: bold;
+}
+.likes .fa-layers-counter{
+  position: relative;
+  color: white;
+  right: 40px;
+  bottom: 13px;
 }
 .post-catchegories{
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  color: rgb(80, 142, 255);
+  color: var(--dark-purple);
   font-weight: 500;
   font-size: 16px;
   margin: 0;
@@ -112,19 +165,9 @@ button{
   font-size: 16px;
   font-weight: bold;
   letter-spacing: .15rem;
-
 }
 .catch-post h5{
   margin: 5px 0;
-}
-
-.likes{
-  /* display: block; */
-  margin: 18px 10px 10px 0;
-  font-weight: bold;
-}
-.likes + span{
-  font-weight: bold;
 }
 .container{
   display: flex;
@@ -137,22 +180,13 @@ main{
 .create-page{
   margin-left: 15px;
 }
-.catch-title{
-  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 28px;
-  text-decoration: none;
-  color: rgb(80, 142, 255);
-}
-/* .catch-title a{
-  color: rgb(80, 142, 255);
-} */
 .catch-post{
     background: rgb(250, 250, 250);
     /* border: 1px solid black; */
     /* box-shadow: 1px 1px 5px rgb(161, 161, 161); */
     box-shadow: 1px 1px 4px rgb(0 0 0 / 5%);
     border: 1px solid rgba(0,0,0,.09);
-    padding: 10px 25px 35px 25px;
+    padding: 0px 25px 0px 25px;
     margin: 15px 10px;
 }
 .catch-post 
@@ -166,10 +200,10 @@ main{
 }
 .catch-post a{
   text-decoration: none;
-  color: rgb(80, 142, 255);
+  color: rgb(255, 80, 80);
 }
 .catch-post a:visited{
-  color:rgb(125, 70, 255);
+  color:rgb(255, 22, 22);
 }
 .single-catch{
   margin: 0 auto;
@@ -209,11 +243,14 @@ main{
 .selected{
   background: rgb(197, 197, 255);
 }
+.selected:hover,
+.selected:focus{
+  font-weight: bold;
+  background: rgb(230, 230, 255);
+  box-shadow: inset -2px -2px 1px rgb(41, 37, 37);
+}
 .editable{
   border: 1px solid black;  
-}
-.edit-catch-title{
-  background: rgb(197, 197, 255);
 }
 .see-more{
   display: block;
@@ -250,6 +287,11 @@ main{
   /* display: inline-block; */
   justify-content: right;
 }
+input.edit-catch-title{
+  width: 400px;
+  margin: 10px 0;
+  font-size: 18px;
+}
 input[type=checkbox]{
   margin: 5px 0;
   padding: 5px;
@@ -270,11 +312,6 @@ input[type=checkbox]:checked:after{
 }
 input[type=checkbox]:hover:after{
   background-color: rgb(255, 82, 82);
-}
-input.catch-title{
-  width: 400px;
-  margin: 10px 0;
-  font-size: 18px;
 }
 input.catch-link{
   display: block;
@@ -320,6 +357,7 @@ footer span{
   text-align: right;
   margin-right: 15px;
 }
+
 
 
 

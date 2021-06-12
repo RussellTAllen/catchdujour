@@ -219,8 +219,8 @@ function editComment(){
     
     commentText.classList.add('hidden')
     edit.classList.add('selected')
+    edit.innerText = "Confirm Edit"
     editCommentText.classList.remove('hidden')
-
 
     // Handle event listeners
     // window.addEventListener('keypress', confirmCommentEdit)
@@ -281,7 +281,7 @@ async function deleteComment(){
 }
 
 async function likeCatchPost(){
-    const catchPostId = this.parentNode.dataset.id
+    const catchPostId = this.parentNode.parentNode.dataset.id
     console.log('catchpostID: '+catchPostId)
     try{
         const response = await fetch('../../catchPosts/likeCatchPost', {

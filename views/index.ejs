@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catch du Jour!</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/dabf81eaea.js" crossorigin="anonymous"></script>
+    
 </head>
 <body data-user="<%= user._id %>">
     <!-- Filter out user's omitted catchegories -->
@@ -31,15 +33,24 @@
  
             <!-- Print posts-->
             <% catchPosts.forEach( el => { %>
-
-           
             
-            <div class="catch-post" data-id="<%=el._id%>">
-                <h3><a class="catch-title"
-                        href="catchPosts/<%= el._id%>/catchPost">
-                        <%= el.catchTitle %></a>
-                </h3>
-                <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(el.date).fromNow() %></h5>
+            <section class="catch-post" data-id="<%=el._id%>">
+                <section class="catch-header">
+                    <div class="likes">
+                        <i class="fas fa-fish fa-3x"></i>
+                        <span class="fa-layers-counter fa-fw"><%= el.likes %></span>
+                    </div>
+                    <div class="catch-title">
+                        <h3><a href="catchPosts/<%= el._id%>/catchPost">
+                            <%= el.catchTitle %></a>
+                        </h3>
+                        <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(el.date).fromNow() %></h5>
+                    </div>
+                    <div class="comment-bubble">
+                        <i class="far fa-comment fa-3x fa-fw"></i>
+                        <span class="fa-layers-counter fa-fw"><%= el.comments.length %></span>
+                    </div>
+                </section>
 
                 <hr>
                 <% if (!el.catchegories[0]) { %>
@@ -78,11 +89,10 @@
                         </div>
                     <% } %>
                 </div>
-                <button type="button" class="likes">Likes: </button><span><%= el.likes %></span>
-                <div>Comments: <%= el.comments.length %></div>
+  
 
-            </div>
-            <% }) %>    
+            </section>
+            <% }) %>
         </main>
 
         <aside>

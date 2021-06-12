@@ -125,13 +125,19 @@ button{
   font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 28px;
   text-decoration: none;
-  margin: 5px 0;
+  margin: 0px 0;
+}
+.catch-title h5{
+  margin: 0;
 }
 .comment-bubble{
   display: inline-block;
   margin-left: auto;
   margin-top: 15px;
  
+}
+.far.fa-comment{
+  line-height: 0.6;
 }
 .fa-layers-counter{
   position: relative;
@@ -147,9 +153,8 @@ button{
 .likes{
   display: inline-block;
   cursor: pointer;
-  /* margin: 18px 10px 10px 0; */
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 3px;
 }
 .likes + span{
   font-weight: bold;
@@ -165,7 +170,7 @@ button{
   color: var(--dark-purple);
   font-weight: 500;
   font-size: 16px;
-  margin: 0;
+  margin: -2px 0 5px 0;
   letter-spacing: .05rem;
 }
 .post-catchegories span{
@@ -174,15 +179,15 @@ button{
   font-weight: bold;
   letter-spacing: .15rem;
 }
-.catch-post h5{
-  margin: 5px 0;
-}
 .container{
   display: flex;
   justify-content: center;
 }
 main{
   width: 920px;
+}
+hr{
+  margin: 2px 0;
 }
 .sort,
 .create-page{

@@ -6,9 +6,6 @@ const moment = require('moment-timezone')
 
 
 module.exports = {
-    // getIndex: (req,res)=>{
-    //     res.render('index.ejs')
-    // }
     getWelcome: async (req, res) => {
         try{
             const user = await User.findById(req.user._id)
@@ -20,7 +17,7 @@ module.exports = {
                         userName: user.userName                    
                     }
                 }
-              })
+            })
             console.log('logged in user: '+user)
             res.render('welcome.ejs', {
                 user: user

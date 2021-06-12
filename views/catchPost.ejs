@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://kit.fontawesome.com/dabf81eaea.js" crossorigin="anonymous"></script>
     <title>Catch du Jour!</title>
 </head>
 
@@ -14,12 +15,21 @@
     <div class="container">
     <main>
         <section data-id="<%= catchPost._id %>" class="catch-post single-catch">
-            <h3 class="catch-title"><%= catchPost.catchTitle %></h3>
-            <h5>Posted by: 
-                <a href="/catchPosts/<%= catchPost.postedBy.userName %>">
-                    <em><%= catchPost.postedBy.userName %></em>
-                </a>  <%= moment(catchPost.date).fromNow() %>
-            </h5>
+            <section class="catch-header">
+                <div class="likes">
+                    <i class="fas fa-fish fa-3x"></i>
+                    <span class="fa-layers-counter fa-fw"><%= catchPost.likes %></span>
+                </div>
+                <div class="catch-title">
+                    <h3><%= catchPost.catchTitle %></h3>
+                    <h5>Posted by: <em><a href="../<%= catchPost.postedBy.userName %>"><%= catchPost.postedBy.userName %></a></em> <%= moment(catchPost.date).fromNow() %></h5>
+                </div>
+                <div class="comment-bubble">
+                    <i class="far fa-comment fa-3x fa-fw"></i>
+                    <span class="fa-layers-counter fa-fw"><%= catchPost.comments.length %></span>
+                </div>
+            </section>
+            
             <hr>
             <% if (!catchPost.catchegories[0]) { %>
                 <h4 class="post-catchegories">No catchegories selected.</h4>

@@ -80,6 +80,10 @@
                     <% } %>
                     <hr>
 
+                    <% if (el.catchLink !== 'none'){ %>
+                        <span>Outside link: </span><a href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
+                    <% } %>
+
                     <p class="catch-post-content"><%= el.catchContent %></p>
                     <textarea class="edit-post-content hidden" maxlength="10000"><%= el.catchContent %></textarea>
 

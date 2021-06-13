@@ -74,6 +74,7 @@ h5 em a:visited{
   width: 85px;
   height: 85px;
   margin-top: -5px;
+  margin-left: -5px;
 }
 header.container{
   display: flex;

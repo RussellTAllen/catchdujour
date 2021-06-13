@@ -38,6 +38,10 @@
             <% } %>
             <hr>
 
+            <% if (catchPost.catchLink !== 'none'){ %>
+                <span>Outside link: </span><a href="<%= catchPost.catchLink %>" target="_blank"><%= catchPost.catchLink %></a>
+            <% } %>
+
             <p class="catch-post-content"><%= catchPost.catchContent %></p>
             <textarea class="edit-post-content hidden" maxlength="30000" required><%= catchPost.catchContent %></textarea> 
             

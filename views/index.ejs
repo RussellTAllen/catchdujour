@@ -64,11 +64,15 @@
                     <a href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
                 <% } %>
 
+                <!-- Format content if it exceeds desired length -->
                 <% let content = el.catchContent %>
-                <% el.catchContent.length < 300 ? content = el.catchContent : content = el.catchContent.slice(0, 300) + '...' %>
-                <p class="catch-post-content"><%= content %></p>
-                <% if (content.length >= 300){ %>
-                    <a href="catchPosts/<%= el._id %>/catchPost" class="see-more">(See whole catch)</a>
+                <% content.length < 300 ? content = content : content = content.slice(0, 300) %>
+                <% content.includes('\n', content.indexOf('\n', content.indexOf('\n', content.indexOf('\n')+1)+1)) ? content = content.slice(0, content.indexOf('\n', content.indexOf('\n', content.indexOf('\n')+1)+1)) : content = content %>
+
+                <% if (content.length >= 300 || el.catchContent.includes('\n', content.indexOf('\n', content.indexOf('\n', content.indexOf('\n')+1)+1))){ %>
+                    <p class="catch-post-content"><%= content %>...<a href="catchPosts/<%= el._id %>/catchPost" class="see-more"> (See whole catch)</a></p>
+                <% }else{ %>
+                    <p class="catch-post-content"><%= content %></p>
                 <% } %>
                 <textarea class="edit-post-content hidden" name="catchContent"><%= el.catchContent %></textarea>
 

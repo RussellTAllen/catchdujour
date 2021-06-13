@@ -54,14 +54,14 @@ body, *{
   font-family: "Cereal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: var(--super-dark-red);
 }
-a,
-em a:visited{
+a{
   color: var(--light-purple);
 }
 a:visited{
   color: var(--dark-purple);
 }
-a:hover{
+a:hover,
+h5 em a:visited{
   color: var(--dark-red);
 }
 .logo{
@@ -147,6 +147,9 @@ button{
 }
 .catch-title h3 a{
   color: var(--dark-purple);
+}
+.catch-title h3 a:hover{
+  color: var(--dark-red);
 }
 .catch-title h5{
   margin: 0;
@@ -235,11 +238,12 @@ hr{
   white-space: pre-wrap;
 }
 .catch-post a{
+  display: inline;
   text-decoration: none;
-  /* color: rgb(255, 80, 80); */
+  color: var(--dark-red);
 }
 .catch-post a:hover{
-  color: var(--dark-red);
+  color: var(--med-red);
 }
 /* .catch-post a:visited{
   color:rgb(255, 22, 22);

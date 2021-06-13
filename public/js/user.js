@@ -13,6 +13,7 @@ const selectedCatchegory = document.querySelectorAll('.catchegory-selected')
 const unselectedCatchegory = document.querySelectorAll('.catchegory-unselected')
 
 
+
 // EVENT LISTENERS
 Array.from(deleteBtn).forEach(el =>{
     el.addEventListener('click', deleteCatchPost)
@@ -39,7 +40,6 @@ Array.from(unselectedCatchegory).forEach(el =>{
 followedBtn.addEventListener('click', toggleFollowedDropdown)
 
 
-
 // FUNCTIONS
 // function unfollowRuss(){
 //     console.log("REALLY?!?!")
@@ -58,7 +58,6 @@ followedBtn.addEventListener('click', toggleFollowedDropdown)
 //         }
 //     }
 // }
-
 
 
 function toggleFollowedDropdown(){

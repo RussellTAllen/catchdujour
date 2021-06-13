@@ -25,10 +25,18 @@
             <% } %>
 
             <!-- Sort by New, Tastiest, Most Talked About -->
+            <% let newClass = 'unsort' %>
+            <% let mostLikedClass = 'unsort' %>
+            <% let mostCommentedClass = 'unsort' %>
+
+            <% if (preferredSort === 'new'){ newClass = 'sort-select' } %>
+            <% if (preferredSort === 'mostLiked'){ mostLikedClass = 'sort-select' } %>
+            <% if (preferredSort === 'mostCommented'){ mostCommentedClass = 'sort-select' } %>
+
             <div class="sort">
-                <a href="/">Freshest</a>  |  
-                <a href="/mostLiked">Tastiest</a>  |  
-                <a href="/mostCommented">Most Chewed On</a>
+                <a href="/" class="new <%= newClass %>">Freshest</a> |
+                <a href="/mostLiked" class="most-liked <%= mostLikedClass %>">Tastiest</a>  |  
+                <a href="/mostCommented" class="most-comments <%= mostCommentedClass %>">Most Chewed On</a>
             </div>
  
             <!-- Print posts-->
@@ -37,7 +45,11 @@
             <section class="catch-post" data-id="<%=el._id%>">
                 <section class="catch-header">
                     <div class="likes">
+                        <% if (el.likedBy.some(u => u.userName === user.userName)){ %>
+                        <i class="fas fa-fish fa-3x liked"></i>
+                        <% }else{ %>
                         <i class="fas fa-fish fa-3x"></i>
+                        <% } %>
                         <span class="fa-layers-counter fa-fw"><%= el.likes %></span>
                     </div>
                     <div class="catch-title">

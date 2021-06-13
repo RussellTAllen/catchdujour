@@ -40,12 +40,13 @@ module.exports = {
 
             await User.findOneAndUpdate({ _id: req.user._id },
                 { preferredSort: 'new' })
-            res.render('index.ejs', {
+            await res.render('index.ejs', {
                 catchPosts: catchPosts, 
                 user: user,
                 following: user.following,
                 catchegories: catchegories,
                 targetUser: 'none',
+                preferredSort: 'new',
                 moment: moment
             })
         }catch(err){
@@ -64,12 +65,13 @@ module.exports = {
 
             await User.findOneAndUpdate({ _id: req.user._id },
                 { preferredSort: 'mostLiked'})
-            res.render('index.ejs', {
+            await res.render('index.ejs', {
                 catchPosts: catchPosts, 
                 user: req.user,
                 following: user.following,
                 catchegories: catchegories,
                 targetUser: 'none',
+                preferredSort: 'mostLiked',
                 moment: moment
             })
         }catch(err){
@@ -88,12 +90,13 @@ module.exports = {
 
             await User.findOneAndUpdate({ _id: req.user._id },
                     { preferredSort: 'mostCommented' })
-            res.render('index.ejs', {
+            await res.render('index.ejs', {
                 catchPosts: catchPosts, 
                 user: req.user,
                 following: user.following,
                 catchegories: catchegories,
                 targetUser: 'none',
+                preferredSort: 'mostCommented',
                 moment: moment
             })
         }catch(err){

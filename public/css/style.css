@@ -18,6 +18,7 @@
   --med-red: #ff6a6a;
   --maroon: #400000;
   --super-dark-red: #0d0000;
+  --super-light-red: #ffebeb;
   --dark-red: #bf0000;
   --dark-purple: #330c2d;
   --dark-blue: #131f28;
@@ -194,6 +195,9 @@ button{
   right: 40px;
   bottom: 13px;
 }
+.liked{
+  color: var(--dark-red);
+}
 .post-catchegories{
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: var(--dark-purple);
@@ -218,9 +222,20 @@ main{
 hr{
   margin: 2px 0;
 }
-.sort,
-.create-page{
+.create-page,
+.sort{
   margin-left: 15px;
+  margin-bottom: 5px;
+  /* padding: 1px 2px 2px 2px; */
+}
+.sort-select{
+  background: var(--super-light-red);
+  color: var(--super-dark-red);
+  border: 2px solid var(--super-dark-red);
+  border-radius: 10px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 1px 8px;
 }
 .catch-post{
   background: var(--catch-background);

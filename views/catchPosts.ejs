@@ -52,18 +52,19 @@
             <% catchPosts = catchPosts.filter(post => post.catchegories?.every(cat => !user.omittedCatchegories.includes(cat))) %>
 
             <!-- Print All Posts from User -->
-            <ul>
             <% catchPosts.forEach( el => { %>
-                <div class="catch-post" data-id="<%=el._id%>">
+                <section class="catch-post" data-id="<%=el._id%>">
                     <section class="catch-header">
                         <div class="likes">
+                            <% if (el.likedBy.some(u => u.userName === user.userName)){ %>
+                            <i class="fas fa-fish fa-3x liked"></i>
+                            <% }else{ %>
                             <i class="fas fa-fish fa-3x"></i>
+                            <% } %>
                             <span class="fa-layers-counter fa-fw"><%= el.likes %></span>
                         </div>
                         <div class="catch-title">
-                            <h3><a href="../catchPosts/<%= el._id%>/catchPost">
-                                <%= el.catchTitle %></a>
-                            </h3>
+                            <h3><a href="../catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>
                             <h5>Posted by: <em><a href="<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(el.date).fromNow() %></h5>
                         </div>
                         <div class="comment-bubble">
@@ -81,7 +82,7 @@
                     <hr>
 
                     <% if (el.catchLink !== 'none'){ %>
-                        <span>Outside link: </span><a href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
+                        <span>Outside link: </span><a class="catch-link" href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
                     <% } %>
 
                     <p class="catch-post-content"><%= el.catchContent %></p>
@@ -108,7 +109,7 @@
                         <% } %>
                     </div>
 
-                </div>
+                </section>
             <% }) %>    
             </ul>
             <!-- -------------------------- -->

@@ -39,7 +39,7 @@
             <hr>
 
             <% if (catchPost.catchLink !== 'none'){ %>
-                <span>Outside link: </span><a href="<%= catchPost.catchLink %>" target="_blank"><%= catchPost.catchLink %></a>
+                <span>Outside link: </span><a class="catch-link" href="<%= catchPost.catchLink %>" target="_blank"><%= catchPost.catchLink %></a>
             <% } %>
 
             <p class="catch-post-content"><%= catchPost.catchContent %></p>

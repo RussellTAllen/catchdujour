@@ -146,9 +146,14 @@ button{
   font-size: 25px;
   text-decoration: none;
   margin: 0px 0;
+  word-wrap: break-word;
+  max-width: 700px;
+
+
 }
 .catch-title h3 a{
   color: var(--dark-purple);
+  word-wrap: break-word;
 }
 .catch-title h3 a:hover{
   color: var(--dark-red);
@@ -156,12 +161,15 @@ button{
 .catch-title h5{
   margin: 0;
 }
+.catch-link{
+  word-wrap: break-word;
+}
 .comment-bubble{
   display: inline-block;
   margin-left: auto;
   margin-top: 15px;
 }
-/* Text bubble graphic */
+/* Comment bubble graphic */
 .far.fa-comment{
   line-height: 0.6;
 }
@@ -170,8 +178,9 @@ button{
   position: relative;
   right: 39px;
   bottom: 14px;
+  font-weight: 500;
 }
-
+/* Fish likes button */
 .fa-fish{
   color: var(--med-red);
   text-shadow: 1px 1px 0px var(--super-dark-red);
@@ -222,6 +231,9 @@ main{
 hr{
   margin: 2px 0;
 }
+header+hr{
+  margin: 10px 0;
+}
 .create-page,
 .sort{
   margin-left: 15px;
@@ -243,15 +255,15 @@ hr{
   border: 1px solid rgba(0,0,0,.09);
   padding: 0px 25px 0px 25px;
   margin: 15px 10px;
+  min-width: 800px;
 }
-.catch-post 
 .catch-post-content{
-  /* background:rgb(199, 199, 199); */
   width: 100%;
   max-width: 800px;
   font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 18px;
   white-space: pre-wrap;
+  word-wrap: break-word;
 }
 .catch-post a{
   display: inline;

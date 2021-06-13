@@ -134,7 +134,7 @@ function editCatchPost(){
     editTitle.setAttribute('maxlength', '60')
     editTitle.setAttribute('required', 'true')
     editTitle.classList.add('edit-catch-title')
-    editTitle.value = postTitle.innerText
+    editTitle.value = postTitle.querySelector('a').innerText
     postTitle.replaceWith(editTitle)
     
     // Turn post content into editable input

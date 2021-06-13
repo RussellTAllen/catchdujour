@@ -132,12 +132,16 @@ button{
   width: 100%;
 }
 .catch-title{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 .catch-title h3{
   display: inline-block;
+  flex-wrap: wrap;
   color: var(--dark-purple);
   font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 28px;
+  font-size: 25px;
   text-decoration: none;
   margin: 0px 0;
 }
@@ -404,4 +408,9 @@ footer span{
 /*******************************************/
 .hidden{
   display: none;
+}
+
+/* First breakpoint */
+@media (max-width: 1090px){
+ 
 }

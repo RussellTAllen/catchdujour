@@ -14,11 +14,17 @@
 /******************************************/
 :root{
   --main-red: #ff0000;
+  --light-red: #ffd1d1;
+  --med-red: #ff6a6a;
   --maroon: #400000;
   --super-dark-red: #0d0000;
   --dark-red: #bf0000;
   --dark-purple: #330c2d;
+  --dark-blue: #131f28;
+  --gray-blue: #5a98c2;
   --light-purple: #bd88a1;
+  --orange: #ef8938;
+  --background: #f0f7ff;
   --background: #f0f7ff;
   --catch-background: rgb(250,250,250);
 }
@@ -46,8 +52,10 @@ body{
 }
 body, *{
   font-family: "Cereal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: var(--super-dark-red);
 }
-a{
+a,
+em a:visited{
   color: var(--light-purple);
 }
 a:visited{
@@ -57,9 +65,15 @@ a:hover{
   color: var(--dark-red);
 }
 .logo{
-  height: 80px;
   width: 80px;
+  height: 80px;
   margin-top: 0;
+  transition: .2s;
+}
+.logo:hover{
+  width: 85px;
+  height: 85px;
+  margin-top: -5px;
 }
 header.container{
   display: flex;
@@ -102,10 +116,9 @@ header hr{
   display: block;
 }
 h1{
-  color: red;
+  color: var(--main-red);
   margin: 0;
   padding: 0;
-  
 }
 button{
   cursor: pointer;
@@ -122,10 +135,14 @@ button{
 }
 .catch-title h3{
   display: inline-block;
+  color: var(--dark-purple);
   font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 28px;
   text-decoration: none;
   margin: 0px 0;
+}
+.catch-title h3 a{
+  color: var(--dark-purple);
 }
 .catch-title h5{
   margin: 0;
@@ -134,21 +151,25 @@ button{
   display: inline-block;
   margin-left: auto;
   margin-top: 15px;
- 
 }
+/* Text bubble graphic */
 .far.fa-comment{
   line-height: 0.6;
 }
+/* Comment counter */
 .fa-layers-counter{
   position: relative;
   right: 39px;
   bottom: 14px;
 }
+
 .fa-fish{
-  color: var(--main-red);
+  color: var(--med-red);
+  text-shadow: 1px 1px 0px var(--super-dark-red);
 }
 .fa-fish:hover{
-  color: var(--dark-red);
+  color: var(--main-red);
+  text-shadow: 3px 2px 0px var(--light-red);
 }
 .likes{
   display: inline-block;
@@ -194,11 +215,11 @@ hr{
   margin-left: 15px;
 }
 .catch-post{
-    background: var(--catch-background);
-    box-shadow: 1px 1px 4px rgb(0 0 0 / 5%);
-    border: 1px solid rgba(0,0,0,.09);
-    padding: 0px 25px 0px 25px;
-    margin: 15px 10px;
+  background: var(--catch-background);
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 5%);
+  border: 1px solid rgba(0,0,0,.09);
+  padding: 0px 25px 0px 25px;
+  margin: 15px 10px;
 }
 .catch-post 
 .catch-post-content{
@@ -220,9 +241,8 @@ hr{
   color:rgb(255, 22, 22);
 } */
 .single-catch{
-  margin: 0 auto;
+  margin: 20px auto;
 }
-
 .comment-area,
 .edit-post-content{
   width: 100%;
@@ -281,13 +301,15 @@ hr{
 .followed-content a,
 .followed-content span{
   display: block;
-  background: var(--light-purple);
+  background: var(--light-red);
   color: var(--dark-purple);
   padding: 5px 25px 5px 10px;
 }
 .followed-by-content a:hover,
 .followed-content a:hover{
-  background:rgb(223, 223, 255)
+  background:var(--super-dark-red);
+  color: var(--light-red);
+
 }
 .catchegories,
 .omitted-catchegories{
@@ -319,14 +341,15 @@ input[type=checkbox]:checked:after{
   border: 1px solid var(--dark-purple);
   border-radius: 4px;
   cursor: pointer;
-  background-color: var(--light-purple);
+  background-color: var(--light-red);
   border: 1px solid #adb8c0;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
   content: '\2714';
 	font-size: 14px;
 }
 input[type=checkbox]:hover:after{
-  background-color: rgb(255, 82, 82);
+  background-color: var(--super-dark-red);
+  color: var(--light-red);
 }
 input.catch-link{
   display: block;

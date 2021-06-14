@@ -44,12 +44,12 @@
             
             <section class="catch-post" data-id="<%=el._id%>">
                 <section class="catch-header">
+                    <% if (el.likedBy.some(u => u.userName === user.userName)){ %>
+                    <div class="likes liked">
+                    <% }else{ %>
                     <div class="likes">
-                        <% if (el.likedBy.some(u => u.userName === user.userName)){ %>
-                        <i class="fas fa-fish fa-3x liked"><span class="fa-layers-counter fa-fw"><%= el.likes %></span></i>
-                        <% }else{ %>
+                    <% } %>
                         <i class="fas fa-fish fa-3x"><span class="fa-layers-counter fa-fw"><%= el.likes %></span></i>
-                        <% } %>
                     </div>
                     <div class="catch-title">
                         <h3><a href="catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>

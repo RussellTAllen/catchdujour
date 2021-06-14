@@ -208,7 +208,7 @@ button{
   line-height: 0.6;
 }
 /* Comment counter */
-.fa-layers-counter{
+.comment-bubble .far .fa-layers-counter{
   position: relative;
   right: 33px;
   bottom: 12px;
@@ -223,26 +223,34 @@ button{
 }
 /* Fish likes button */
 .fa-fish{
-  /* color: var(--med-red); */
   color: var(--catch-background);
-  text-shadow: 2px 0px 0px var(--dark-red), -2px 0px 0px var(--dark-red), 0px -2px 0px var(--dark-red), 0px 2px 0px var(--dark-red);
+  text-shadow: 2px 0px 1px var(--dark-red), -2px 0px 1px var(--dark-red), 0px -2px 1px var(--dark-red), 0px 2px 1px var(--dark-red);
 }
-.fa-fish:hover{
+.likes:hover .fa-fish{
   color: var(--main-red);
   text-shadow: 0px 0px 0px var(--light-red);
 }
 /* Likes counter */
-.likes .fa-layers-counter{
+.likes .fa-fish .fa-layers-counter{
   position: relative;
-  color: white;
-  right: 36px;
+  color: var(--dark-red);
+  text-shadow: none;
+  font-weight: bold;
+  font-size: 20px;
+  right: 37px;
   bottom: 11px;
 }
+.likes:hover .fa-fish .fa-layers-counter{
+  color: var(--catch-background);
+}
 /* Signify if user has liked */
-.liked{
+.liked.likes .fa-fish{
   color: var(--dark-red);
   text-shadow: 1px 1px 0px var(--super-dark-red);
-
+}
+.liked.likes .fa-fish .fa-layers-counter{
+  color: var(--catch-background);
+  text-shadow: 1px 1px 0px var(--super-dark-red);
 }
 .post-catchegories{
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;

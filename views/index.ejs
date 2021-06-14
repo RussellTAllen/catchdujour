@@ -46,19 +46,17 @@
                 <section class="catch-header">
                     <div class="likes">
                         <% if (el.likedBy.some(u => u.userName === user.userName)){ %>
-                        <i class="fas fa-fish fa-3x liked"></i>
+                        <i class="fas fa-fish fa-3x liked"><span class="fa-layers-counter fa-fw"><%= el.likes %></span></i>
                         <% }else{ %>
-                        <i class="fas fa-fish fa-3x"></i>
+                        <i class="fas fa-fish fa-3x"><span class="fa-layers-counter fa-fw"><%= el.likes %></span></i>
                         <% } %>
-                        <span class="fa-layers-counter fa-fw"><%= el.likes %></span>
                     </div>
                     <div class="catch-title">
                         <h3><a href="catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>
                         <h5>Posted by: <em><a href="catchPosts/<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(el.date).fromNow() %></h5>
                     </div>
                     <div class="comment-bubble">
-                        <i class="far fa-comment fa-3x fa-fw"></i>
-                        <span class="fa-layers-counter fa-fw"><%= el.comments.length %></span>
+                        <i class="far fa-comment fa-3x fa-fw"><span class="fa-layers-counter fa-fw"><%= el.comments.length %></span></i>
                     </div>
                 </section>
 

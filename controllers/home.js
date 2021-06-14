@@ -62,6 +62,7 @@ module.exports = {
             const catchPosts = await CatchPost.find().sort({ likes: -1 })
             let catchegories = await Catchegory.find()
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories.sort((a,b) => b.count - a.count)
 
             await User.findOneAndUpdate({ _id: req.user._id },
                 { preferredSort: 'mostLiked'})
@@ -87,6 +88,7 @@ module.exports = {
             const catchPosts = await CatchPost.find().sort({ commentsLength: -1 })
             let catchegories = await Catchegory.find()
             catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories.sort((a,b) => b.count - a.count)
 
             await User.findOneAndUpdate({ _id: req.user._id },
                     { preferredSort: 'mostCommented' })

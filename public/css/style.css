@@ -129,6 +129,34 @@ button{
 .edit-and-delete{
   margin: 10px 0;
 }
+.catch-post{
+  background: var(--catch-background);
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 5%);
+  border: 1px solid rgba(0,0,0,.09);
+  padding: 0px 20px 0px 20px;
+  margin: 15px 10px;
+  max-width: 920px;
+  min-width: 350px;
+}
+.catch-post-content{
+  width: 100%;
+  max-width: 855px;
+  font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 18px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.catch-post a{
+  display: inline;
+  text-decoration: none;
+  color: var(--dark-red);
+}
+.catch-post a:hover{
+  color: var(--med-red);
+}
+.single-catch{
+  margin: 20px auto;
+}
 .catch-header{
   display: flex;
   width: 100%;
@@ -146,10 +174,10 @@ button{
   font-size: 25px;
   text-decoration: none;
   margin: 0px 0;
-  word-wrap: break-word;
-  max-width: 700px;
-
-
+  word-break: break-word;
+  width: 100%;
+  max-width: 740px;
+  min-width: 200px;
 }
 .catch-title h3 a{
   color: var(--dark-purple);
@@ -168,6 +196,7 @@ button{
   display: inline-block;
   margin-left: auto;
   margin-top: 15px;
+  margin-right: -20px;
 }
 /* Comment bubble graphic */
 .far.fa-comment{
@@ -176,9 +205,16 @@ button{
 /* Comment counter */
 .fa-layers-counter{
   position: relative;
-  right: 39px;
-  bottom: 14px;
+  right: 33px;
+  bottom: 12px;
   font-weight: 500;
+  font-size: 20px;
+}
+.likes{
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 3px;
 }
 /* Fish likes button */
 .fa-fish{
@@ -187,23 +223,16 @@ button{
 }
 .fa-fish:hover{
   color: var(--main-red);
-  text-shadow: 3px 2px 0px var(--light-red);
+  /* text-shadow: 0px 0px 0px var(--light-red); */
 }
-.likes{
-  display: inline-block;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 3px;
-}
-.likes + span{
-  font-weight: bold;
-}
+/* Likes counter */
 .likes .fa-layers-counter{
   position: relative;
   color: white;
-  right: 40px;
-  bottom: 13px;
+  right: 36px;
+  bottom: 11px;
 }
+/* Signify if user has liked */
 .liked{
   color: var(--dark-red);
 }
@@ -227,6 +256,7 @@ button{
 }
 main{
   width: 920px;
+  min-width: 350px;
 }
 hr{
   margin: 2px 0;
@@ -248,36 +278,6 @@ header+hr{
   font-weight: 500;
   text-decoration: none;
   padding: 1px 8px;
-}
-.catch-post{
-  background: var(--catch-background);
-  box-shadow: 1px 1px 4px rgb(0 0 0 / 5%);
-  border: 1px solid rgba(0,0,0,.09);
-  padding: 0px 25px 0px 25px;
-  margin: 15px 10px;
-  min-width: 800px;
-}
-.catch-post-content{
-  width: 100%;
-  max-width: 800px;
-  font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
-  font-size: 18px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-.catch-post a{
-  display: inline;
-  text-decoration: none;
-  color: var(--dark-red);
-}
-.catch-post a:hover{
-  color: var(--med-red);
-}
-/* .catch-post a:visited{
-  color:rgb(255, 22, 22);
-} */
-.single-catch{
-  margin: 20px auto;
 }
 .comment-area,
 .edit-post-content{
@@ -443,6 +443,47 @@ footer span{
 }
 
 /* First breakpoint */
-@media (max-width: 1090px){
- 
+@media (max-width: 1170px){
+  aside{
+    display: none;
+  }
+}
+
+@media (max-width: 768px){
+  header.container{
+    display: flex;
+    flex-direction: column;
+  }
+  header.container div.container{
+    order: 1;
+  }
+  header nav{
+    justify-self: flex-end;
+    align-self: flex-start;
+    order: 0;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 350px){
+  header.container div.container{
+    display: block;
+    text-align: center;
+  }
+  .catch-header{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .catch-header .likes{
+    order: 0;
+    flex: 50%;
+  }
+  .catch-header .comment-bubble{
+    order: 1;
+    margin-right: -10px;
+  }
+  .catch-header .catch-title{
+    order: 2;
+    flex: 100%;
+  }
 }

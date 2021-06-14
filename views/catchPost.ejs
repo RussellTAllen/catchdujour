@@ -17,16 +17,18 @@
         <section data-id="<%= catchPost._id %>" class="catch-post single-catch">
             <section class="catch-header">
                 <div class="likes">
-                    <i class="fas fa-fish fa-3x"></i>
-                    <span class="fa-layers-counter fa-fw"><%= catchPost.likes %></span>
+                    <% if (catchPost.likedBy.some(u => u.userName === user.userName)){ %>
+                        <i class="fas fa-fish fa-3x liked"><span class="fa-layers-counter fa-fw"><%= catchPost.likes %></span></i>
+                        <% }else{ %>
+                        <i class="fas fa-fish fa-3x"><span class="fa-layers-counter fa-fw"><%= catchPost.likes %></span></i>
+                        <% } %>
                 </div>
                 <div class="catch-title">
                     <h3><%= catchPost.catchTitle %></h3>
                     <h5>Posted by: <em><a href="../<%= catchPost.postedBy.userName %>"><%= catchPost.postedBy.userName %></a></em> <%= moment(catchPost.date).fromNow() %></h5>
                 </div>
                 <div class="comment-bubble">
-                    <i class="far fa-comment fa-3x fa-fw"></i>
-                    <span class="fa-layers-counter fa-fw"><%= catchPost.comments.length %></span>
+                    <i class="far fa-comment fa-3x fa-fw"><span class="fa-layers-counter fa-fw"><%= catchPost.comments.length %></span></i>
                 </div>
             </section>
             

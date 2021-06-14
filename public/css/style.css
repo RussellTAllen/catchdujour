@@ -26,7 +26,6 @@
   --light-purple: #bd88a1;
   --orange: #ef8938;
   --background: #f0f7ff;
-  --background: #f0f7ff;
   --catch-background: rgb(250,250,250);
 }
 
@@ -48,10 +47,16 @@ input{
   background:rgb(255, 175, 46);
 } */
 /***************/
+html{
+  padding: 0;
+  margin: 0;
+}
 body{
   margin: 20px 25px;
+  padding: 0;
 }
-body, *{
+body, 
+*{
   font-family: "Cereal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: var(--super-dark-red);
 }
@@ -135,8 +140,8 @@ button{
   border: 1px solid rgba(0,0,0,.09);
   padding: 0px 20px 0px 20px;
   margin: 15px 10px;
+  width: 100%;
   max-width: 920px;
-  min-width: 350px;
 }
 .catch-post-content{
   width: 100%;
@@ -218,12 +223,13 @@ button{
 }
 /* Fish likes button */
 .fa-fish{
-  color: var(--med-red);
-  text-shadow: 1px 1px 0px var(--super-dark-red);
+  /* color: var(--med-red); */
+  color: var(--catch-background);
+  text-shadow: 2px 0px 0px var(--dark-red), -2px 0px 0px var(--dark-red), 0px -2px 0px var(--dark-red), 0px 2px 0px var(--dark-red);
 }
 .fa-fish:hover{
   color: var(--main-red);
-  /* text-shadow: 0px 0px 0px var(--light-red); */
+  text-shadow: 0px 0px 0px var(--light-red);
 }
 /* Likes counter */
 .likes .fa-layers-counter{
@@ -235,6 +241,8 @@ button{
 /* Signify if user has liked */
 .liked{
   color: var(--dark-red);
+  text-shadow: 1px 1px 0px var(--super-dark-red);
+
 }
 .post-catchegories{
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -255,8 +263,8 @@ button{
   justify-content: center;
 }
 main{
-  width: 920px;
-  min-width: 350px;
+  width: 100%;
+  max-width: 920px;
 }
 hr{
   margin: 2px 0;
@@ -267,7 +275,7 @@ header+hr{
 .create-page,
 .sort{
   margin-left: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   /* padding: 1px 2px 2px 2px; */
 }
 .sort-select{
@@ -360,11 +368,6 @@ header+hr{
   /* display: inline-block; */
   justify-content: right;
 }
-input.edit-catch-title{
-  width: 400px;
-  margin: 10px 0;
-  font-size: 18px;
-}
 input[type=checkbox]{
   margin: 5px 0;
   padding: 5px;
@@ -387,29 +390,42 @@ input[type=checkbox]:hover:after{
   background-color: var(--super-dark-red);
   color: var(--light-red);
 }
+input.catch-title,
+input.edit-catch-title,
 input.catch-link{
   display: block;
-  width: 400px;
+  width: 100%;
+  max-width: 550px;
   margin-bottom: 10px;
   font-size: 16px;
 }
 textarea{
   font-size: 16px;
 }
-textarea.catch-content{
-  display: block;
-  width: 450px;
-  height: 350px;
-  resize: none;
-}
-textarea.edit-comment-text
+textarea.catch-content,
+textarea.edit-comment-text,
 textarea{
   resize: none;
-  width: 600px;
+  width: 100%;
+  max-width: 650px;
   height: 350px;
+}
+.container.create-catch main{
+  width: 100%;
+  max-width: 650px;
+}
+/* Create catch form body */
+.container.create-catch{
+  padding: 0 auto;  
+}
+/* Create catch submit button */
+#create-catch-btn{
+  margin: 10px 0;
 }
 aside{
   width: 250px;
+  margin-left: 20px;
+  margin-top: 17px;
 }
 aside h3{
   margin: 10px 15px;
@@ -463,12 +479,38 @@ footer span{
     order: 0;
     margin-bottom: 20px;
   }
+  /* textarea.catch-content{
+    width: 570px;
+  } */
 }
 
 @media (max-width: 570px){
+  body{
+    margin: 0 2px;
+    padding: 0;
+  }
+  .container{
+    width: 100%;
+    min-width: 346px;
+    
+    /* margin-left: 24px; */
+  }
+  div.intro{
+    margin: 0 auto;
+    min-width: 340px;
+    max-width: 570px;
+  }
+  main h1,
+  div.intro h1{
+    font-size: 26px;
+  }
+  div.intro h3{
+    font-size: 14px;
+  }
   header.container div.container{
     display: block;
     text-align: center;
+    margin: 0 auto;
   }
   .catch-header{
     display: flex;
@@ -485,5 +527,9 @@ footer span{
   .catch-header .catch-title{
     order: 2;
     flex: 100%;
+  }
+  .catch-post{
+    padding: 0;
+    margin: 15px 1px;
   }
 }

@@ -465,7 +465,7 @@ footer span{
   }
 }
 
-@media (max-width: 350px){
+@media (max-width: 570px){
   header.container div.container{
     display: block;
     text-align: center;

@@ -55,13 +55,13 @@
             <% catchPosts.forEach( el => { %>
                 <section class="catch-post" data-id="<%=el._id%>">
                     <section class="catch-header">
-                        <div class="likes">
-                            <% if (el.likedBy.some(u => u.userName === user.userName)){ %>
-                            <i class="fas fa-fish fa-3x liked"><span class="fa-layers-counter fa-fw"><%= el.likes %></span></i>
+                        <% if (el.likedBy.some(u => u.userName === user.userName)){ %>
+                            <div class="likes liked">
                             <% }else{ %>
-                            <i class="fas fa-fish fa-3x"><span class="fa-layers-counter fa-fw"><%= el.likes %></span></i>
+                            <div class="likes">
                             <% } %>
-                        </div>
+                                <i class="fas fa-fish fa-3x"><span class="fa-layers-counter fa-fw"><%= el.likes %></span></i>
+                            </div>
                         <div class="catch-title">
                             <h3><a href="../catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>
                             <h5>Posted by: <em><a href="<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(el.date).fromNow() %></h5>

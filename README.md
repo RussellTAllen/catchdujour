@@ -7,4 +7,5 @@ CatchDuJour Social Media website
 🚧 Currently in beta phase
   - Released to a small amount of users, I'm still adding features daily
   - Expect lots of UI/design updates as well as additional bells & whistles
+  
  

@@ -45,30 +45,6 @@ module.exports = {
             console.log(err)
         }
     },
-    getProfile: async (req,res) => {
-        try{
-            const user = await User.findById(req.user._id)
-            const catchPosts = await CatchPost.find({ userId: req.user.id }).sort({ _id: -1 })
-            let catchegories = await Catchegory.find()
-            const availableCatchegories = catchegories
-            if (!catchegories) catchegories = []
-            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
-            catchegories.sort((a,b) => b.count - a.count)
-
-            res.render('catchPosts.ejs', {
-                catchPosts: catchPosts, 
-                user: req.user,
-                targetUser: req.user,
-                catchegories: catchegories,
-                availableCatchegories: availableCatchegories,
-                following: user.following,
-                followedBy: user.followedBy,
-                moment: moment
-            })
-        }catch(err){
-            console.log(err)
-        }
-    },
     getCatchPostsByUserId: async (req,res) => {
         if (!req.user) req.user = {}
 
@@ -79,7 +55,7 @@ module.exports = {
             let catchegories = await Catchegory.find()
             const availableCatchegories = catchegories
             if (!catchegories) catchegories = []
-            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit === cat.catchegory))
             catchegories.sort((a,b) => b.count - a.count)
             const catchPosts = await CatchPost.find({ userId: targetUser._id }).sort({ _id: -1 })
             catchegories = catchegories.filter(cat => catchPosts.some(post => post.catchegories.includes(cat.catchegory)))

@@ -1,0 +1,57 @@
+<% catchPosts.forEach( el => { %>
+            <section class="catch-post" data-id="<%=el._id%>">
+                <section class="catch-header">
+                    <% if (el.likedBy.some(u => u.userName === user.userName)){ %>
+                        <div class="likes liked">
+                        <% }else{ %>
+                        <div class="likes">
+                        <% } %>
+                            <i class="fas fa-fish fa-3x"><span class="fa-layers-counter fa-fw"><%= el.likes %></span></i>
+                        </div>
+                    <div class="catch-title">
+                        <h3><a href="../catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>
+                        <h5>Posted by: <em><a href="<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(el.date).fromNow() %></h5>
+                    </div>
+                    <div class="comment-bubble">
+                        <i class="far fa-comment fa-3x fa-fw"><span class="fa-layers-counter fa-fw"><%= el.comments.length %></span></i>
+                    </div>
+                </section>
+                 
+                <hr>
+                <% if (!el.catchegories[0]) { %>
+                    <h4 class="post-catchegories">No catchegories selected.</h4>
+                <% } else { %>
+                    <h4 class="post-catchegories">Catchegories: <span><%= el.catchegories.join(', ') %></span></h4>
+                <% } %>
+                <hr>
+
+                <% if (el.catchLink !== 'none'){ %>
+                    <span>Outside link: </span><a class="catch-link" href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
+                <% } %>
+
+                <p class="catch-post-content"><%= el.catchContent %></p>
+                <textarea class="edit-post-content hidden" maxlength="10000"><%= el.catchContent %></textarea>
+
+
+                <% console.log(el.catchegories[0]) %>
+
+                <% if (user.userName === el.postedBy.userName) {%>
+                <div class="edit-and-delete">
+                    <button class="edit" type="submit">Edit Post</button>
+                    <button class="del"> Delete </button>
+                </div>
+                <% } %>
+                <div class="edit-post-catchegories hidden">
+                    <% for (let i = 0, len = availableCatchegories.length; i < len; i++) {%>
+                        <div>
+                            <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= availableCatchegories[i].catchegory %>"
+                            <% if (el.catchegories.includes(availableCatchegories[i].catchegory)) {%>
+                                checked
+                            <% } %>
+                            <label for="<%= availableCatchegories[i].catchegory %>"><%= availableCatchegories[i].catchegory %></label>
+                        </div>
+                    <% } %>
+                </div>
+
+            </section>
+        <% }) %> 

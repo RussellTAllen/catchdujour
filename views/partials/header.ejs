@@ -1,6 +1,6 @@
     <header class="container">
         <div class="container">
-            <a href="/"><img src="../../img/catch-logo.png" class="logo" alt="logo"></a>
+            <a href="/"><img src="/img/catch-logo.png" class="logo" alt="logo"></a>
             <div class='intro'>
                     <% if (targetUser === 'none'){ %>
                     <h1>Welcome to Catch du Jour!</h1>
@@ -18,7 +18,7 @@
         <% } else {%>
             <h5><%= user.userName %> is logged in</h5>
             <a href="/logout">Logout</a>
-            <a href="/catchProfile">Go To Your Profile</a>
+            <a href="/users/profile">Go To Your Profile</a>
             <div class="followed-container">
                 <button id="followed-btn">Following (<%= following.length %>)</button>
                 <div id="followed-dropdown" class="followed-content hidden">

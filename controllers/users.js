@@ -1,6 +1,33 @@
 const User = require('../models/User')
+const CatchPost = require('../models/CatchPost')
+const Catchegory = require('../models/Catchegory')
+const moment = require('moment-timezone')
 
 module.exports = {
+    getProfile: async (req,res) => {
+        try{
+            const user = await User.findById(req.user._id)
+            const catchPosts = await CatchPost.find({ userId: req.user._id }).sort({ _id: -1 })
+            let catchegories = await Catchegory.find()
+            const availableCatchegories = catchegories
+            if (!catchegories) catchegories = []
+            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories.sort((a,b) => b.count - a.count)
+
+            res.render('profile.ejs', {
+                catchPosts: catchPosts, 
+                user: req.user,
+                targetUser: req.user,
+                catchegories: catchegories,
+                availableCatchegories: availableCatchegories,
+                following: user.following,
+                followedBy: user.followedBy,
+                moment: moment
+            })
+        }catch(err){
+            console.log(err)
+        }
+    },
     followUser: async (req, res) => {
         try{
             const followedUserId = String(Object.keys(req.body))
@@ -71,7 +98,7 @@ module.exports = {
             console.log('Catchegory Omitted')
             console.log( req.body.omitCatchegory )
             console.log( req.user.omittedCatchegories )
-            res.redirect('/')
+            res.json('Catchegory Omitted!')
         }catch(err){
             console.log(err)
         }
@@ -83,7 +110,7 @@ module.exports = {
                 }})
             console.log('Catchegory Allowed')
             console.log( req.user.omittedCatchegories )
-            res.redirect('/')
+            res.json('Catchegory allowed!')
         }catch(err){
             console.log(err)
         }

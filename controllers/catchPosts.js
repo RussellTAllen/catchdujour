@@ -147,7 +147,7 @@ module.exports = {
             if (req.body.createCatchegory) {
                 req.body.catchegories.push(req.body.createCatchegory.toLowerCase())
                 const catchegories = await Catchegory.find()
-                if (catchegories.every(cat => !cat.catchegory.includes(req.body.createCatchegory.toLowerCase().trim()))){
+                if (catchegories.every(cat => cat.catchegory !== req.body.createCatchegory.toLowerCase().trim())){
                     await Catchegory.create({
                             catchegory: req.body.createCatchegory.toLowerCase().trim(), 
                             count: 0,

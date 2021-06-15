@@ -11,10 +11,9 @@
 </head>
 <body data-user="<%= user._id %>">
     <!-- Filter out user's omitted catchegories -->
-    <% catchPosts = catchPosts.filter(post => post.catchegories?.every(cat => !user.omittedCatchegories.includes(cat))) %>
+    <% catchPosts = catchPosts.filter(post => post.catchegories?.every(cat => user.omittedCatchegories !== cat)) %>
     
     <%- include('partials/header') -%>
-
 
     <div class="container">
         <main>
@@ -114,20 +113,17 @@
             <% } %>
             <hr>
             <div class="catchegories">
-                <form action="/users/omitCatchegory?_method=PUT" method="POST">
                 <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
                     <div>
                         <input type="checkbox" class="catchegory-selected" name="catchegory" value="<%= catchegories[i].catchegory %>" checked>
                         <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %> (<%= catchegories[i].count %>)</label>
                     </div>
                 <% } %>
-                </form>
             </div>
       
             <% if (user.omittedCatchegories.length > 0) {%>
             <h3>Unseen Catchegories</h3>
             <div class='omitted-catchegories'>
-                <form action="/users/omitCatchegory?_method=PUT" method="POST">
                 <% for (let i = 0, len = user.omittedCatchegories.length; i < len; i++) {%>
                     <div>
                         <input type="checkbox" class="catchegory-unselected" name="omitted-catchegory" value="<%= user.omittedCatchegories[i] %>">

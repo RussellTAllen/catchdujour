@@ -3,8 +3,6 @@ const User = require('../models/User')
 const Catchegory = require('../models/Catchegory')
 const moment = require('moment-timezone')
 
-
-
 module.exports = {
     getWelcome: async (req, res) => {
         try{
@@ -35,7 +33,7 @@ module.exports = {
             let catchPosts = await CatchPost.find().sort({ _id: -1 })
             let catchegories = await Catchegory.find()
             if (!catchegories) catchegories = []
-            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit === cat.catchegory))
             catchegories.sort((a,b) => b.count - a.count)
 
             await User.findOneAndUpdate({ _id: req.user._id },
@@ -61,7 +59,7 @@ module.exports = {
             if (!user) user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
             const catchPosts = await CatchPost.find().sort({ likes: -1 })
             let catchegories = await Catchegory.find()
-            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit === cat.catchegory))
             catchegories.sort((a,b) => b.count - a.count)
 
             await User.findOneAndUpdate({ _id: req.user._id },
@@ -87,7 +85,7 @@ module.exports = {
             if (!user) user = { userName: 'guest', omittedCatchegories: ['nsfw'] }
             const catchPosts = await CatchPost.find().sort({ commentsLength: -1 })
             let catchegories = await Catchegory.find()
-            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit.includes(cat.catchegory)))
+            catchegories = catchegories.filter(cat => !user.omittedCatchegories.some(omit => omit === cat.catchegory))
             catchegories.sort((a,b) => b.count - a.count)
 
             await User.findOneAndUpdate({ _id: req.user._id },

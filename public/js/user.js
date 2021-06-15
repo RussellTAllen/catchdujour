@@ -130,10 +130,10 @@ function editCatchPost(){
     console.log('user.js says content contains: '+editContent.textContent.includes('\r\n'))
     // Turn title into editable input
     const editTitle = document.createElement('input')
-    editTitle.setAttribute('maxlength', '60')
+    editTitle.setAttribute('maxlength', '180')
     editTitle.setAttribute('required', 'true')
     editTitle.classList.add('edit-catch-title')
-    editTitle.value = postTitle.querySelector('a').innerText
+    editTitle.value = postTitle.querySelector('h3').innerText
     postTitle.replaceWith(editTitle)
     
     // Turn post content into editable input

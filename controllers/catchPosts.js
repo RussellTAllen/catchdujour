@@ -76,7 +76,7 @@ module.exports = {
     editCatchPost: async (req, res) => {
         try{
             await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },{
-                catchContent: req.body.catchContent.trim(),
+                catchContent: req.body.catchContent,
                 catchTitle: req.body.catchTitle,
                 catchegories: req.body.catchegories
             })

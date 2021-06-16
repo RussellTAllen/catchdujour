@@ -5,7 +5,7 @@ const newCatchegory = document.querySelector('#new-catchegory')
 const catchTitle = document.querySelector('.catch-title')
 const catchContent = document.querySelector('.catch-content')
 
-createCatchBtn.addEventListener('click', addNewCatchegory)
+// createCatchBtn.addEventListener('click', addNewCatchegory)
 
 async function addNewCatchegory(){
     // if (!newCatchegory.value || !catchContent.value || !catchTitle.value) return

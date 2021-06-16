@@ -76,7 +76,7 @@
                         <hr>
                         <h4><%= moment(comment.date).fromNow() %> <a href="/catchPosts/<%= comment.user.userName %>"><em><%= comment.user.userName %></em></a> said: </h4>
                         <p class='comment-text'><%= comment.text %></p>
-                        <textarea class="edit-comment-text hidden"><%= comment.text %></textarea>
+                        <textarea class="edit-comment-text hidden" maxlength="3000"><%= comment.text %></textarea>
                         <% if (user.userName === comment.user.userName) {%>
                             <button class='edit-comment'>Edit Comment</button>
                             <button class='del-comment'>Delete Comment</button>
@@ -94,7 +94,7 @@
             <div class="comment-box">
                 <form action="/catchPosts/<%= catchPost._id %>/comment/?_method=PUT" method="POST">
                     <label for="text">Enter Comment here: </label>
-                        <textarea name="text" class="comment-area"></textarea>
+                        <textarea name="text" class="comment-area" maxlength="3000"></textarea>
                     <input type="submit">
                 </form>
             </div>

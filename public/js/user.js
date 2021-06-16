@@ -190,7 +190,7 @@ function editCatchPost(){
                     body: JSON.stringify({
                         'catchPostId': catchPostId,
                         'catchTitleElement': catchTitle,
-                        'catchTitle': catchTitle.value,
+                        'catchTitle': catchTitle.value.trim(),
                         'catchContent': editContent.value,
                         'catchegories': newPostCatchegories,
                         'oldPostCatchegories': oldPostCatchegories,

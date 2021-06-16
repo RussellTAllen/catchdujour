@@ -139,7 +139,7 @@ button{
   box-shadow: 1px 3px 2px rgb(0 0 0 / 10%), -1px -1px 0px rgb(0 0 0 / 10%);
   border: 1px solid rgba(0,0,0,.09);
   padding: 0px 20px 0px 20px;
-  margin: 15px 10px;
+  margin: 15px 0px;
   width: 100%;
   max-width: 920px;
 }
@@ -274,6 +274,9 @@ main{
   width: 100%;
   max-width: 920px;
 }
+main.profile-container{
+  margin: 0 auto;
+}
 hr{
   margin: 2px 0;
 }
@@ -295,12 +298,11 @@ header+hr{
   text-decoration: none;
   padding: 1px 8px;
 }
-.comment-area,
-.edit-post-content{
+.comment-area{
   width: 100%;
   height: 200px;
   resize: none;
-  overflow: hidden;
+  /* overflow: hidden; */
   min-height: 50px;
   max-height: 200px;
   white-space: pre-wrap;
@@ -411,12 +413,14 @@ textarea{
   font-size: 16px;
 }
 textarea.catch-content,
+textarea.edit-post-content,
 textarea.edit-comment-text,
 textarea{
   resize: none;
   width: 100%;
   max-width: 650px;
   height: 350px;
+  white-space: pre-wrap;
 }
 .container.create-catch main{
   width: 100%;
@@ -494,7 +498,7 @@ footer span{
 
 @media (max-width: 570px){
   body{
-    margin: 0 2px;
+    margin: 0 10px;
     padding: 0;
   }
   .container{

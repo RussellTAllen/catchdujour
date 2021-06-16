@@ -14,51 +14,52 @@
     
     <%- include('partials/header') -%>
 
-    <div id="followed-by">
-        <button id="followed-by-btn">See who is following you (<%= followedBy.length %>)</button>
-        <div class="followed-by-content hidden">
-            <% for (let i = 0, len = followedBy.length; i < len; i++) {%>
-                <a href="/catchPosts/<%= followedBy[i].userName %>"><%= followedBy[i].userName %></a>
-            <% } %>
+    <main class="profile-container">
+        <div id="followed-by">
+            <button id="followed-by-btn">See who is following you (<%= followedBy.length %>)</button>
+            <div class="followed-by-content hidden">
+                <% for (let i = 0, len = followedBy.length; i < len; i++) {%>
+                    <a href="/catchPosts/<%= followedBy[i].userName %>"><%= followedBy[i].userName %></a>
+                <% } %>
+            </div>
         </div>
-    </div>
 
-    <section>
-        <h3><%= targetUser.userName %>'s Catchegories</h3>
+        <section>
+            <h3>Your Viewed Catchegories</h3>
+            <hr>
+            <div class="catchegories">
+                <form action="/users/omitCatchegory?_method=PUT" method="POST">
+                <% for (let i = 0, len = catchegories.length; i < len; i++){ %>
+                    <div>
+                        <input type="checkbox" class="catchegory-selected" name="catchegory" value="<%= catchegories[i].catchegory %>" checked>
+                        <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %> (<%= catchegories[i].count %>)</label>
+                    </div>
+                <% } %>
+                </form>
+            </div>
+
+            <% if (user.omittedCatchegories.length > 0) {%>
+            <h3>Unseen Catchegories</h3>
+            <div class='omitted-catchegories'>
+                <form action="/users/omitCatchegory?_method=PUT" method="POST">
+                <% for (let i = 0, len = user.omittedCatchegories.length; i < len; i++) {%>
+                    <div>
+                        <input type="checkbox" class="catchegory-unselected" name="omitted-catchegory" value="<%= user.omittedCatchegories[i] %>">
+                        <label for="<%= user.omittedCatchegories[i] %>"><%= user.omittedCatchegories[i] %></label>
+                    </div>
+                <% } %>
+            </div>
+            <% } %>
+        </section>
         <hr>
-        <div class="catchegories">
-            <form action="/users/omitCatchegory?_method=PUT" method="POST">
-            <% for (let i = 0, len = catchegories.length; i < len; i++){ %>
-                <div>
-                    <input type="checkbox" class="catchegory-selected" name="catchegory" value="<%= catchegories[i].catchegory %>" checked>
-                    <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %> (<%= catchegories[i].count %>)</label>
-                </div>
-            <% } %>
-            </form>
-        </div>
+        
+        <section>
+            <h3>Your Catches</h3>
+            <h5>(You will be able to see all of your catches, even if the catch includes one of your 'unseen' catchegories)</h5>
+            <%- include('partials/catchPostsByUser') -%>
 
-        <% if (user.omittedCatchegories.length > 0) {%>
-        <h3>Unseen Catchegories</h3>
-        <div class='omitted-catchegories'>
-            <form action="/users/omitCatchegory?_method=PUT" method="POST">
-            <% for (let i = 0, len = user.omittedCatchegories.length; i < len; i++) {%>
-                <div>
-                    <input type="checkbox" class="catchegory-unselected" name="omitted-catchegory" value="<%= user.omittedCatchegories[i] %>">
-                    <label for="<%= user.omittedCatchegories[i] %>"><%= user.omittedCatchegories[i] %></label>
-                </div>
-            <% } %>
-        </div>
-        <% } %>
-    </section>
-    <hr>
-    
-    <section>
-        <h3>Your Catches</h3>
-        <h5>(You will be able to see all of your catches, even if the catch includes one of your 'unseen' catchegories)</h5>
-        <%- include('partials/catchPostsByUser') -%>
-
-    </section>   
- 
+        </section>   
+    </main>
 
    
 

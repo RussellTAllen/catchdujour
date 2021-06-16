@@ -19,6 +19,12 @@ require('./config/passport')(passport)
 
 connectDB()
 
+// SSL cert
+app.get('/.well-known/pki-validation/470DFCB181B2A7D3780BCEAA6E911361.txt', function (req, res, next) {
+  res.send('470DFCB181B2A7D3780BCEAA6E911361 content');
+});
+
+// Setting up express and libraries
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))

@@ -13,13 +13,7 @@ module.exports = {
         //     console.log(err)
         // }
 
-        fs.readFile('.well-known/pki-validation/470DFCB181B2A7D3780BCEAA6E911361.txt', 'utf8' , (err, data) => {
-            if (err) {
-              console.error(err)
-              return
-            }
-            console.log(data)
-          })
+      
     },
     getWelcome: async (req, res) => {
         try{

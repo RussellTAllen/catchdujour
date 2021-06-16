@@ -15,7 +15,7 @@ router.get('/signup', authController.getSignup)
 router.get('/catchPosts/:id/catchPost', catchPostsController.getCatchPostById)
 router.get('/createCatchPage', ensureAuth, catchPostsController.getCreateCatchPage)
 router.get('/catchPosts/:userName', catchPostsController.getCatchPostsByUserId)
-router.get('/.well-known/pki-validation/470DFCB181B2A7D3780BCEAA6E911361.txt', homeController.sslCert)
+// router.get('/.well-known/pki-validation/470DFCB181B2A7D3780BCEAA6E911361.txt', homeController.sslCert)
 
 router.post('/login', authController.postLogin)
 router.post('/signup', authController.postSignup)

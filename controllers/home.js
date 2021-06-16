@@ -3,17 +3,14 @@ const User = require('../models/User')
 const Catchegory = require('../models/Catchegory')
 const moment = require('moment-timezone')
 const fs = require('fs')
+const path = require('path')
 
 module.exports = {
-    sslCert: async (req, res) =>{
-        // try{
-        //     res.render('470DFCB181B2A7D3780BCEAA6E911361.txt')
-
-        // }catch(err){
-        //     console.log(err)
-        // }
-
-      
+    getSslCert: async (req, res) =>{
+        fs.readFile(path.join( __dirname, '../.well-known/pki-validation/', '470DFCB181B2A7D3780BCEAA6E911361.txt'), 'utf8', (err, data) =>{
+            if (err) throw err
+            console.log(data)
+        })
     },
     getWelcome: async (req, res) => {
         try{

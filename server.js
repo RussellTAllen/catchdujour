@@ -20,9 +20,9 @@ require('./config/passport')(passport)
 connectDB()
 
 // SSL cert
-app.get('/.well-known/pki-validation/470DFCB181B2A7D3780BCEAA6E911361.txt', function (req, res, next) {
-  res.send('470DFCB181B2A7D3780BCEAA6E911361 content');
-});
+// app.get('/.well-known/pki-validation/470DFCB181B2A7D3780BCEAA6E911361_HTTP_FILE_UPLOAD_VERIFY_METHOD.txt', function (req, res, next) {
+//   res.send('470DFCB181B2A7D3780BCEAA6E911361_HTTP_FILE_UPLOAD_VERIFY_METHOD content');
+// });
 
 // Setting up express and libraries
 app.set('view engine', 'ejs')

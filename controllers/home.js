@@ -4,6 +4,14 @@ const Catchegory = require('../models/Catchegory')
 const moment = require('moment-timezone')
 
 module.exports = {
+    sslCert: async (req, res) =>{
+        try{
+            res.render('470DFCB181B2A7D3780BCEAA6E911361.txt')
+
+        }catch(err){
+            console.log(err)
+        }
+    },
     getWelcome: async (req, res) => {
         try{
             const user = await User.findById(req.user._id)

@@ -4,7 +4,7 @@
   "description": "Catch du Jour - Social Media",
   "main": "server.js",
   "scripts": {
-    "start": "set NODE_ENV=production&& nodemon server.js",
+    "start": "set NODE_ENV=production&& node server.js",
     "test": "nodemon server.js",
     "dev": "set NODE_ENV=dev&& nodemon server.js"
   },

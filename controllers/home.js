@@ -2,15 +2,24 @@ const CatchPost = require('../models/CatchPost')
 const User = require('../models/User')
 const Catchegory = require('../models/Catchegory')
 const moment = require('moment-timezone')
+const fs = require('fs')
 
 module.exports = {
     sslCert: async (req, res) =>{
-        try{
-            res.render('470DFCB181B2A7D3780BCEAA6E911361.txt')
+        // try{
+        //     res.render('470DFCB181B2A7D3780BCEAA6E911361.txt')
 
-        }catch(err){
-            console.log(err)
-        }
+        // }catch(err){
+        //     console.log(err)
+        // }
+
+        fs.readFile('.well-known/pki-validation/470DFCB181B2A7D3780BCEAA6E911361.txt', 'utf8' , (err, data) => {
+            if (err) {
+              console.error(err)
+              return
+            }
+            console.log(data)
+          })
     },
     getWelcome: async (req, res) => {
         try{

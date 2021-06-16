@@ -2,16 +2,15 @@ const CatchPost = require('../models/CatchPost')
 const User = require('../models/User')
 const Catchegory = require('../models/Catchegory')
 const moment = require('moment-timezone')
-const fs = require('fs')
 const path = require('path')
 
 module.exports = {
     getSslCert: async (req, res) =>{
-        fs.readFile(path.join( __dirname, '../.well-known/pki-validation/', '470DFCB181B2A7D3780BCEAA6E911361.txt'), 'utf8', (err, data) =>{
+        res.sendFile(path.join( __dirname, '../.well-known/pki-validation/', '470DFCB181B2A7D3780BCEAA6E911361.txt'), 'text/plain', (err, data) =>{
             if (err) throw err
             console.log(data)
         })
-    },
+    },   
     getWelcome: async (req, res) => {
         try{
             const user = await User.findById(req.user._id)

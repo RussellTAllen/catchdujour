@@ -242,7 +242,6 @@ button{
   right: 37px;
   bottom: 11px;
 }
-
 .comment-likes:hover .fa-fish .fa-layers-counter,
 .likes:hover .fa-fish .fa-layers-counter{
   color: var(--catch-background);
@@ -317,6 +316,9 @@ section.comments{
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+}
+.comment-likes{
+  cursor: pointer;
 }
 .comment-box{
   display: flex;

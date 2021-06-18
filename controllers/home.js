@@ -21,7 +21,8 @@ module.exports = {
         res.sendFile('/favicon16x16.png')
     },   
     getWebManifest: async(req, res) =>{
-        res.sendFile('/site.webmanifest.png')
+        // res.sendFile('/manifest.json')
+        res.sendFile('/site.webmanifest')
     },   
     getWelcome: async (req, res) => {
         try{

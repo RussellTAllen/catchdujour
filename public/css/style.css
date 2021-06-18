@@ -226,11 +226,13 @@ button{
   color: var(--catch-background);
   text-shadow: 2px 0px 1px var(--dark-red), -2px 0px 1px var(--dark-red), 0px -2px 1px var(--dark-red), 0px 2px 1px var(--dark-red);
 }
+.comment-likes:hover .fa-fish,
 .likes:hover .fa-fish{
   color: var(--main-red);
   text-shadow: 0px 0px 0px var(--light-red);
 }
 /* Likes counter */
+.comment-likes .fa-fish .fa-layers-counter,
 .likes .fa-fish .fa-layers-counter{
   position: relative;
   color: var(--dark-red);
@@ -240,14 +242,18 @@ button{
   right: 37px;
   bottom: 11px;
 }
+
+.comment-likes:hover .fa-fish .fa-layers-counter,
 .likes:hover .fa-fish .fa-layers-counter{
   color: var(--catch-background);
 }
 /* Signify if user has liked */
+.liked.comment-likes .fa-fish,
 .liked.likes .fa-fish{
   color: var(--dark-red);
   text-shadow: 1px 1px 0px var(--super-dark-red);
 }
+.liked.comment-likes .fa-fish .fa-layers-counter,
 .liked.likes .fa-fish .fa-layers-counter{
   color: var(--catch-background);
   text-shadow: 1px 1px 0px var(--super-dark-red);
@@ -307,6 +313,11 @@ header+hr{
   max-height: 200px;
   white-space: pre-wrap;
 }
+section.comments{
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
 .comment-box{
   display: flex;
   flex-direction: column;
@@ -318,6 +329,9 @@ header+hr{
 }
 .comment-text{
   white-space: pre-wrap
+}
+.comment-likes{
+  text-align: right;
 }
 .edit-comment{
   display: block;

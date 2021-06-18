@@ -177,6 +177,26 @@ module.exports = {
           console.log(err)
         }
     },
+    likeComment: async (req, res) => {
+        try{
+            const post = await CatchPost.findById( req.body.catchPostId )
+            const comment = post.comments.id(req.body.commentId)
+
+            if (!comment.likedBy) comment.likedBy = []
+   
+            if (comment.likedBy.some(user => user.userId === String(req.user._id))) {
+                comment.likes--
+                comment.likedBy = comment.likedBy.filter((user) => user.userId !== String(req.user._id))
+            } else {
+                comment.likes++
+                comment.likedBy.push({ userId: String(req.user._id), userName: req.user.userName })
+            }
+            await post.save()
+            res.json('Added a like!')
+        }catch(err){
+          console.log(err)
+        }
+    },
     addComment: async (req, res) => {
         try{
             await CatchPost.findOneAndUpdate({ _id: req.params.id }, {

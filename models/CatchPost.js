@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('./User')
+// const Comment = require('./Comment')
 
 const CommentSchema = new mongoose.Schema({
   text: {
@@ -14,7 +15,18 @@ const CommentSchema = new mongoose.Schema({
     type: User.UserSchema,
     sparse: true,
     unique: false
-  }
+  },
+  likes: {
+    type: Number,
+    default: 0
+  },
+  likedBy: [new mongoose.Schema(
+    { 
+      userId: String,
+      userName: String
+     },
+    { _id: false },
+  )] 
 })
 
 const CatchPostSchema = new mongoose.Schema({

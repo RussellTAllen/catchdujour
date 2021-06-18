@@ -22,6 +22,10 @@ router.get('/catchPosts/:userName', catchPostsController.getCatchPostsByUserId)
 // })
 
 router.get('/.well-known/pki-validation/470DFCB181B2A7D3780BCEAA6E911361.txt', homeController.getSslCert)
+router.get('/apple-touch-icon.png', homeController.getAppleIcon)
+router.get('/favicon-32x32.png', homeController.getFavicon32)
+router.get('/favicon-16x16.png', homeController.getFavicon16)
+router.get('/site.webmanifest', homeController.getWebManifest)
 
 
 

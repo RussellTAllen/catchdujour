@@ -10,6 +10,18 @@ module.exports = {
             if (err) throw err
             console.log(data)
         })
+    },
+    getAppleIcon: async(req, res) =>{
+        res.sendFile('/apple-touch-icon.png')
+    },   
+    getFavicon32: async(req, res) =>{
+        res.sendFile('/favicon-32x32.png')
+    },   
+    getFavicon16: async(req, res) =>{
+        res.sendFile('/favicon16x16.png')
+    },   
+    getWebManifest: async(req, res) =>{
+        res.sendFile('/site.webmanifest.png')
     },   
     getWelcome: async (req, res) => {
         try{

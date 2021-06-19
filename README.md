@@ -14,6 +14,5 @@ CatchDuJour Social Media website
   - Users can filter out catchegories they are not interested in.
   - Users are able to follow others 
 
-Users can sort the 'catches' (posts) they want to view by 'catchegory'.  So
  
  

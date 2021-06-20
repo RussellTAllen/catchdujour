@@ -19,14 +19,15 @@
                  
                 <hr>
                 <% if (!el.catchegories[0]) { %>
-                    <h4 class="post-catchegories">No catchegories selected.</h4>
+                <h4 class="post-catchegories">No catchegories selected.</h4>
                 <% } else { %>
-                    <h4 class="post-catchegories">Catchegories: <span><%= el.catchegories.join(', ') %></span></h4>
+                <h4 class="post-catchegories">Catchegories: <span><%= el.catchegories.join(', ') %></span></h4>
                 <% } %>
                 <hr>
 
                 <% if (el.catchLink !== 'none'){ %>
-                    <span>Outside link: </span><a class="catch-link" href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
+                <span class="catch-link">Outside link: <a href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a></span>
+                <input type="text" name="link" class="edit-catch-link hidden" maxlength="200" value="<%= el.catchLink %>">
                 <% } %>
 
                 <p class="catch-post-content"><%= el.catchContent %></p>

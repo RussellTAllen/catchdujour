@@ -7,18 +7,6 @@ const moment = require('moment-timezone')
 
 
 module.exports = {
-    // getCatchPosts: async (req,res)=>{
-    //     console.log(req.user)
-    //     try{
-    //         const catchPosts = await CatchPost.find()
-    //         res.render('index.ejs', {
-    //             catchPosts: catchPosts, 
-    //             user: req.user.userName,
-    //         })
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // },
     getCatchPostById: async (req,res) => {
         if (!req.user) req.user = {}
 
@@ -78,6 +66,7 @@ module.exports = {
             await CatchPost.findOneAndUpdate({ _id: req.body.catchPostId },{
                 catchContent: req.body.catchContent,
                 catchTitle: req.body.catchTitle,
+                catchLink: req.body.catchLink,
                 catchegories: req.body.catchegories
             })
             res.json('Edit catch success!')

@@ -120,10 +120,14 @@ function editCatchPost(){
     const postTitle = this.parentNode.parentNode.querySelector('.catch-title')
     const postContent = this.parentNode.parentNode.querySelector('.catch-post-content')
     const editContent = this.parentNode.parentNode.querySelector('.edit-post-content')
+    const linkContent = this.parentNode.parentNode.querySelector('.catch-link')
+    const editLinkContent = this.parentNode.parentNode.querySelector('.edit-catch-link')
     const postCatchegories = this.parentNode.parentNode.querySelector('.post-catchegories')
     const editPostCatchegories = this.parentNode.parentNode.querySelector('.edit-post-catchegories')
     const edit = this.parentNode.querySelector('.edit')
 
+    console.log('linkcontent: '+linkContent)
+    
     edit.classList.add('selected')
     edit.innerText = "Submit Edit"
 
@@ -137,15 +141,12 @@ function editCatchPost(){
     postTitle.replaceWith(editTitle)
     
     // Turn post content into editable input
-    ///////////// Old way
-    // const editInput = document.createElement('textarea')
-    // editInput.classList.add('edit-catch-post')
-    // editInput.innerText = postContent.textContent
-    // postContent.replaceWith(editInput)
-    //
-    // New way
     postContent.classList.add('hidden')
     editContent.classList.remove('hidden')
+
+    // Turn post link into editable input
+    linkContent.classList.add('hidden')
+    editLinkContent.classList.remove('hidden')
 
     // Turn post catchegories into editable input
     editPostCatchegories.classList.remove('hidden')
@@ -192,6 +193,7 @@ function editCatchPost(){
                         'catchTitleElement': catchTitle,
                         'catchTitle': catchTitle.value.trim(),
                         'catchContent': editContent.value,
+                        'catchLink': editLinkContent.value,
                         'catchegories': newPostCatchegories,
                         'oldPostCatchegories': oldPostCatchegories,
                         'newPostCatchegories': newPostCatchegories

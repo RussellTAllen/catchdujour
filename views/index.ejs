@@ -65,14 +65,15 @@
 
                 <hr>
                 <% if (!el.catchegories[0]) { %>
-                    <h4 class="post-catchegories">No catchegories selected.</h4>
+                <h4 class="post-catchegories">No catchegories selected.</h4>
                 <% } else { %>
-                    <h4 class="post-catchegories">Catchegories: <span><%= el.catchegories.join(', ') %></span></h4>
+                <h4 class="post-catchegories">Catchegories: <span><%= el.catchegories.join(', ') %></span></h4>
                 <% } %>
                 <hr>
 
                 <% if (el.catchLink !== 'none'){ %>
-                    <span>Outside link: </span><a class="catch-link" href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
+                <span>Outside link: </span><a class="catch-link" href="<%= el.catchLink %>" target="_blank"><%= el.catchLink %></a>
+                <input type="text" name="link" class="edit-catch-link hidden" maxlength="200" value="<%= el.catchLink %>">
                 <% } %>
 
                 <!-- Format content if it exceeds desired length -->
@@ -81,9 +82,9 @@
                 <% content.includes('\n', content.indexOf('\n', content.indexOf('\n', content.indexOf('\n')+1)+1)) ? content = content.slice(0, content.indexOf('\n', content.indexOf('\n', content.indexOf('\n')+1)+1)) : content = content %>
 
                 <% if (content.length >= 300 || el.catchContent.includes('\n', content.indexOf('\n', content.indexOf('\n', content.indexOf('\n')+1)+1))){ %>
-                    <p class="catch-post-content"><%= content %>...<a href="catchPosts/<%= el._id %>/catchPost" class="see-more"> (See whole catch)</a></p>
+                <p class="catch-post-content"><%= content %>...<a href="catchPosts/<%= el._id %>/catchPost" class="see-more"> (See whole catch)</a></p>
                 <% }else{ %>
-                    <p class="catch-post-content"><%= content %></p>
+                <p class="catch-post-content"><%= content %></p>
                 <% } %>
                 <textarea class="edit-post-content hidden" name="catchContent"><%= el.catchContent %></textarea>
 
@@ -95,13 +96,13 @@
                 <% } %>
                 <div class="edit-post-catchegories hidden">
                     <% for (let i = 0, len = catchegories.length; i < len; i++) {%>
-                        <div>
-                            <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= catchegories[i].catchegory %>"
-                            <% if (el.catchegories.includes(catchegories[i].catchegory)) {%>
-                                checked
-                            <% } %>
-                            <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
-                        </div>
+                    <div>
+                        <input type="checkbox" class="post-catchegory" name="post-catchegory" value="<%= catchegories[i].catchegory %>"
+                        <% if (el.catchegories.includes(catchegories[i].catchegory)) {%>
+                            checked
+                        <% } %>
+                        <label for="<%= catchegories[i].catchegory %>"><%= catchegories[i].catchegory %></label>
+                    </div>
                     <% } %>
                 </div>
   

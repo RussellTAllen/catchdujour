@@ -148,6 +148,7 @@ button{
   max-width: 855px;
   font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 18px;
+  letter-spacing: 1.5;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
@@ -418,7 +419,8 @@ input[type=checkbox]:hover:after{
 }
 input.catch-title,
 input.edit-catch-title,
-input.catch-link{
+input.catch-link,
+input.edit-catch-link{
   display: block;
   width: 100%;
   max-width: 550px;
@@ -482,7 +484,9 @@ footer span{
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
-.hidden{
+.hidden,
+.catch-link.hidden,
+.edit-catch-link.hidden{
   display: none;
 }
 

@@ -121,7 +121,7 @@ function editCatchPost(){
     const postContent = this.parentNode.parentNode.querySelector('.catch-post-content')
     const editContent = this.parentNode.parentNode.querySelector('.edit-post-content')
     const linkContent = this.parentNode.parentNode.querySelector('.catch-link')
-    const editLinkContent = this.parentNode.parentNode.querySelector('.edit-catch-link')
+    let editLinkContent = this.parentNode.parentNode.querySelector('.edit-catch-link')
     const postCatchegories = this.parentNode.parentNode.querySelector('.post-catchegories')
     const editPostCatchegories = this.parentNode.parentNode.querySelector('.edit-post-catchegories')
     const edit = this.parentNode.querySelector('.edit')
@@ -176,6 +176,9 @@ function editCatchPost(){
                     newPostCatchegories.push(editPostCatchegories.getElementsByTagName('input').item(i).value)
                 }
             }
+
+            if (editLinkContent === null) editLinkContent = ''
+            else editLinkContent = editLinkContent.value
             
             // Send PUT request to controller
             try{
@@ -188,7 +191,7 @@ function editCatchPost(){
                         'catchTitleElement': catchTitle,
                         'catchTitle': catchTitle.value.trim(),
                         'catchContent': editContent.value,
-                        'catchLink': editLinkContent.value || '',
+                        'catchLink': editLinkContent,
                         'catchegories': newPostCatchegories,
                         'oldPostCatchegories': oldPostCatchegories,
                         'newPostCatchegories': newPostCatchegories

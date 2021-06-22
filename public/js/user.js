@@ -145,7 +145,8 @@ function editCatchPost(){
     editContent.classList.remove('hidden')
 
     // Turn post link into editable input
-    if (linkContent){
+    console.log(linkContent !== null)
+    if (linkContent !== null){
         linkContent.classList.add('hidden')
         editLinkContent.classList.remove('hidden')
     }

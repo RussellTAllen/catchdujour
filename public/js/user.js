@@ -145,9 +145,10 @@ function editCatchPost(){
     editContent.classList.remove('hidden')
 
     // Turn post link into editable input
-    linkContent.classList.add('hidden')
-    editLinkContent.classList.remove('hidden')
-
+    if (linkContent){
+        linkContent.classList.add('hidden')
+        editLinkContent.classList.remove('hidden')
+    }
     // Turn post catchegories into editable input
     editPostCatchegories.classList.remove('hidden')
     postCatchegories.classList.add('hidden')

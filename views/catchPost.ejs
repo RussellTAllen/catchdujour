@@ -42,6 +42,7 @@
 
             <% if (catchPost.catchLink !== 'none'){ %>
                 <span>Outside link: </span><a class="catch-link" href="<%= catchPost.catchLink %>" target="_blank"><%= catchPost.catchLink %></a>
+                <input type="text" name="link" class="edit-catch-link hidden" maxlength="200" value="<%= catchPost.catchLink %>">
             <% } %>
 
             <p class="catch-post-content"><%= catchPost.catchContent %></p>

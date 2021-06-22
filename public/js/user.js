@@ -1,4 +1,5 @@
 console.log('client-side user.js is connected')
+console.log('heroku sees this update...')
 
 // DOM Variables
 const deleteBtn = document.querySelectorAll('.del')
@@ -11,8 +12,6 @@ const followedBtn = document.querySelector('#followed-btn')
 const followedContent = document.querySelector('.followed-content')
 const selectedCatchegory = document.querySelectorAll('.catchegory-selected')
 const unselectedCatchegory = document.querySelectorAll('.catchegory-unselected')
-
-
 
 // EVENT LISTENERS
 Array.from(deleteBtn).forEach(el =>{
@@ -131,7 +130,6 @@ function editCatchPost(){
     edit.classList.add('selected')
     edit.innerText = "Submit Edit"
 
-    console.log('user.js says content contains: '+editContent.textContent.includes('\r\n'))
     // Turn title into editable input
     const editTitle = document.createElement('input')
     editTitle.setAttribute('maxlength', '180')

@@ -145,7 +145,6 @@ function editCatchPost(){
     editContent.classList.remove('hidden')
 
     // Turn post link into editable input
-    console.log(linkContent !== null)
     if (linkContent !== null){
         linkContent.classList.add('hidden')
         editLinkContent.classList.remove('hidden')
@@ -160,15 +159,10 @@ function editCatchPost(){
     edit.addEventListener('click', confirmEdit)
     
     async function confirmEdit(e){
-        // let eventKey = e.key
-        // if (e.key == undefined) eventKey = 'Enter'
-        // if (eventKey === 'Enter' && !e.shiftKey){
             const catchContent = this.parentNode.parentNode.querySelector('.edit-post-content')
             const catchTitle = this.parentNode.parentNode.querySelector('.edit-catch-title')
             const oldPostCatchegories = catchContent.parentNode.querySelector('.post-catchegories').innerText.slice(14).split(', ')
             let postCatchegoriesChildren = editPostCatchegories.children
-
-            console.log('length: ' +catchContent.value.length)
 
             if (catchContent.value.length === 0 || catchTitle.value.length === 0){
                 alert('Catch title and content must not be blank')
@@ -183,7 +177,6 @@ function editCatchPost(){
                 }
             }
             
-            
             // Send PUT request to controller
             try{
                 await updateCatchegoryCount(oldPostCatchegories, newPostCatchegories)
@@ -195,7 +188,7 @@ function editCatchPost(){
                         'catchTitleElement': catchTitle,
                         'catchTitle': catchTitle.value.trim(),
                         'catchContent': editContent.value,
-                        'catchLink': editLinkContent.value,
+                        'catchLink': editLinkContent.value || '',
                         'catchegories': newPostCatchegories,
                         'oldPostCatchegories': oldPostCatchegories,
                         'newPostCatchegories': newPostCatchegories

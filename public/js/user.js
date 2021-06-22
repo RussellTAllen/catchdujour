@@ -1,5 +1,4 @@
 console.log('client-side user.js is connected')
-console.log('heroku sees this update...')
 
 // DOM Variables
 const deleteBtn = document.querySelectorAll('.del')

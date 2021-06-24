@@ -4,6 +4,8 @@ const Comment = require('../models/CatchPost')
 const Catchegory = require('../models/Catchegory')
 const moment = require('moment-timezone')
 
+const Mongo = require('mongodb')
+
 
 
 module.exports = {
@@ -168,17 +170,26 @@ module.exports = {
     },
     likeComment: async (req, res) => {
         try{
+            console.log(req.body.catchPostId)
+            console.log(req.body.commentId)
+
             const post = await CatchPost.findById( req.body.catchPostId )
             const comment = post.comments.id(req.body.commentId)
 
             if (!comment.likedBy) comment.likedBy = []
+
+            console.log('user: '+req.user._id)
+            // console.log('user id: '+comment.likedBy[0]._id)
+            // console.log('same '+comment.likedBy[0]._id.equals(req.user._id))
    
-            if (comment.likedBy.some(user => user.userId === String(req.user._id))) {
+
+            if (comment.likedBy.some(user => user._id.equals(req.user._id))) {
                 comment.likes--
-                comment.likedBy = comment.likedBy.filter((user) => user.userId !== String(req.user._id))
+                comment.likedBy = comment.likedBy.filter((user) => !user._id.equals(req.user._id))
             } else {
                 comment.likes++
-                comment.likedBy.push({ userId: String(req.user._id), userName: req.user.userName })
+                // comment.likedBy.push({ userId: String(req.user._id), userName: req.user.userName })
+                comment.likedBy.push(req.user._id)
             }
             await post.save()
             res.json('Added a like!')

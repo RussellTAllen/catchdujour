@@ -16,17 +16,16 @@ const CommentSchema = new mongoose.Schema({
     sparse: true,
     unique: false
   },
+  // user: {
+  //   type: User.UserSchema,
+  //   sparse: true,
+  //   unique: false
+  // },
   likes: {
     type: Number,
     default: 0
   },
-  likedBy: [new mongoose.Schema(
-    { 
-      userId: String,
-      userName: String
-     },
-    { _id: false },
-  )] 
+  likedBy: [{ type: mongoose.Types.ObjectId, ref: 'User' }]
 })
 
 const CatchPostSchema = new mongoose.Schema({
@@ -56,14 +55,9 @@ const CatchPostSchema = new mongoose.Schema({
     type: Number, 
     default: 0
   },
-  likedBy: {
-    type: [User.UserSchema,
-    { unique: false,
-    sparse: true}],
-    default: [],
-    sparse: true,
-    unique: false,
-  },
+  likedBy: 
+    [{ type: mongoose.Types.ObjectId, ref: 'User' }]
+  ,
   comments: {
     type: [CommentSchema],
     sparse: true,

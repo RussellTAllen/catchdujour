@@ -10,7 +10,7 @@
                         </div>
                     <div class="catch-title">
                         <h3><a href="/catchPosts/<%= el._id%>/catchPost"><%= el.catchTitle %></a></h3>
-                        <h5>Posted by: <em><a href="/catchPosts/<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(el.date).fromNow() %></h5>
+                        <h5>Posted by: <em><a href="/<%= el.postedBy.userName %>"><%= el.postedBy.userName %></a></em> <%= moment(el.date).fromNow() %></h5>
                     </div>
                     <div class="comment-bubble">
                         <i class="far fa-comment fa-3x fa-fw"><span class="fa-layers-counter fa-fw"><%= el.comments.length %></span></i>

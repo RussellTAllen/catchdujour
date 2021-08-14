@@ -14,7 +14,7 @@ router.get('/logout', authController.logout)
 router.get('/signup', authController.getSignup)
 router.get('/catchPosts/:id/catchPost', catchPostsController.getCatchPostById)
 router.get('/createCatchPage', ensureAuth, catchPostsController.getCreateCatchPage)
-router.get('/catchPosts/:userName', catchPostsController.getCatchPostsByUserId)
+router.get('/:userName', catchPostsController.getCatchPostsByUserId)
 
 router.post('/login', authController.postLogin)
 router.post('/signup', authController.postSignup)

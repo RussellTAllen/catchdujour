@@ -54,7 +54,7 @@ module.exports = {
                 }
             })
 
-            res.redirect(`/catchPosts/${followedUser.userName}`)
+            res.redirect(`/${followedUser.userName}`)
         }catch(err){
             console.log(err)
         }

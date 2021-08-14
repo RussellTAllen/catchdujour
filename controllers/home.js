@@ -5,25 +5,6 @@ const moment = require('moment-timezone')
 const path = require('path')
 
 module.exports = {
-    getSslCert: async (req, res) =>{
-        res.sendFile(path.join( __dirname, '../.well-known/pki-validation/', '470DFCB181B2A7D3780BCEAA6E911361.txt'), 'text/plain', (err, data) =>{
-            if (err) throw err
-            console.log(data)
-        })
-    },
-    getAppleIcon: async(req, res) =>{
-        res.sendFile('/apple-touch-icon.png')
-    },   
-    getFavicon32: async(req, res) =>{
-        res.sendFile('/favicon-32x32.png')
-    },   
-    getFavicon16: async(req, res) =>{
-        res.sendFile('/favicon16x16.png')
-    },   
-    getWebManifest: async(req, res) =>{
-        // res.sendFile('/manifest.json')
-        res.sendFile('/site.webmanifest')
-    },   
     getWelcome: async (req, res) => {
         try{
             const user = await User.findById(req.user._id)

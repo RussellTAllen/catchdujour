@@ -36,6 +36,9 @@ module.exports = {
     getCatchPostsByUserId: async (req,res) => {
         if (!req.user) req.user = {}
 
+        console.log('req.params.userName')
+        console.log(req.params.userName)
+
         try{
             let user = await User.findById(req.user._id)
             let targetUser = await User.findOne({ userName: req.params.userName })

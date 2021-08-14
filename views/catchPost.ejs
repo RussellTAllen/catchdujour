@@ -25,7 +25,7 @@
                 </div>
                 <div class="catch-title">
                     <h3><%= catchPost.catchTitle %></h3>
-                    <h5>Posted by: <em><a href="../<%= catchPost.postedBy.userName %>"><%= catchPost.postedBy.userName %></a></em> <%= moment(catchPost.date).fromNow() %></h5>
+                    <h5>Posted by: <em><a href="/<%= catchPost.postedBy.userName %>"><%= catchPost.postedBy.userName %></a></em> <%= moment(catchPost.date).fromNow() %></h5>
                 </div>
                 <div class="comment-bubble">
                     <i class="far fa-comment fa-3x fa-fw"><span class="fa-layers-counter fa-fw"><%= catchPost.comments.length %></span></i>
@@ -75,7 +75,7 @@
                 <% catchPost.comments.forEach(comment => {%>
                     <div class="comment" data-id="<%= comment._id %>">
                         <hr>
-                        <h4><%= moment(comment.date).fromNow() %> <a href="/catchPosts/<%= comment.user.userName %>"><em><%= comment.user.userName %></em></a> said: </h4>
+                        <h4><%= moment(comment.date).fromNow() %> <a href="/<%= comment.user.userName %>"><em><%= comment.user.userName %></em></a> said: </h4>
                         <p class='comment-text'><%= comment.text %></p>
                         <textarea class="edit-comment-text hidden" maxlength="3000"><%= comment.text %></textarea>
                         <% if (comment.likedBy.some(u => u.userName === user.userName)){ %>

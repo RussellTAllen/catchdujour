@@ -19,7 +19,7 @@
             <button id="followed-by-btn">See who is following you (<%= followedBy.length %>)</button>
             <div class="followed-by-content hidden">
                 <% for (let i = 0, len = followedBy.length; i < len; i++) {%>
-                    <a href="/catchPosts/<%= followedBy[i].userName %>"><%= followedBy[i].userName %></a>
+                    <a href="/<%= followedBy[i].userName %>"><%= followedBy[i].userName %></a>
                 <% } %>
             </div>
         </div>

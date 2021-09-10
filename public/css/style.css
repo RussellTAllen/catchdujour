@@ -149,6 +149,7 @@ button{
   font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 18px;
   letter-spacing: 1.5;
+  line-height: 1.5;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
@@ -193,7 +194,7 @@ button{
   color: var(--dark-red);
 }
 .catch-title h5{
-  margin: 0;
+  margin: 3px 0 15px 0;
 }
 .catch-link{
   word-wrap: break-word;
